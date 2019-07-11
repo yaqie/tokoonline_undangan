@@ -433,6 +433,7 @@
             <!-- /row -->
 
             <!-- yaqie ganteng -->
+            <!-- aji ganteng -->
 
             <!-- row -->
 			<div class="row">
