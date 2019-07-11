@@ -16,7 +16,7 @@ class Admin extends CI_Controller {
 	{
 
     if ($this->session->userdata('status') != "loginadmin"){
-      $this->load->view('admin/login');
+      $this->load->view('admin2/login');
     } else if ($this->session->userdata('status') == "loginadmin"){
       $id_user = $this->session->userdata('id');
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
@@ -24,9 +24,9 @@ class Admin extends CI_Controller {
         'admin' => $admin,
         'breadcrumb' => 'Beranda',
       );
-      $this->load->view('admin/header',$data);
-      $this->load->view('admin/dashboard',$data);
-      $this->load->view('admin/footer',$data);
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/dashboard',$data);
+      $this->load->view('admin2/footer',$data);
     }
 
 	}
