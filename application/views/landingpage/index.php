@@ -432,6 +432,7 @@
 			</div>
             <!-- /row -->
 
+            <!-- yaqie ganteng -->
 
             <!-- row -->
 			<div class="row">
