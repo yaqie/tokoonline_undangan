@@ -258,7 +258,7 @@ class P_admin extends CI_Controller {
               redirect(base_url('admin/tambah_produk'));
           } else {
               # code...
-              #code 2
+              #code 3
               $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
               $img_name = MD5($nama_gambar).".".$ext;
   
