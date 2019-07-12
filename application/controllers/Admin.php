@@ -44,9 +44,9 @@ class Admin extends CI_Controller {
         'admin' => $admin,
         'breadcrumb' => 'Profil',
       );
-      $this->load->view('admin/header',$data);
-      $this->load->view('admin/profil',$data);
-      $this->load->view('admin/footer',$data);
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/profil',$data);
+      $this->load->view('admin2/footer',$data);
     }
   }
 

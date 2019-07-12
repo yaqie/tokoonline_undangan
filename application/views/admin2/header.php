@@ -64,7 +64,7 @@ desired effect
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Admin</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -155,19 +155,21 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+          <a href="#"><i class="fa fa-gear"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="#">Kategori</a></li>
+            <li><a href="#">Produk</a></li>
           </ul>
         </li>
+        
+        <li><a href="<?= base_url('admin/profil'); ?>"><i class="fa fa-user"></i> <span>Profil Saya</span></a></li>
+        <li><a href="<?= base_url('p_admin/logout'); ?>"><i class="fa fa-sign-out"></i> <span>Keluar</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
