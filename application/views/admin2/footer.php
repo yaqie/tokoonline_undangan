@@ -9,6 +9,8 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/admin2/dist/') ?>js/adminlte.min.js"></script>
 <script src="<?= base_url('assets/admin2/bower_components/') ?>ckeditor/ckeditor.js"></script>
+<script src="<?= base_url('assets/admin2/bower_components/') ?>datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets/admin2/bower_components/') ?>datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor

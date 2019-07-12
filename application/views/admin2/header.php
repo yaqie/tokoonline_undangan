@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?= base_url('assets/admin2/bower_components/') ?>font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?= base_url('assets/admin2/bower_components/') ?>Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/admin2/bower_components/') ?>datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/admin2/dist/') ?>css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -166,6 +167,7 @@ desired effect
           <ul class="treeview-menu">
             <li><a href="#">Kategori</a></li>
             <li><a href="#">Produk</a></li>
+            <li><a href="<?= base_url('admin/bank'); ?>">Bank</a></li>
             <li><a href="<?= base_url('admin/cara_pesan'); ?>">Cara Pesan</a></li>
             <li><a href="<?= base_url('admin/tentang_kami'); ?>">Tentang Kami</a></li>
           </ul>

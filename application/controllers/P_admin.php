@@ -145,8 +145,85 @@ class P_admin extends CI_Controller {
         redirect(base_url('admin/tentang_kami'));
       }
     }
-  
 
+    function tambah_bank(){
+      $db = get_instance()->db->conn_id;
+  
+      // mysqli_real_escape_string anti injeksi
+      $rekening = mysqli_real_escape_string($db, $this->input->post('rekening'));
+      $nama_bank = mysqli_real_escape_string($db, $this->input->post('nama_bank'));
+      $atas_nama = mysqli_real_escape_string($db, $this->input->post('atas_nama'));
+  
+      $data = array(
+          'rekening' => $rekening,
+          'nama_bank' => $nama_bank,
+          'atas_nama' => $atas_nama,
+      );
+  
+      // ===== input data ke tabel =====
+      $this->m_data->input_data($data,'bank');
+  
+  
+      // ===== buat set_flashdata =====
+      $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Bank berhasil ditambah!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+  
+      // jika berhasil input akan di arahkan ke halaman login
+      redirect(base_url('admin/bank'));
+    }
+
+    public function hapus_bank($kode)
+    {
+        $where = array('id_bank' => $kode);
+
+        $this->m_data->hapus_data($where,'bank');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Bank berhasil dihapus!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/bank'));
+    }
+  
+    function edit_bank()
+    {
+      if ($this->session->userdata('status') != "loginadmin"){
+        redirect(base_url('admin'));
+      } else {
+        global $date,$rand;
+        $db = get_instance()->db->conn_id;
+      
+        $id         = mysqli_real_escape_string($db, $this->input->post('id'));
+        $rekening = mysqli_real_escape_string($db, $this->input->post('rekening'));          
+        $nama_bank = mysqli_real_escape_string($db, $this->input->post('nama_bank'));          
+        $atas_nama = mysqli_real_escape_string($db, $this->input->post('atas_nama'));       
+                        
+        $where = array('id_bank' => $id );
+  
+          $data = array(
+            'rekening' => $rekening,
+            'nama_bank' => $nama_bank,
+            'atas_nama' => $atas_nama,
+          );
+  
+          // update modified (jika di perlukan dalam tabel)
+          $query = $this->m_data->update_data($where,$data,'bank');
+  
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Perubahan berhasil!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+          ');
+  
+          redirect(base_url('admin/bank'));
+        }
+      }
 
   function edit_setting()
   {

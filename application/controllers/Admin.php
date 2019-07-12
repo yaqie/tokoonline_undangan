@@ -88,6 +88,28 @@ class Admin extends CI_Controller {
     }
   }
 
+  public function bank()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $bank = $this->m_data->tampil_data('bank')->result();
+      $data = array(
+        'bank' => $bank,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'bank',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/bank',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+  
+
   public function semua_pengguna()
   {
     if ($this->session->userdata('status') != "loginadmin"){
