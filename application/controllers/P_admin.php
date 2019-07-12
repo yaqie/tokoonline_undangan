@@ -111,6 +111,40 @@ class P_admin extends CI_Controller {
         redirect(base_url('admin/cara_pesan'));
       }
     }
+
+    function edit_tentang_kami()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      global $date,$rand;
+      $db = get_instance()->db->conn_id;
+      
+      $deskripsi = mysqli_real_escape_string($db, $this->input->post('deskripsi'));  
+      $deskripsi = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
+      $c = $this->m_data->select_where(array('id_setting' => 3 ),'setting_web')->row();          
+
+      
+        $where = array(
+          'id_setting' => 3
+        );
+
+        $data = array(
+          'deskripsi' => $deskripsi,
+        );
+
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data,'setting_web');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Perubahan berhasil!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+        ');
+
+        redirect(base_url('admin/tentang_kami'));
+      }
+    }
   
 
 

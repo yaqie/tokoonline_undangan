@@ -167,6 +167,7 @@ desired effect
             <li><a href="#">Kategori</a></li>
             <li><a href="#">Produk</a></li>
             <li><a href="<?= base_url('admin/cara_pesan'); ?>">Cara Pesan</a></li>
+            <li><a href="<?= base_url('admin/tentang_kami'); ?>">Tentang Kami</a></li>
           </ul>
         </li>
         

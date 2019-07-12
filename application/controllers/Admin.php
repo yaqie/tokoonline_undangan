@@ -69,6 +69,25 @@ class Admin extends CI_Controller {
     }
   }
 
+  public function tentang_kami()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $data = array(
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'Tentang Kami',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/tentang_kami',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
   public function semua_pengguna()
   {
     if ($this->session->userdata('status') != "loginadmin"){
