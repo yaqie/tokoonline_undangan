@@ -175,7 +175,7 @@
 					<ul class="menu-list">
 						<li><a href="<?= base_url() ?>">Home</a></li>
 						<li><a href="<?= base_url('cara_pesan') ?>">Cara Pesan</a></li>
-						<li><a href="#">Tentang Kami</a></li>
+						<li><a href="<?= base_url('tentang_kami') ?>">Tentang Kami</a></li>
 						<li><a href="#">Kontak</a></li>
 						<?php
 						if ($this->session->userdata('status') == "login"){

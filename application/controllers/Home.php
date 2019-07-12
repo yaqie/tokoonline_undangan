@@ -44,10 +44,20 @@ class Home extends CI_Controller {
 		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
 		$data = array(
 			'cara' => $cara,
-			'asd' => 'asd',
 		);
 		$this->load->view('landingpage/header',$data);
 		$this->load->view('landingpage/cara_pesan',$data);
+		$this->load->view('landingpage/footer',$data);
+	}
+
+	public function tentang_kami()
+	{
+		$tentang = $this->m_data->select_where(array('id_setting' => 3),'setting_web')->row();
+		$data = array(
+			'tentang' => $tentang,
+		);
+		$this->load->view('landingpage/header',$data);
+		$this->load->view('landingpage/tentang_kami',$data);
 		$this->load->view('landingpage/footer',$data);
 	}
 

@@ -7,3 +7,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth'] = 'home/auth';
 $route['profil'] = 'home/profil';
 $route['cara_pesan'] = 'home/cara_pesan';
+$route['tentang_kami'] = 'home/tentang_kami';
