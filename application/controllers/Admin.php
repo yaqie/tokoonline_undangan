@@ -50,6 +50,25 @@ class Admin extends CI_Controller {
     }
   }
 
+  public function cara_pesan()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '2'),'setting_web')->row();
+      $data = array(
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'Cara Pesan',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/cara_pesan',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
   public function semua_pengguna()
   {
     if ($this->session->userdata('status') != "loginadmin"){
