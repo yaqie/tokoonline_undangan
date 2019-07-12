@@ -159,14 +159,24 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li><a href="<?= base_url('admin') ?>"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li class="treeview">
+          <a href="#"><i class="fa fa-shopping-cart"></i> <span>Produk</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url('admin/tambah_produk'); ?>">Tambah Produk</a></li>
+            <li><a href="<?= base_url('admin/semua_produk'); ?>">Semua Produk</a></li>            
+          </ul>
+        </li>
+        <li class="treeview">
           <a href="#"><i class="fa fa-gear"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Kategori</a></li>
-            <li><a href="#">Produk</a></li>
+            <li><a href="<?= base_url('admin/produk'); ?>">Produk</a></li>
             <li><a href="<?= base_url('admin/bank'); ?>">Bank</a></li>
             <li><a href="<?= base_url('admin/cara_pesan'); ?>">Cara Pesan</a></li>
             <li><a href="<?= base_url('admin/tentang_kami'); ?>">Tentang Kami</a></li>

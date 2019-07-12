@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2019 at 08:29 PM
+-- Generation Time: Jul 13, 2019 at 01:24 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `anggi`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank`
+--
+
+CREATE TABLE `bank` (
+  `id_bank` int(11) NOT NULL,
+  `rekening` varchar(100) NOT NULL,
+  `nama_bank` varchar(100) NOT NULL,
+  `atas_nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bank`
+--
+
+INSERT INTO `bank` (`id_bank`, `rekening`, `nama_bank`, `atas_nama`) VALUES
+(1, '13251351353', 'BRI', 'Aji');
 
 -- --------------------------------------------------------
 
@@ -61,46 +81,34 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `id_parent`, `id_parent2`, `nama_kategori`, `slug`) VALUES
-(1, NULL, NULL, 'Hanphone & Tablet', 'hanphone-tablet'),
-(2, NULL, NULL, 'Olahraga & Aktivitas Luar Ruang', 'olahraga-aktivitas-luar-ruang'),
-(3, NULL, NULL, 'Komputer & Laptop', 'komputer-laptop'),
-(4, NULL, NULL, 'Kamera', 'kamera'),
-(5, NULL, NULL, 'Mainan & Video Games', 'mainan-video-games'),
-(6, NULL, NULL, 'Peralatan Elektronik', 'peralatan-elektronik'),
-(7, NULL, NULL, 'Fashion Pria', 'fashion-pria'),
-(8, NULL, NULL, 'Home & Living', 'home-living'),
-(9, NULL, NULL, 'Fashion Wanita', 'fashion-wanita'),
-(10, NULL, NULL, 'Ibu & Anak', 'ibu-anak'),
-(11, NULL, NULL, 'Tiket & Voucher', 'tiket-voucher'),
-(12, NULL, NULL, 'Kesehatan & Kecantikan', 'kesehatan-kecantikan'),
-(13, NULL, NULL, 'Otomotif', 'otomotif'),
-(14, NULL, NULL, 'Tour & Travel', 'tour-travel'),
-(15, 4, NULL, 'Flash Kamera', 'flash-kamera'),
-(17, 4, NULL, 'Aksesoris Kamera', 'aksesoris-kamera'),
-(18, 4, 17, 'Kartu Memori Kamera', 'kartu-memori-kamera'),
-(19, 4, 17, 'Aksesoris Kamera Lainnya', 'aksesoris-kamera-lainnya'),
-(20, 4, 17, 'Aksesoris Action Cam', 'aksesoris-action-cam'),
-(21, 4, 17, 'Frame Foto Digital', 'frame-foto-digital'),
-(22, 4, 17, 'Dry Box Kamera', 'dry-box-kamera'),
-(23, 4, 17, 'Tripod, Monopod &  Mount', 'tripod-monopod-mount'),
-(24, 1, NULL, 'Hanphone', 'hanphone'),
-(25, 1, NULL, 'Aksesoris Handphone & Tablet', 'aksesoris-handphone-tablet'),
-(26, 1, NULL, 'Tablet', 'tablet'),
-(27, 1, NULL, 'Tukar Tambah', 'tukar-tambah'),
-(28, 1, NULL, 'Wearable Gadget', 'wearable-gadget'),
-(29, 4, NULL, 'Baterai Kamera', 'baterai-kamera'),
-(30, 4, NULL, 'Tas & Case', 'tas-case'),
-(31, 4, NULL, 'Kamera Digital', 'kamera-digital'),
-(32, 4, NULL, 'Kamera Video', 'kamera-video'),
-(33, 4, NULL, 'Lensa Kamera', 'lensa-kamera'),
-(34, 4, 15, 'Aksesoris Flash', 'aksesoris-flash'),
-(35, 4, 15, 'Flash & Lighting Kamera', 'flash-lighting-kamera'),
-(36, 4, 29, 'Baterai Grid Kamera', 'baterai-grid-kamera'),
-(37, 4, 29, 'Baterai & Charger Kamera', 'baterai-charger-kamera'),
-(38, 4, 30, 'Hard Case & Proteksi Kamera', 'hard-case-produksi-kamera'),
-(39, 4, 30, 'Strap Kamera', 'strap-kamera'),
-(40, 4, 30, 'Pouch Kamera', 'pouch-kamera'),
-(41, 4, 30, 'Tas Kamera', 'tas-kamera');
+(1, NULL, NULL, 'Undangan Pernikahan', 'hanphone-tablet'),
+(2, NULL, NULL, 'Undangan Khitanan', 'olahraga-aktivitas-luar-ruang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produk`
+--
+
+CREATE TABLE `produk` (
+  `id_produk` int(11) NOT NULL,
+  `nama_produk` varchar(150) NOT NULL,
+  `kategori` int(1) NOT NULL,
+  `harga` varchar(20) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `gambar` text NOT NULL,
+  `satuan` varchar(20) NOT NULL,
+  `tgljam` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori`, `harga`, `deskripsi`, `gambar`, `satuan`, `tgljam`) VALUES
+(1, 'Aji', 1, '50000', 'adfbabbadfdfbsdfbsfgbsfgbdf', '', '50 Buah', '2019-07-13 06:07:54'),
+(2, 'yaqi', 1, '50000', 'vgh', '', '50 Buah', '2019-07-13 06:17:39'),
+(3, 'v b', 1, '50000', 'dfcbhjkl', 'bdec59f4f3ee485dca76fa5a006eb950.jpg', '50 Buah', '2019-07-13 06:20:04');
 
 -- --------------------------------------------------------
 
@@ -111,7 +119,7 @@ INSERT INTO `kategori` (`id_kategori`, `id_parent`, `id_parent2`, `nama_kategori
 CREATE TABLE `setting_web` (
   `id_setting` int(11) NOT NULL,
   `judul` varchar(150) NOT NULL,
-  `deskripsi` varchar(150) NOT NULL,
+  `deskripsi` text NOT NULL,
   `logo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,7 +128,9 @@ CREATE TABLE `setting_web` (
 --
 
 INSERT INTO `setting_web` (`id_setting`, `judul`, `deskripsi`, `logo`) VALUES
-(1, 'Market Places', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', '215521240.png');
+(1, 'Market Places', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', '215521240.png'),
+(2, 'Cara Pesan', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, yaqiea</p>', ''),
+(3, 'Tentang Kami', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,a</p>', '');
 
 -- --------------------------------------------------------
 
@@ -156,6 +166,12 @@ INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `nohp`, 
 --
 
 --
+-- Indexes for table `bank`
+--
+ALTER TABLE `bank`
+  ADD PRIMARY KEY (`id_bank`);
+
+--
 -- Indexes for table `izin_usaha`
 --
 ALTER TABLE `izin_usaha`
@@ -166,6 +182,12 @@ ALTER TABLE `izin_usaha`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id_produk`);
 
 --
 -- Indexes for table `setting_web`
@@ -185,6 +207,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `bank`
+--
+ALTER TABLE `bank`
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `izin_usaha`
 --
 ALTER TABLE `izin_usaha`
@@ -195,10 +222,15 @@ ALTER TABLE `izin_usaha`
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
+-- AUTO_INCREMENT for table `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `setting_web`
 --
 ALTER TABLE `setting_web`
-  MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --
