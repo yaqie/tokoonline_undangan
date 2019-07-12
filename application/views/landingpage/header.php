@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP HTML Template</title>
+	<title><?= $web->judul ?></title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -176,7 +176,7 @@
 						<li><a href="<?= base_url() ?>">Home</a></li>
 						<li><a href="<?= base_url('cara_pesan') ?>">Cara Pesan</a></li>
 						<li><a href="<?= base_url('tentang_kami') ?>">Tentang Kami</a></li>
-						<li><a href="#">Kontak</a></li>
+						<li><a href="https://api.whatsapp.com/send?phone=<?= $admin->nowa ?>" target="_blank">Kontak</a></li>
 						<?php
 						if ($this->session->userdata('status') == "login"){
 						?>
