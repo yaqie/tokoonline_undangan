@@ -12,7 +12,7 @@ class P_user extends CI_Controller {
 	}
 
 
-  function login (){
+  function login(){
     $db = get_instance()->db->conn_id;
 
     // mysqli_real_escape_string anti injeksi
@@ -36,7 +36,7 @@ class P_user extends CI_Controller {
 
         // jika username tidak tersedia dalam database,
         // maka akan di arahkan ke halaman login
-        redirect(base_url('user'));
+        redirect(base_url('auth'));
 
 
     } else {
@@ -54,17 +54,17 @@ class P_user extends CI_Controller {
       if (password_verify($pass,$password_user)) {
 
           $data_session = array(
-              'id'        => $u->id_user,
-              'username'  => $u->username,
-              'email'     => $u->email,
-              'status'    => "login"
+              'id_user'         => $u->id_user,
+              'username_user'   => $u->username,
+              'email_user'      => $u->email,
+              'status'          => "login"
           );
 
           // membuat session berdasarkan $data_session
           $this->session->set_userdata($data_session);
 
           // masuk ke halaman dashboard
-          redirect(base_url('user'));
+          redirect(base_url('profil'));
       } else {
           $this->session->set_flashdata('message', '
             <div class="alert alert-danger">Username / Password Salah!
@@ -73,7 +73,7 @@ class P_user extends CI_Controller {
           ');
           // jika password salah,
           // maka akan di arahkan ke halaman login
-          redirect(base_url('user'));
+          redirect(base_url('auth'));
       }
     }
   }
@@ -507,12 +507,6 @@ class P_user extends CI_Controller {
 
   }
 
-  function logout()
-  {
-    $this->session->sess_destroy();
-    redirect(base_url('user'));
-  }
-
 
   function daftar(){
     global $date;
@@ -532,7 +526,7 @@ class P_user extends CI_Controller {
       ');
       // jika password salah,
       // maka akan di arahkan ke halaman login
-      redirect(base_url('user/daftar'));
+      redirect(base_url('auth'));
     } else {
       $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'user' ),'user')->num_rows();
       $hitung_email = $this->m_data->select_where(array('email' => $email,'level' => 'user' ),'user')->num_rows();
@@ -542,14 +536,14 @@ class P_user extends CI_Controller {
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
           </div>
         ');
-        redirect(base_url('user/daftar'));
+        redirect(base_url('auth'));
       } else if($hitung_email > 0) {
         $this->session->set_flashdata('message', '
           <div class="alert alert-danger"> E-mail sudah tersedia, gunakan e-mail lain!
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
           </div>
         ');
-        redirect(base_url('user/daftar'));
+        redirect(base_url('auth'));
       } else {
         $pass = hash('sha512', $password);
         $hash = password_hash($pass, PASSWORD_DEFAULT);
@@ -569,9 +563,17 @@ class P_user extends CI_Controller {
           </div>
         ');
         // maka akan di arahkan ke halaman login
-        redirect(base_url('user/'));
+        redirect(base_url('auth'));
       }
     }
+  }
+
+
+
+  function logout()
+  {
+    $this->session->sess_destroy();
+    redirect(base_url(''));
   }
 
 
