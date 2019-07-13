@@ -253,6 +253,11 @@ class P_admin extends CI_Controller {
   
               // ===== input data ke tabel =====             
               $this->m_data->input_data($data,'produk');
+              $this->session->set_flashdata('message', '
+                <div class="alert alert-success"> Produk berhasil ditambah!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+              ');  
               
               // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
               redirect(base_url('admin/tambah_produk'));
@@ -306,12 +311,134 @@ class P_admin extends CI_Controller {
   
                   // ===== input data ke tabel =====             
                   $this->m_data->input_data($data,'produk');
-          
+                  $this->session->set_flashdata('message', '
+                  <div class="alert alert-success"> Produk berhasil ditambah!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                ');  
                   // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
                   redirect(base_url('admin/tambah_produk'));
               }
-  }
-  }
+          }
+          }
+
+    public function proses_edit_produk()
+    {
+        
+        global $date;
+        $db = get_instance()->db->conn_id;
+
+        // mysqli_real_escape_string anti injeksi
+        $id          = mysqli_real_escape_string($db, $this->input->post('id'));
+        $nama_produk = mysqli_real_escape_string($db, $this->input->post('nama_produk'));
+        $kategori    = mysqli_real_escape_string($db, $this->input->post('kategori'));
+        $harga       = mysqli_real_escape_string($db, $this->input->post('harga'));
+        $satuan      = mysqli_real_escape_string($db, $this->input->post('satuan'));
+        $deskripsi   = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
+        $deskripsi   = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
+        $nama_gambar = $_FILES["file"]["name"];
+
+        $where = array('id_produk' => $id );
+
+        if ($nama_gambar == "") {
+            $data = array(                   
+                
+                'nama_produk'       => $nama_produk,
+                'kategori'          => $kategori,
+                'harga'             => $harga,
+                'satuan'            => $satuan,
+                'deskripsi'         => $deskripsi,
+            );
+
+// ===== input data ke tabel =====   
+$this->m_data->update_data($where,$data,'produk');
+$this->session->set_flashdata('message', '
+  <div class="alert alert-success"> Produk berhasil diubah!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+  </div>
+');  
+
+// setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+redirect(base_url('admin/semua_produk'));
+        } else {
+            # code...
+        
+            $data=$this->db->query("SELECT * FROM produk WHERE id_produk=$id ")->row();
+            unlink('./produk_img/'.$data->gambar);
+
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).".".$ext;
+
+                $config['upload_path']          = './produk_img/';
+                $config['allowed_types']        = 'jpg|jpeg|png';
+                $config['max_size']             = 2048;
+                $config['file_name']            = $img_name;
+        
+                $this->load->library('upload', $config);
+        
+                if ( ! $this->upload->do_upload('file')){
+                    $error = array('error' => $this->upload->display_errors());
+                    // $this->load->view('v_upload', $error);
+                    echo json_encode(['code'=>200, 'msg'=>'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+                }else{
+
+                    
+
+                    
+                    $gbr = $this->upload->data();
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']='./produk_img/'.$gbr['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= FALSE;
+                    $config['quality']= '80%';
+                    $config['width']= 200;
+                    $config['height']= 300;
+                    $config['new_image']= './produk_img/'.$gbr['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+
+                    echo json_encode(['code'=>1, 'msg'=>'sukses']);
+
+                    $data = array(                   
+                        
+                      'nama_produk'       => $nama_produk,
+                      'kategori'          => $kategori,
+                      'harga'             => $harga,
+                      'satuan'            => $satuan,
+                      'deskripsi'         => $deskripsi,
+                      'gambar'              => $img_name,
+                    );
+
+        // ===== input data ke tabel =====             
+        $this->m_data->update_data($where,$data,'produk');
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Produk berhasil diubah!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/semua_produk'));
+    }
+}
+}
+
+  public function hapus_produk($kode)
+    {
+        $where = array('id_produk' => $kode);
+
+        $this->m_data->hapus_data($where,'produk');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Produk berhasil dihapus!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/semua_produk'));
+    }
 
   function edit_setting()
   {

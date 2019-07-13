@@ -129,6 +129,59 @@ class Admin extends CI_Controller {
       $this->load->view('admin2/footer',$data);
     }
   }
+
+  public function semua_produk()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      
+      $this->db->select('*');
+      $this->db->from('produk');
+      $this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+      $query=$this->db->get();
+      $produk= $query->result();
+
+      $kategori = $this->m_data->tampil_data('kategori')->result();
+      $data = array(
+        'produk' => $produk,
+        'kategori' => $kategori,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'semua produk',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/semua_produk',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
+  public function edit_produk($id)
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $produk = $this->m_data->select_where(array('id_produk' => $id),'produk')->row();
+
+      $kategori = $this->m_data->tampil_data('kategori')->result();
+      $data = array(
+        'p' => $produk,
+        'kategori' => $kategori,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'Edit produk',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/edit_produk',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
   
 
   public function semua_pengguna()
