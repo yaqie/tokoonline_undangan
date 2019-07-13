@@ -19,17 +19,18 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambahkan Produk Baru</h3>
+              <h3 class="box-title">Edit Produk</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/tambah_produk'); ?>" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/proses_edit_produk'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+            <input type="hidden" name="id" class="form-control" value="<?= $p->id_produk ?>">     
             <div class="box-body">
                 <div class="form-group">
                     <label for="fname" class="col-sm-2 text-right control-label col-form-label">Nama Produk</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" maxlength="150" value="" placeholder="Masukkan Nama Produk" required="true">
+                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" maxlength="150" value="<?= $p->nama_produk ?>" placeholder="Masukkan Nama Produk" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,27 +38,27 @@
                     <div class="col-sm-9">
                     <select class="form-control" name="kategori" required="true">
                         <option value="none" selected="" disabled="">Pilih Salah Satu</option>
-                        <option value="1">Undangan Pernikahan</option>
-                        <option value="2">Undangan Khitanan</option>
+                        <option value="1" <?php if ($p->kategori == 1){ echo 'selected'; } ?>>Undangan Pernikahan</option>
+                        <option value="2" <?php if ($p->kategori == 2){ echo 'selected'; } ?>>Undangan Khitanan</option>
                     </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Harga</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="harga" name="harga" maxlength="150" value="" placeholder="Masukkan harga (Contoh: 50000)" required="true">
+                        <input type="text" class="form-control" id="harga" name="harga" maxlength="150" value="<?= $p->harga ?>" placeholder="Masukkan harga (Contoh: 50000)" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Satuan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="satuan" name="satuan" maxlength="150" value="" placeholder="Masukkan Satuan (Contoh: 10 Buah)" required="true">
+                        <input type="text" class="form-control" id="satuan" name="satuan" maxlength="150" value="<?= $p->satuan ?>" placeholder="Masukkan Satuan (Contoh: 10 Buah)" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Deskripsi</label>
                     <div class="col-sm-9">
-                    <textarea id="editor1" name="deskripsi" rows="10" cols="80"></textarea>
+                    <textarea id="editor1" name="deskripsi" rows="10" cols="80"><?= $p->deskripsi ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -71,7 +72,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-              <button type="submit" id="btnSubmit2" class="btn btn-info waves-effect waves-light">Tambah</button>
+              <button type="submit" id="btnSubmit2" class="btn btn-info waves-effect waves-light">Edit</button>
               </div>
             </form>
           </div>
