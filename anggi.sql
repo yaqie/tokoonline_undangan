@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2019 at 07:22 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Jul 15, 2019 at 07:18 PM
+-- Server version: 10.1.40-MariaDB
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,27 +40,7 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`id_bank`, `rekening`, `nama_bank`, `atas_nama`) VALUES
-(2, '13251351353', 'BRI', 'Aji');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `izin_usaha`
---
-
-CREATE TABLE `izin_usaha` (
-  `id_izin_usaha` int(11) NOT NULL,
-  `nama_izin` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `izin_usaha`
---
-
-INSERT INTO `izin_usaha` (`id_izin_usaha`, `nama_izin`) VALUES
-(1, 'perseroan terbatas'),
-(2, 'Commanditaire Vennootschap'),
-(3, 'IUMKM');
+(1, '13251351353', 'BRI', 'Aji');
 
 -- --------------------------------------------------------
 
@@ -81,8 +61,27 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `id_parent`, `id_parent2`, `nama_kategori`, `slug`) VALUES
-(1, NULL, NULL, 'Undangan Pernikahan', 'hanphone-tablet'),
-(2, NULL, NULL, 'Undangan Khitanan', 'olahraga-aktivitas-luar-ruang');
+(1, NULL, NULL, 'Undangan Khitanan', 'undangan-khitanan'),
+(2, NULL, NULL, 'Undangan Pernikahan', 'undangan-pernikahan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `konfirmasi_pembayaran`
+--
+
+CREATE TABLE `konfirmasi_pembayaran` (
+  `id_konfirmasi` int(11) NOT NULL,
+  `kode_invoice` varchar(20) NOT NULL,
+  `bank_tujuan` varchar(100) NOT NULL,
+  `bank_pengirim` varchar(100) NOT NULL,
+  `no_rekening` varchar(100) NOT NULL,
+  `nama_pengirim` varchar(200) NOT NULL,
+  `tanggal_transfer` date NOT NULL,
+  `jumlah_transfer` varchar(20) NOT NULL,
+  `gambar` text NOT NULL,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,10 +105,9 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori`, `harga`, `deskripsi`, `gambar`, `satuan`, `tgljam`) VALUES
-(5, 'qqq', 1, '50000', '<p>xxxxxxxxxxx</p>', '014ee7aa2b63fbb64191e1e80fbc2a00.jpg', '50 Buah', '2019-07-13 11:54:56'),
-(6, 'Aji', 1, '50000', '<p>ddddddddddddddd</p>', '014ee7aa2b63fbb64191e1e80fbc2a00.jpg', '50 Buah', '2019-07-13 13:26:39'),
-(7, 'yaqi', 2, '50000', '<p>ssssssssss</p>', '310789bf3531940c62d610c5792d4dd4.png', '50 Buah', '2019-07-13 13:27:43'),
-(8, 'zaki', 2, '40000', '<p>ddddddddddddd</p>', '333934bc28a93a5497d312f2e9dc0e74.png', '40 Buah', '2019-07-13 13:30:32');
+(1, 'Lorem Ipsum', 1, '50000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '8541a09f7bd94e084132db479856f414.png', 'lusin', '2019-07-15 14:58:36'),
+(2, 'Numquam, quisquam natus voluptas quibusdam aut corporis eos', 1, '100000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '1f96175de26ad752df8fad2c0ebbb046.jpg', '10 buah', '2019-07-15 15:30:52'),
+(3, 'Dolor modi ullam cumque', 1, '100000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', 'eec14a6fbb642fb7b1ff1fb6d7a94855.jpg', '10 buah', '2019-07-15 15:31:19');
 
 -- --------------------------------------------------------
 
@@ -173,16 +171,16 @@ ALTER TABLE `bank`
   ADD PRIMARY KEY (`id_bank`);
 
 --
--- Indexes for table `izin_usaha`
---
-ALTER TABLE `izin_usaha`
-  ADD PRIMARY KEY (`id_izin_usaha`);
-
---
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `konfirmasi_pembayaran`
+--
+ALTER TABLE `konfirmasi_pembayaran`
+  ADD PRIMARY KEY (`id_konfirmasi`);
 
 --
 -- Indexes for table `produk`
@@ -211,32 +209,38 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `izin_usaha`
---
-ALTER TABLE `izin_usaha`
-  MODIFY `id_izin_usaha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `konfirmasi_pembayaran`
+--
+ALTER TABLE `konfirmasi_pembayaran`
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `setting_web`
 --
 ALTER TABLE `setting_web`
   MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;COMMIT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
