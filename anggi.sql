@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2019 at 01:24 AM
+-- Generation Time: Jul 15, 2019 at 07:22 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -40,7 +40,7 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`id_bank`, `rekening`, `nama_bank`, `atas_nama`) VALUES
-(1, '13251351353', 'BRI', 'Aji');
+(2, '13251351353', 'BRI', 'Aji');
 
 -- --------------------------------------------------------
 
@@ -106,9 +106,10 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori`, `harga`, `deskripsi`, `gambar`, `satuan`, `tgljam`) VALUES
-(1, 'Aji', 1, '50000', 'adfbabbadfdfbsdfbsfgbsfgbdf', '', '50 Buah', '2019-07-13 06:07:54'),
-(2, 'yaqi', 1, '50000', 'vgh', '', '50 Buah', '2019-07-13 06:17:39'),
-(3, 'v b', 1, '50000', 'dfcbhjkl', 'bdec59f4f3ee485dca76fa5a006eb950.jpg', '50 Buah', '2019-07-13 06:20:04');
+(5, 'qqq', 1, '50000', '<p>xxxxxxxxxxx</p>', '014ee7aa2b63fbb64191e1e80fbc2a00.jpg', '50 Buah', '2019-07-13 11:54:56'),
+(6, 'Aji', 1, '50000', '<p>ddddddddddddddd</p>', '014ee7aa2b63fbb64191e1e80fbc2a00.jpg', '50 Buah', '2019-07-13 13:26:39'),
+(7, 'yaqi', 2, '50000', '<p>ssssssssss</p>', '310789bf3531940c62d610c5792d4dd4.png', '50 Buah', '2019-07-13 13:27:43'),
+(8, 'zaki', 2, '40000', '<p>ddddddddddddd</p>', '333934bc28a93a5497d312f2e9dc0e74.png', '40 Buah', '2019-07-13 13:30:32');
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `izin_usaha`
 --
@@ -220,12 +221,12 @@ ALTER TABLE `izin_usaha`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `setting_web`
 --
