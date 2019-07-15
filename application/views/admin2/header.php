@@ -153,6 +153,7 @@ desired effect
           <ul class="treeview-menu">
             <li><a href="<?= base_url('admin/tambah_produk'); ?>">Tambah Produk</a></li>
             <li><a href="<?= base_url('admin/semua_produk'); ?>">Semua Produk</a></li>            
+            <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>            
           </ul>
         </li>
         <li class="treeview">
@@ -162,7 +163,6 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url('admin/produk'); ?>">Produk</a></li>
             <li><a href="<?= base_url('admin/bank'); ?>">Bank</a></li>
             <li><a href="<?= base_url('admin/cara_pesan'); ?>">Cara Pesan</a></li>
             <li><a href="<?= base_url('admin/tentang_kami'); ?>">Tentang Kami</a></li>

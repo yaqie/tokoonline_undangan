@@ -19,29 +19,17 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambahkan Bank Baru</h3>
+              <h3 class="box-title">Tambahkan Kategori Baru</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/tambah_bank'); ?>" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/kategori_master'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="fname" class="col-sm-2 text-right control-label col-form-label">Rekening</label>
+                    <label for="fname" class="col-sm-2 text-right control-label col-form-label">Nama Kategori</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="rekening" name="rekening" maxlength="150" value="" placeholder="Masukkan Nomor Rekening">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Nama Bank</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="nama_bank" name="nama_bank" maxlength="150" value="" placeholder="Masukkan Nama Bank">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Atas Nama</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="atas_nama" name="atas_nama" maxlength="150" value="" placeholder="Masukkan Atas Nama">
+                        <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
                     </div>
                 </div>
             </div>
@@ -58,44 +46,45 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Bank</h3>
+              <h3 class="box-title">Data Kategori</h3>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID Bank</th>
-                  <th>Rekening</th>
-                  <th>Nama Bank</th>
-                  <th>Atas Nama</th>
-                  <th>#</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Slug</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                foreach ($bank as $b):              
+                $no=0;
+                foreach ($kategori_master as $k):
+                $no++;
                 ?>
-                <tr>
-                  <td><?= $b->id_bank ?></td>
-                  <td><?= $b->rekening ?></td>
-                  <td><?= $b->nama_bank ?></td>
-                  <td><?= $b->atas_nama ?></td>
-                  <td>
-                  <a href="<?= base_url('p_admin/hapus_bank/'.$b->id_bank) ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')">Hapus</a> 
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default<?= $b->id_bank ?>">
-                        Edit
-                  </button>
-                  </td>
-                </tr>
-                <?php endforeach ?>
+
+                  <tr>
+                      <td><?= $no ?></td>
+                      <td><?= $k->nama_kategori ?></td>
+                      <td><?= $k->slug ?></td>
+                      <td>
+                        <a href="<?= base_url('p_admin/hapus_kategori/'.$k->id_kategori) ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')">Hapus</a> 
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default<?= $k->id_kategori ?>">
+                              Edit
+                        </button>
+                      </td>
+                  </tr>
+
+                <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>ID Bank</th>
-                  <th>Rekening</th>
-                  <th>Nama Bank</th>
-                  <th>Atas Nama</th>
-                  <th>#</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Slug</th>
+                    <th>#</th>
                 </tr>
                 </tfoot>
               </table>
@@ -103,8 +92,8 @@
 
           </div>
           <!-- /.box -->
-          <?php foreach ($bank as $b): ?>    
-            <div class="modal fade" id="modal-default<?= $b->id_bank ?>">                        
+          <?php foreach ($kategori_master as $k): ?>    
+            <div class="modal fade" id="modal-default<?= $k->id_kategori ?>">                        
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -113,27 +102,23 @@
                     <span aria-hidden="true">&times;</span></button>                    
                 </div>
                 <div class="modal-body">
-                <form action="<?= base_url('p_admin/edit_bank'); ?>" method="post" class="" enctype="multipart/form-data">
-                        <input type="hidden" name="id" class="form-control" value="<?= $b->id_bank ?>">                     
-                        <label for="side-overlay-profile-email">Rekening</label>
-                        <input type="text" name="rekening" class="form-control" value="<?= $b->rekening ?>"> 
-                        <label for="side-overlay-profile-email">Nama Bank</label>
-                        <input type="text" name="nama_bank" class="form-control" value="<?= $b->nama_bank ?>">
-                        <label for="side-overlay-profile-email">Atas Nama</label>
-                        <input type="text" name="atas_nama" class="form-control" value="<?= $b->atas_nama ?>"><br>
+                <form action="<?= base_url('p_admin/edit_kategori'); ?>" method="post" class="" enctype="multipart/form-data">
+                        <input type="hidden" name="id" class="form-control" value="<?= $k->id_kategori ?>">                     
                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                          <label for="side-overlay-profile-email">Nama Kategori</label>
+                          <input type="text" name="nama" class="form-control" value="<?= $k->nama_kategori ?>"> 
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                 </form>
                 </div>
                 
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
             </div>
-            <?php endforeach ?>
+          <?php endforeach ?>
 
         </div>
         <!--/.col (left) -->

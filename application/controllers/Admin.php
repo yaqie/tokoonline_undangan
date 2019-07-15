@@ -109,6 +109,31 @@ class Admin extends CI_Controller {
     }
   }
 
+  public function kategori()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $this->db->from('kategori');
+      $this->db->where(array('id_parent' => NULL ));
+      $this->db->order_by("id_kategori", "desc");
+      $kategori_master = $this->db->get()->result();
+
+      $data = array(
+        'kategori_master' => $kategori_master,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'Kategori',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/kategori',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
   public function tambah_produk()
   {
     if ($this->session->userdata('status') != "loginadmin"){
@@ -234,36 +259,36 @@ class Admin extends CI_Controller {
   }
 
 
-  public function kategori()
-  {
+  // public function kategori()
+  // {
 
-    if ($this->session->userdata('status') != "loginadmin"){
-      $this->load->view('admin/login');
-    } else if ($this->session->userdata('status') == "loginadmin"){
-      $id_user = $this->session->userdata('id');
-      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
-      $this->db->from('kategori');
-      $this->db->where(array('id_parent != ' => NULL, 'id_parent2' => NULL ));
-      $this->db->order_by("id_kategori", "desc");
-      $kategori = $this->db->get()->result();
+  //   if ($this->session->userdata('status') != "loginadmin"){
+  //     $this->load->view('admin/login');
+  //   } else if ($this->session->userdata('status') == "loginadmin"){
+  //     $id_user = $this->session->userdata('id');
+  //     $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+  //     $this->db->from('kategori');
+  //     $this->db->where(array('id_parent != ' => NULL, 'id_parent2' => NULL ));
+  //     $this->db->order_by("id_kategori", "desc");
+  //     $kategori = $this->db->get()->result();
 
-      $this->db->from('kategori');
-      $this->db->where(array('id_parent' => NULL ));
-      $this->db->order_by("id_kategori", "desc");
-      $kategori_master = $this->db->get()->result();
+  //     $this->db->from('kategori');
+  //     $this->db->where(array('id_parent' => NULL ));
+  //     $this->db->order_by("id_kategori", "desc");
+  //     $kategori_master = $this->db->get()->result();
 
-      $data = array(
-        'kategori_master'     => $kategori_master,
-        'kategori'            => $kategori,
-        'admin'               => $admin,
-        'breadcrumb'          => 'Kategori',
-      );
-      $this->load->view('admin/header',$data);
-      $this->load->view('admin/kategori',$data);
-      $this->load->view('admin/footer',$data);
-    }
+  //     $data = array(
+  //       'kategori_master'     => $kategori_master,
+  //       'kategori'            => $kategori,
+  //       'admin'               => $admin,
+  //       'breadcrumb'          => 'Kategori',
+  //     );
+  //     $this->load->view('admin/header',$data);
+  //     $this->load->view('admin/kategori',$data);
+  //     $this->load->view('admin/footer',$data);
+  //   }
 
-  }
+  // }
 
 
   public function subkategori()

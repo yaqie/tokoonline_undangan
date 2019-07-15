@@ -16,7 +16,12 @@ class Home extends CI_Controller {
 	{
 		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
 		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
+		$this->db->from('produk');
+		$this->db->order_by("id_produk", "desc");
+		$produk = $this->db->get()->result();
+		
 		$data = array(
+			'produk' => $produk,
 			'web' => $web,
 			'admin' => $admin,
 		);

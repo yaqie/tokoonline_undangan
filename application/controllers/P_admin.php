@@ -190,6 +190,22 @@ class P_admin extends CI_Controller {
         // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
         redirect(base_url('admin/bank'));
     }
+    
+    public function hapus_kategori($kode)
+    {
+        $where = array('id_kategori' => $kode);
+
+        $this->m_data->hapus_data($where,'kategori');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Kategori berhasil dihapus!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/kategori'));
+    }
   
     function edit_bank()
     {
@@ -222,6 +238,38 @@ class P_admin extends CI_Controller {
           ');
   
           redirect(base_url('admin/bank'));
+        }
+      }
+    
+    
+    function edit_kategori()
+    {
+      if ($this->session->userdata('status') != "loginadmin"){
+        redirect(base_url('admin'));
+      } else {
+        global $date,$rand;
+        $db = get_instance()->db->conn_id;
+      
+        $id     = mysqli_real_escape_string($db, $this->input->post('id'));
+        $nama   = mysqli_real_escape_string($db, $this->input->post('nama'));
+                        
+        $where = array('id_kategori' => $id );
+  
+        $data = array(
+          'nama_kategori' => $nama,
+          'slug' => slug($nama),
+        );
+
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data,'kategori');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Perubahan berhasil!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+        ');
+
+        redirect(base_url('admin/kategori'));
         }
       }
 
@@ -792,7 +840,7 @@ redirect(base_url('admin/semua_produk'));
     ');
 
     // jika berhasil input akan di arahkan ke halaman login
-    redirect(base_url('admin/kategori_master'));
+    redirect(base_url('admin/kategori'));
   }
 
   function kategori(){
