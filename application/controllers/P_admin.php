@@ -325,7 +325,12 @@ class P_admin extends CI_Controller {
               if ( ! $this->upload->do_upload('file')){
                   $error = array('error' => $this->upload->display_errors());
                   // $this->load->view('v_upload', $error);
-                  echo json_encode(['code'=>200, 'msg'=>'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+                  $this->session->set_flashdata('message', '
+                  <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                ');
+                redirect(base_url('admin/tambah_produk'));
               }else{
 
                   

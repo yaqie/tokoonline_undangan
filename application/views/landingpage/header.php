@@ -163,8 +163,13 @@
 				<div class="category-nav show-on-click">
 					<span class="category-header">Kategori <i class="fa fa-list"></i></span>
 					<ul class="category-list">
-						<li><a href="#">Undangan Pernikahan</a></li>
-						<li><a href="#">Undangan Khitanan</a></li>
+					<?php
+					foreach($kategori as $k){
+					?>
+						<li><a href="#"><?= $k->nama_kategori ?></a></li>
+					<?php
+					}
+					?>
 					</ul>
 				</div>
 				<!-- /category nav -->
@@ -176,7 +181,7 @@
 						<li><a href="<?= base_url() ?>">Home</a></li>
 						<li><a href="<?= base_url('cara_pesan') ?>">Cara Pesan</a></li>
 						<li><a href="<?= base_url('tentang_kami') ?>">Tentang Kami</a></li>
-						<li><a href="https://api.whatsapp.com/send?phone=<?= $admin->nowa ?>" target="_blank">Kontak</a></li>
+						<li><a href="https://api.whatsapp.com/send?phone=<?= $admin->nohp ?>" target="_blank">Kontak</a></li>
 						<?php
 						if ($this->session->userdata('status') == "login"){
 						?>

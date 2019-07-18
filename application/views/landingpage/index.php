@@ -54,7 +54,7 @@
 				<!-- section-title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h2 class="title">Undangan Pernikahan</h2>
+						<h2 class="title"><?= $kategori2->nama_kategori ?></h2>
 						<div class="pull-right">
 							<div class="product-slick-dots-1 custom-dots"></div>
 						</div>
@@ -67,7 +67,7 @@
 					<div class="banner banner-2">
 						<img src="<?= base_url('assets/img_undangan') ?>/pernikahan.jpg" style="object-fit:cover;height:350px;" alt="">
 						<div class="banner-caption">
-							<h2 class="white-color" style="color:#F8694A;">Undangan<br>Pernikahan</h2>
+							<h2 class="white-color" style="color:#F8694A;"><?= $kategori2->nama_kategori ?></h2>
 							<button class="primary-btn">Shop Now</button>
 						</div>
 					</div>
@@ -82,16 +82,13 @@
 							<?php foreach($produk as $p) { ?>
 							<div class="product product-single">
 								<div class="product-thumb">
-									<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Lihat</button>
 									<img src="<?= base_url('produk_img/') ?><?= $p->gambar ?>" style="height:300px;" alt="">
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">Rp <?= nominal($p->harga) ?></h3>
 									<h2 class="product-name"><a href="#"><?= $p->nama_produk ?></a></h2>
 									<div class="product-btns">
-										<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-										<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-										<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										<a class="primary-btn add-to-cart" href="<?= base_url('detail/'.$p->id_produk) ?>"> Lihat Detail</a>
 									</div>
 								</div>
 							</div>
@@ -110,7 +107,7 @@
 				<!-- section title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h2 class="title">Undangan Khitanan</h2>
+						<h2 class="title"><?= $kategori3->nama_kategori ?></h2>
 						<div class="pull-right">
 							<div class="product-slick-dots-2 custom-dots">
 							</div>
@@ -124,7 +121,7 @@
 					<div class="banner banner-2">
 					<img src="<?= base_url('assets/img_undangan') ?>/khitanan.png" style="object-fit:cover;height:350px;" alt="">
 						<div class="banner-caption">
-							<h2 style="color:black;" class="white-color">Undangan<br>Khitanan</h2>
+							<h2 style="color:black;" class="white-color"><?= $kategori3->nama_kategori ?></h2>
 							<button class="primary-btn">Shop Now</button>
 						</div>
 					</div>
@@ -136,110 +133,20 @@
 					<div class="row">
 						<div id="product-slick-2" class="product-slick">
 							<!-- Product Single -->
+							<?php foreach($produk2 as $p2) { ?>
 							<div class="product product-single">
 								<div class="product-thumb">
-									<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-									<img src="<?= base_url('assets/landingpage/img/') ?>/product06.jpg" alt="">
+									<img src="<?= base_url('produk_img/') ?><?= $p2->gambar ?>" style="height:300px;" alt="">
 								</div>
 								<div class="product-body">
-									<h3 class="product-price">$32.50</h3>
-									<div class="product-rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o empty"></i>
-									</div>
-									<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+									<h3 class="product-price">Rp <?= nominal($p2->harga) ?></h3>
+									<h2 class="product-name"><a href="#"><?= $p2->nama_produk ?></a></h2>
 									<div class="product-btns">
-										<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-										<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-										<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										<a class="primary-btn add-to-cart" href="<?= base_url('detail/'.$p2->id_produk) ?>"> Lihat Detail</a>
 									</div>
 								</div>
 							</div>
-							<!-- /Product Single -->
-
-							<!-- Product Single -->
-							<div class="product product-single">
-								<div class="product-thumb">
-									<div class="product-label">
-										<span class="sale">-20%</span>
-									</div>
-									<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-									<img src="<?= base_url('assets/landingpage/img/') ?>/product05.jpg" alt="">
-								</div>
-								<div class="product-body">
-									<h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-									<div class="product-rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o empty"></i>
-									</div>
-									<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-									<div class="product-btns">
-										<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-										<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-										<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /Product Single -->
-
-							<!-- Product Single -->
-							<div class="product product-single">
-								<div class="product-thumb">
-									<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-									<img src="<?= base_url('assets/landingpage/img/') ?>/product04.jpg" alt="">
-								</div>
-								<div class="product-body">
-									<h3 class="product-price">$32.50</h3>
-									<div class="product-rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o empty"></i>
-									</div>
-									<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-									<div class="product-btns">
-										<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-										<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-										<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-									</div>
-								</div>
-							</div>
-							<!-- /Product Single -->
-
-							<!-- Product Single -->
-							<div class="product product-single">
-								<div class="product-thumb">
-									<div class="product-label">
-										<span>New</span>
-										<span class="sale">-20%</span>
-									</div>
-									<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-									<img src="<?= base_url('assets/landingpage/img/') ?>/product03.jpg" alt="">
-								</div>
-								<div class="product-body">
-									<h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-									<div class="product-rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o empty"></i>
-									</div>
-									<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-									<div class="product-btns">
-										<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-										<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-										<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-									</div>
-								</div>
-							</div>
+							<?php } ?>
 							<!-- /Product Single -->
 
 						</div>

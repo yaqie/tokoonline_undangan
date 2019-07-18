@@ -88,12 +88,12 @@
 	<!-- /FOOTER -->
 
 	<!-- jQuery Plugins -->
-	<script src="<?= base_url('assets/landingpage/js/') ?>/jquery.min.js"></script>
-	<script src="<?= base_url('assets/landingpage/js/') ?>/bootstrap.min.js"></script>
-	<script src="<?= base_url('assets/landingpage/js/') ?>/slick.min.js"></script>
-	<script src="<?= base_url('assets/landingpage/js/') ?>/nouislider.min.js"></script>
-	<script src="<?= base_url('assets/landingpage/js/') ?>/jquery.zoom.min.js"></script>
-	<script src="<?= base_url('assets/landingpage/js/') ?>/main.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>jquery.min.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>bootstrap.min.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>slick.min.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>nouislider.min.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>jquery.zoom.min.js"></script>
+	<script src="<?= base_url('assets/landingpage/js/') ?>main.js"></script>
 
 </body>
 

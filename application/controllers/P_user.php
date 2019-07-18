@@ -92,359 +92,33 @@ class P_user extends CI_Controller {
 
       // mysqli_real_escape_string anti injeksi
       $username = mysqli_real_escape_string($db, $this->input->post('username'));
-      $nama = mysqli_real_escape_string($db, $this->input->post('nama'));
       $email = mysqli_real_escape_string($db, $this->input->post('email'));
-      $nomor1 = mysqli_real_escape_string($db, $this->input->post('nomor1'));
-      $nomor2 = mysqli_real_escape_string($db, $this->input->post('nomor2'));
-      $nama_gambar = $_FILES["file"]["name"];
-
-      if (isset($nama_gambar)) {
-        $path = $_FILES['file']['name'];
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $img_name = $rand . "." . $ext;
-
-        $config['upload_path']          = './ktp/';
-        $config['allowed_types']        = 'jpg|jpeg|png';
-        $config['max_size']             = 2048;
-        $config['file_name']            = $img_name;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('file')) {
-            $error = array('error' => $this->upload->display_errors());
-            // $this->load->view('v_upload', $error);
-            $this->session->set_flashdata('message', '
-            <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-            </div>
-            ');
-
-            redirect(base_url('user/profil'));
-        } else {
-            $c = $this->m_data->select_where(array('id_user'=>$id_user),'user')->row();
-
-            if ($c->gambar_ktp != "") {
-                unlink("./ktp/$c->gambar_ktp");
-            }
-
-            //Compress Image
-            $config['image_library'] = 'gd2';
-            $config['source_image'] = './ktp/' . $img_name;
-            $config['create_thumb'] = FALSE;
-            $config['maintain_ratio'] = FALSE;
-            $config['quality'] = '80%';
-            $config['width'] = 400;
-            $config['height'] = 200;
-            $config['new_image'] = './ktp/' . $img_name;
-            $this->load->library('image_lib', $config);
-            $this->image_lib->resize();
-
-            $gbr = $this->upload->data();
-
-
-            $user = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'user' ),'user')->row();
-
-            if ($username == $user->username && $email == $user->email) {
-              $where = array(
-                'id_user' => $id_user
-              );
-
-              $data = array(
-                'username' => $username,
-                'nama' => $nama,
-                'email' => $email,
-                'nohp' => $nomor1,
-                'nowa' => $nomor2,
-                'gambar_ktp' => $img_name,
-              );
-
-              // update modified (jika di perlukan dalam tabel)
-              $query = $this->m_data->update_data($where,$data,'user');
-
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-success"> Perubahan berhasil!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            } else {
-
-              if ($username != $user->username && $email == $user->email){
-                echo $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'user' ),'user')->num_rows();
-                echo "username beda";
-                if ($hitung_username > 0) {
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-danger"> Perubahan gagal disimpan! Username sudah digunakan.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                } else {
-                  $where = array(
-                    'id_user' => $id_user
-                  );
-
-                  $data = array(
-                    'username' => $username,
-                    'nama' => $nama,
-                    'email' => $email,
-                    'nohp' => $nomor1,
-                    'nowa' => $nomor2,
-                    'gambar_ktp' => $img_name,
-                  );
-
-                  // update modified (jika di perlukan dalam tabel)
-                  $query = $this->m_data->update_data($where,$data,'user');
-
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-success"> Perubahan berhasil!
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                }
-              } else if ($email != $user->email && $username == $user->username){
-                echo $hitung_email = $this->m_data->select_where(array('email' => $email ),'user')->num_rows();
-                echo "email beda";
-                if ($hitung_email > 0) {
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-danger"> Perubahan gagal disimpan! E-mail sudah digunakan.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                } else {
-                  $where = array(
-                    'id_user' => $id_user
-                  );
-
-                  $data = array(
-                    'username' => $username,
-                    'nama' => $nama,
-                    'email' => $email,
-                    'nohp' => $nomor1,
-                    'nowa' => $nomor2,
-                    'gambar_ktp' => $img_name,
-                  );
-
-                  // update modified (jika di perlukan dalam tabel)
-                  $query = $this->m_data->update_data($where,$data,'user');
-
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-success"> Perubahan berhasil!
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                }
-
-              } else if ($username != $user->username && $email != $user->email){
-                $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'user' ),'user')->num_rows();
-                $hitung_email = $this->m_data->select_where(array('email' => $email,'level' => 'user' ),'user')->num_rows();
-
-                if ($hitung_username > 0) {
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-danger"> Perubahan gagal disimpan! Username sudah digunakan.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                } else if ($hitung_email > 0) {
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-danger"> Perubahan gagal disimpan! E-mail sudah digunakan.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                } else {
-                  $where = array(
-                    'id_user' => $id_user
-                  );
-
-                  $data = array(
-                    'username' => $username,
-                    'nama' => $nama,
-                    'email' => $email,
-                    'nohp' => $nomor1,
-                    'nowa' => $nomor2,
-                    'gambar_ktp' => $img_name,
-                  );
-
-                  // update modified (jika di perlukan dalam tabel)
-                  $query = $this->m_data->update_data($where,$data,'user');
-
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-success"> Perubahan berhasil!
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                  ');
-
-                  redirect(base_url('user/profil'));
-                }
-
-              }
-
-            }
-        }
-      } else {
-        $user = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'user' ),'user')->row();
-
-        if ($username == $user->username && $email == $user->email) {
-          $where = array(
-            'id_user' => $id_user
-          );
-
-          $data = array(
-            'username' => $username,
-            'nama' => $nama,
-            'email' => $email,
-            'nohp' => $nomor1,
-            'nowa' => $nomor2,
-          );
-
-          // update modified (jika di perlukan dalam tabel)
-          $query = $this->m_data->update_data($where,$data,'user');
-
-          $this->session->set_flashdata('message', '
-          <div class="alert alert-success"> Perubahan berhasil!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-          </div>
-          ');
-
-          redirect(base_url('user/profil'));
-        } else {
-
-          if ($username != $user->username && $email == $user->email){
-            echo $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'user' ),'user')->num_rows();
-            echo "username beda";
-            if ($hitung_username > 0) {
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-danger"> Perubahan gagal disimpan! Username sudah digunakan.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            } else {
-              $where = array(
-                'id_user' => $id_user
-              );
-
-              $data = array(
-                'username' => $username,
-                'nama' => $nama,
-                'email' => $email,
-                'nohp' => $nomor1,
-                'nowa' => $nomor2,
-              );
-
-              // update modified (jika di perlukan dalam tabel)
-              $query = $this->m_data->update_data($where,$data,'user');
-
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-success"> Perubahan berhasil!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            }
-          } else if ($email != $user->email && $username == $user->username){
-            echo $hitung_email = $this->m_data->select_where(array('email' => $email ),'user')->num_rows();
-            echo "email beda";
-            if ($hitung_email > 0) {
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-danger"> Perubahan gagal disimpan! E-mail sudah digunakan.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            } else {
-              $where = array(
-                'id_user' => $id_user
-              );
-
-              $data = array(
-                'username' => $username,
-                'nama' => $nama,
-                'email' => $email,
-                'nohp' => $nomor1,
-                'nowa' => $nomor2,
-              );
-
-              // update modified (jika di perlukan dalam tabel)
-              $query = $this->m_data->update_data($where,$data,'user');
-
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-success"> Perubahan berhasil!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            }
-
-          } else if ($username != $user->username && $email != $user->email){
-            $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'user' ),'user')->num_rows();
-            $hitung_email = $this->m_data->select_where(array('email' => $email,'level' => 'user' ),'user')->num_rows();
-
-            if ($hitung_username > 0) {
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-danger"> Perubahan gagal disimpan! Username sudah digunakan.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            } else if ($hitung_email > 0) {
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-danger"> Perubahan gagal disimpan! E-mail sudah digunakan.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            } else {
-              $where = array(
-                'id_user' => $id_user
-              );
-
-              $data = array(
-                'username' => $username,
-                'nama' => $nama,
-                'email' => $email,
-                'nohp' => $nomor1,
-                'nowa' => $nomor2,
-              );
-
-              // update modified (jika di perlukan dalam tabel)
-              $query = $this->m_data->update_data($where,$data,'user');
-
-              $this->session->set_flashdata('message', '
-              <div class="alert alert-success"> Perubahan berhasil!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-              </div>
-              ');
-
-              redirect(base_url('user/profil'));
-            }
-
-          }
-
-        }
-      }
-
-      
-
-
+      $nama = mysqli_real_escape_string($db, $this->input->post('nama'));
+      $nohp = mysqli_real_escape_string($db, $this->input->post('nohp'));
+      $alamat = mysqli_real_escape_string($db, $this->input->post('alamat'));
+
+      $where = array(
+        'id_user' => $this->session->userdata('id_user')
+      );
+
+      $data = array(
+        'username'    => $username,
+        'email'       => $email,
+        'nama'        => $nama,
+        'nohp'        => $nohp,
+        'alamat'      => $alamat,
+      );
+
+      // update modified (jika di perlukan dalam tabel)
+      $query = $this->m_data->update_data($where,$data,'user');
+
+      $this->session->set_flashdata('message', '
+      <div class="alert alert-success"> Perubahan berhasil!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+      </div>
+      ');
+
+      redirect(base_url('profil'));
     }
   }
 
@@ -567,6 +241,200 @@ class P_user extends CI_Controller {
       }
     }
   }
+
+
+  function pesan()
+  {
+    global $date;
+    if ($this->session->userdata('status') != "login"){
+			redirect(base_url('auth'));
+		} else {
+      $db = get_instance()->db->conn_id;
+
+      // mysqli_real_escape_string anti injeksi
+      $id = mysqli_real_escape_string($db, $this->input->post('id'));
+      $qty = mysqli_real_escape_string($db, $this->input->post('qty'));
+      $tipe = mysqli_real_escape_string($db, $this->input->post('tipe'));
+
+      $cari_transaksi = $this->m_data->tampil_data('transaksi')->num_rows();
+      if($cari_transaksi == 0){
+        $kode = '0001'; 
+      } else {
+        $cari_transaksi2 = $this->db->query("SELECT * FROM transaksi ORDER BY id_transaksi DESC LIMIT 1")->row();
+        $exp = explode('-',$cari_transaksi2->kode_transaksi);
+        $bilangan = $exp[1] + 1;
+        $kode = sprintf("%04d", $bilangan);
+      }
+      $id_user = $this->session->userdata('id_user');
+
+      $data = array(
+        'kode_transaksi' => "TR-".$kode,
+        'id_produk' => $id,
+        'kuantiti' => $qty,
+        'id_user' => $id_user,
+        'tipe' => $tipe,
+        'tanggaljam' => $date,
+      );
+
+      // ===== input data ke tabel =====
+      $this->m_data->input_data($data,'transaksi');
+      redirect(base_url('pesan/TR-'.$kode));
+    }
+  }
+
+  public function konfirmasi_pesan()
+      {
+          global $date;
+          $db = get_instance()->db->conn_id;
+  
+          // mysqli_real_escape_string anti injeksi
+          
+          $kode   = mysqli_real_escape_string($db, $this->input->post('kode'));
+          $id_transaksi   = mysqli_real_escape_string($db, $this->input->post('id_transaksi'));
+          $nm1      = mysqli_real_escape_string($db, $this->input->post('nm1'));
+          $nm_pang1         = mysqli_real_escape_string($db, $this->input->post('nm_pang1'));
+          $nm_ayah1        = mysqli_real_escape_string($db, $this->input->post('nm_ayah1'));
+          $nm_ibu1     = mysqli_real_escape_string($db, $this->input->post('nm_ibu1'));
+          $anak1     = mysqli_real_escape_string($db, $this->input->post('anak1'));
+          $nm2      = mysqli_real_escape_string($db, $this->input->post('nm2'));
+          $nm_pang2         = mysqli_real_escape_string($db, $this->input->post('nm_pang2'));
+          $nm_ayah2        = mysqli_real_escape_string($db, $this->input->post('nm_ayah2'));
+          $nm_ibu2     = mysqli_real_escape_string($db, $this->input->post('nm_ibu2'));
+          $anak2     = mysqli_real_escape_string($db, $this->input->post('anak2'));  
+          $tgl1     = mysqli_real_escape_string($db, $this->input->post('tgl1'));  
+          $jam1     = mysqli_real_escape_string($db, $this->input->post('jam1'));  
+          $tempat1     = mysqli_real_escape_string($db, $this->input->post('tempat1'));  
+          $tgl2    = mysqli_real_escape_string($db, $this->input->post('tgl2'));  
+          $jam2     = mysqli_real_escape_string($db, $this->input->post('jam2'));  
+          $tempat2     = mysqli_real_escape_string($db, $this->input->post('tempat2'));
+          $hiburan     = mysqli_real_escape_string($db, $this->input->post('hiburan'));
+          $mengundang     = mysqli_real_escape_string($db, $this->input->post('mengundang'));
+          $ket_lain     = mysqli_real_escape_string($db, $this->input->post('ket_lain'));
+          $alamat     = mysqli_real_escape_string($db, $this->input->post('alamat'));
+          $ket_lain = str_ireplace(array("\r","\n",'\r','\n'),'', $ket_lain);
+          $nama_gambar = $_FILES["file"]["name"];
+  
+          if ($nama_gambar == "") {
+              $data = array(                
+                  'id_transaksi' => $id_transaksi,
+                  'nm1' => $nm1,
+                  'nm_pang1' => $nm_pang1,
+                  'nm_ayah1' => $nm_ayah1,
+                  'nm_ibu1' => $nm_ibu1,
+                  'anak1' => $anak1,
+                  'nm2' => $nm2,
+                  'nm_pang2' => $nm_pang2,
+                  'nm_ayah2' => $nm_ayah2,
+                  'nm_ibu2' => $nm_ibu2,
+                  'anak2' => $anak2,
+                  'tgl1' => $tgl1,
+                  'jam1' => $jam1,
+                  'tempat1' => $tempat1,
+                  'tgl2' => $tgl2,
+                  'jam2' => $jam2,
+                  'tempat2' => $tempat2,
+                  'hiburan' => $hiburan,
+                  'mengundang' => $mengundang,
+                  'ket_lain' => $ket_lain,
+              );
+  
+              // ===== input data ke tabel =====             
+              $this->m_data->input_data($data,'detail_pemesanan');
+
+
+              $where = array(
+                'id_transaksi' => $id_transaksi,
+              );
+        
+              $data2 = array(
+                'alamat'      => $alamat,
+              );
+        
+              // update modified (jika di perlukan dalam tabel)
+              $query = $this->m_data->update_data($where,$data2,'transaksi');
+
+
+              $this->session->set_flashdata('message', '
+                <div class="alert alert-success"> Berhasil!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+              ');  
+              
+              // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+              redirect(base_url('invoice/'.$kode));
+          } else {
+              # code...
+              #code 3
+              $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+              $img_name = MD5($nama_gambar).".".$ext;
+  
+              $config['upload_path']          = './produk_img/';
+              $config['allowed_types']        = 'jpg|jpeg|png';
+              $config['max_size']             = 2048;
+              $config['file_name']            = $img_name;
+      
+              $this->load->library('upload', $config);
+      
+              if ( ! $this->upload->do_upload('file')){
+                  $error = array('error' => $this->upload->display_errors());
+                  // $this->load->view('v_upload', $error);
+                  $this->session->set_flashdata('message', '
+                  <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                ');
+                redirect(base_url('pesan/'.$kode));
+              }else{              
+
+                  $data = array(                   
+                    'id_transaksi' => $id_transaksi,
+                    'nm1' => $nm1,
+                    'nm_pang1' => $nm_pang1,
+                    'nm_ayah1' => $nm_ayah1,
+                    'nm_ibu1' => $nm_ibu1,
+                    'anak1' => $anak1,
+                    'nm2' => $nm2,
+                    'nm_pang2' => $nm_pang2,
+                    'nm_ayah2' => $nm_ayah2,
+                    'nm_ibu2' => $nm_ibu2,
+                    'anak2' => $anak2,
+                    'tgl1' => $tgl1,
+                    'jam1' => $jam1,
+                    'tempat1' => $tempat1,
+                    'tgl2' => $tgl2,
+                    'jam2' => $jam2,
+                    'tempat2' => $tempat2,
+                    'hiburan' => $hiburan,
+                    'mengundang' => $mengundang,
+                    'ket_lain' => $ket_lain,
+                    'gambar'  => $img_name,
+                  );
+  
+                  // ===== input data ke tabel =====             
+                  $this->m_data->input_data($data,'detail_pemesanan');
+
+                  $where = array(
+                    'id_transaksi' => $id_transaksi,
+                  );
+            
+                  $data2 = array(
+                    'alamat'      => $alamat,
+                  );
+            
+                  // update modified (jika di perlukan dalam tabel)
+                  $query = $this->m_data->update_data($where,$data2,'transaksi');
+
+
+                  $this->session->set_flashdata('message', '
+                  <div class="alert alert-success"> Berhasil!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                ');  
+                  // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+                  redirect(base_url('invoice/'.$kode));
+              }
+          }
+          }
 
 
 
