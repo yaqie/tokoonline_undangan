@@ -79,12 +79,6 @@
                                 <input type="text" class="form-control" id="nomor1" name="nomor1" value="<?= $admin->nohp ?>">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="email1" class="col-sm-2 text-right control-label col-form-label">Nomor Whatsapp</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nomor2" name="nomor2" value="<?= $admin->nowa ?>">
-                            </div>
-                        </div>
                     </div>
                     <hr>
                     <div class="card-body">
