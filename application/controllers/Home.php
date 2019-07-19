@@ -170,8 +170,8 @@ class Home extends CI_Controller {
 
 		$urldecode = urldecode ($kata);
 
-		if($kode == 0){
-		} else if($kode != 0){
+		if($kode == "semua_kategori"){
+		} else if($kode != "semua_kategori"){
 			$this->db->where(array('slug' => $kode));
 		}
 

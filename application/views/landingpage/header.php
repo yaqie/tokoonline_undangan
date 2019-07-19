@@ -59,7 +59,7 @@
 						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 							<input class="input search-input" name="keyword" type="text" placeholder="Apa yang anda cari ?" required>
 							<select class="input search-categories" name="kategori" required>
-								<option value="0">Semua Kategori</option>
+								<option value="semua_kategori">Semua Kategori</option>
 								<?php
 								foreach($kategori as $k2){
 									echo "<option value='$k2->slug'>$k2->nama_kategori</option>";
