@@ -156,6 +156,7 @@ desired effect
             <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>            
           </ul>
         </li>
+        <li><a href="<?= base_url('admin/konfirmasi_pembayaran') ?>"><i class="fa fa-money"></i> <span>Konfirmasi Pembayaran</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-gear"></i> <span>Pengaturan</span>
             <span class="pull-right-container">

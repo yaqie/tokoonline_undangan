@@ -134,6 +134,29 @@ class Admin extends CI_Controller {
     }
   }
 
+  public function konfirmasi_pembayaran()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $konfirmasi_pembayaran = $this->m_data->tampil_data('konfirmasi_pembayaran')->result();
+      $transaksi = $this->m_data->tampil_data('transaksi')->result();
+      $data = array(
+        'konfirmasi_pembayaran' => $konfirmasi_pembayaran,
+        'transaksi' => $transaksi,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'konfirmasi pembayaran',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/konfirmasi_pembayaran',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
   public function tambah_produk()
   {
     if ($this->session->userdata('status') != "loginadmin"){
