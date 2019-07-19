@@ -283,158 +283,274 @@ class P_user extends CI_Controller {
   }
 
   public function konfirmasi_pesan()
-      {
-          global $date;
-          $db = get_instance()->db->conn_id;
-  
-          // mysqli_real_escape_string anti injeksi
-          
-          $kode   = mysqli_real_escape_string($db, $this->input->post('kode'));
-          $id_transaksi   = mysqli_real_escape_string($db, $this->input->post('id_transaksi'));
-          $nm1      = mysqli_real_escape_string($db, $this->input->post('nm1'));
-          $nm_pang1         = mysqli_real_escape_string($db, $this->input->post('nm_pang1'));
-          $nm_ayah1        = mysqli_real_escape_string($db, $this->input->post('nm_ayah1'));
-          $nm_ibu1     = mysqli_real_escape_string($db, $this->input->post('nm_ibu1'));
-          $anak1     = mysqli_real_escape_string($db, $this->input->post('anak1'));
-          $nm2      = mysqli_real_escape_string($db, $this->input->post('nm2'));
-          $nm_pang2         = mysqli_real_escape_string($db, $this->input->post('nm_pang2'));
-          $nm_ayah2        = mysqli_real_escape_string($db, $this->input->post('nm_ayah2'));
-          $nm_ibu2     = mysqli_real_escape_string($db, $this->input->post('nm_ibu2'));
-          $anak2     = mysqli_real_escape_string($db, $this->input->post('anak2'));  
-          $tgl1     = mysqli_real_escape_string($db, $this->input->post('tgl1'));  
-          $jam1     = mysqli_real_escape_string($db, $this->input->post('jam1'));  
-          $tempat1     = mysqli_real_escape_string($db, $this->input->post('tempat1'));  
-          $tgl2    = mysqli_real_escape_string($db, $this->input->post('tgl2'));  
-          $jam2     = mysqli_real_escape_string($db, $this->input->post('jam2'));  
-          $tempat2     = mysqli_real_escape_string($db, $this->input->post('tempat2'));
-          $hiburan     = mysqli_real_escape_string($db, $this->input->post('hiburan'));
-          $mengundang     = mysqli_real_escape_string($db, $this->input->post('mengundang'));
-          $ket_lain     = mysqli_real_escape_string($db, $this->input->post('ket_lain'));
-          $alamat     = mysqli_real_escape_string($db, $this->input->post('alamat'));
-          $ket_lain = str_ireplace(array("\r","\n",'\r','\n'),'', $ket_lain);
-          $nama_gambar = $_FILES["file"]["name"];
-  
-          if ($nama_gambar == "") {
-              $data = array(                
-                  'id_transaksi' => $id_transaksi,
-                  'nm1' => $nm1,
-                  'nm_pang1' => $nm_pang1,
-                  'nm_ayah1' => $nm_ayah1,
-                  'nm_ibu1' => $nm_ibu1,
-                  'anak1' => $anak1,
-                  'nm2' => $nm2,
-                  'nm_pang2' => $nm_pang2,
-                  'nm_ayah2' => $nm_ayah2,
-                  'nm_ibu2' => $nm_ibu2,
-                  'anak2' => $anak2,
-                  'tgl1' => $tgl1,
-                  'jam1' => $jam1,
-                  'tempat1' => $tempat1,
-                  'tgl2' => $tgl2,
-                  'jam2' => $jam2,
-                  'tempat2' => $tempat2,
-                  'hiburan' => $hiburan,
-                  'mengundang' => $mengundang,
-                  'ket_lain' => $ket_lain,
-              );
-  
-              // ===== input data ke tabel =====             
-              $this->m_data->input_data($data,'detail_pemesanan');
+  {
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $kode   = mysqli_real_escape_string($db, $this->input->post('kode'));
+    $id_transaksi   = mysqli_real_escape_string($db, $this->input->post('id_transaksi'));
+    $nm1      = mysqli_real_escape_string($db, $this->input->post('nm1'));
+    $nm_pang1         = mysqli_real_escape_string($db, $this->input->post('nm_pang1'));
+    $nm_ayah1        = mysqli_real_escape_string($db, $this->input->post('nm_ayah1'));
+    $nm_ibu1     = mysqli_real_escape_string($db, $this->input->post('nm_ibu1'));
+    $anak1     = mysqli_real_escape_string($db, $this->input->post('anak1'));
+    $nm2      = mysqli_real_escape_string($db, $this->input->post('nm2'));
+    $nm_pang2         = mysqli_real_escape_string($db, $this->input->post('nm_pang2'));
+    $nm_ayah2        = mysqli_real_escape_string($db, $this->input->post('nm_ayah2'));
+    $nm_ibu2     = mysqli_real_escape_string($db, $this->input->post('nm_ibu2'));
+    $anak2     = mysqli_real_escape_string($db, $this->input->post('anak2'));  
+    $tgl1     = mysqli_real_escape_string($db, $this->input->post('tgl1'));  
+    $jam1     = mysqli_real_escape_string($db, $this->input->post('jam1'));  
+    $tempat1     = mysqli_real_escape_string($db, $this->input->post('tempat1'));  
+    $tgl2    = mysqli_real_escape_string($db, $this->input->post('tgl2'));  
+    $jam2     = mysqli_real_escape_string($db, $this->input->post('jam2'));  
+    $tempat2     = mysqli_real_escape_string($db, $this->input->post('tempat2'));
+    $hiburan     = mysqli_real_escape_string($db, $this->input->post('hiburan'));
+    $mengundang     = mysqli_real_escape_string($db, $this->input->post('mengundang'));
+    $ket_lain     = mysqli_real_escape_string($db, $this->input->post('ket_lain'));
+    $alamat     = mysqli_real_escape_string($db, $this->input->post('alamat'));
+    $ket_lain = str_ireplace(array("\r","\n",'\r','\n'),'', $ket_lain);
+    $nama_gambar = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+        $data = array(                
+            'id_transaksi' => $id_transaksi,
+            'nm1' => $nm1,
+            'nm_pang1' => $nm_pang1,
+            'nm_ayah1' => $nm_ayah1,
+            'nm_ibu1' => $nm_ibu1,
+            'anak1' => $anak1,
+            'nm2' => $nm2,
+            'nm_pang2' => $nm_pang2,
+            'nm_ayah2' => $nm_ayah2,
+            'nm_ibu2' => $nm_ibu2,
+            'anak2' => $anak2,
+            'tgl1' => $tgl1,
+            'jam1' => $jam1,
+            'tempat1' => $tempat1,
+            'tgl2' => $tgl2,
+            'jam2' => $jam2,
+            'tempat2' => $tempat2,
+            'hiburan' => $hiburan,
+            'mengundang' => $mengundang,
+            'ket_lain' => $ket_lain,
+        );
+
+        // ===== input data ke tabel =====             
+        $this->m_data->input_data($data,'detail_pemesanan');
 
 
-              $where = array(
-                'id_transaksi' => $id_transaksi,
-              );
+        $where = array(
+          'id_transaksi' => $id_transaksi,
+        );
+  
+        $data2 = array(
+          'alamat'      => $alamat,
+        );
+  
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data2,'transaksi');
+
+
+        $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Berhasil!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');  
         
-              $data2 = array(
-                'alamat'      => $alamat,
-              );
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('invoice/'.$kode));
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).".".$ext;
+
+        $config['upload_path']          = './produk_img/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');
+          redirect(base_url('pesan/'.$kode));
+        }else{              
+
+            $data = array(                   
+              'id_transaksi' => $id_transaksi,
+              'nm1' => $nm1,
+              'nm_pang1' => $nm_pang1,
+              'nm_ayah1' => $nm_ayah1,
+              'nm_ibu1' => $nm_ibu1,
+              'anak1' => $anak1,
+              'nm2' => $nm2,
+              'nm_pang2' => $nm_pang2,
+              'nm_ayah2' => $nm_ayah2,
+              'nm_ibu2' => $nm_ibu2,
+              'anak2' => $anak2,
+              'tgl1' => $tgl1,
+              'jam1' => $jam1,
+              'tempat1' => $tempat1,
+              'tgl2' => $tgl2,
+              'jam2' => $jam2,
+              'tempat2' => $tempat2,
+              'hiburan' => $hiburan,
+              'mengundang' => $mengundang,
+              'ket_lain' => $ket_lain,
+              'gambar'  => $img_name,
+            );
+
+            // ===== input data ke tabel =====             
+            $this->m_data->input_data($data,'detail_pemesanan');
+
+            $where = array(
+              'id_transaksi' => $id_transaksi,
+            );
+      
+            $data2 = array(
+              'alamat'      => $alamat,
+            );
+      
+            // update modified (jika di perlukan dalam tabel)
+            $query = $this->m_data->update_data($where,$data2,'transaksi');
+
+
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success"> Berhasil!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');  
+            // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+            redirect(base_url('invoice/'.$kode));
+        }
+    }
+  }
+
+
+
+
+  public function konfirmasi_pembayaran()
+  {
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $kode           = mysqli_real_escape_string($db, $this->input->post('kode'));
+    $banktujuan     = mysqli_real_escape_string($db, $this->input->post('banktujuan'));
+    $bankpengirim   = mysqli_real_escape_string($db, $this->input->post('bankpengirim'));
+    $norek          = mysqli_real_escape_string($db, $this->input->post('norek'));
+    $nama           = mysqli_real_escape_string($db, $this->input->post('nama'));
+    $tanggal        = mysqli_real_escape_string($db, $this->input->post('tanggal'));
+    $jumlah         = mysqli_real_escape_string($db, $this->input->post('jumlah'));
+    $catatan        = mysqli_real_escape_string($db, $this->input->post('catatan'));
+    $nama_gambar    = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+        $data = array(                
+            'kode_invoice'      => $kode,
+            'bank_tujuan'       => $banktujuan,
+            'bank_pengirim'     => $bankpengirim,
+            'no_rekening'       => $norek,
+            'nama_pengirim'     => $nama,
+            'tanggal_transfer'  => $tanggal,
+            'jumlah_transfer'   => $jumlah,
+            'catatan'           => $catatan,
+        );
+
+        // ===== input data ke tabel =====             
+        $this->m_data->input_data($data,'konfirmasi_pembayaran');
+
+        $where = array(
+          'kode_transaksi' => $kode,
+        );
+  
+        $data2 = array(
+          'status'      => 1,
+        );
+  
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data2,'transaksi');
+
+
+        $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Berhasil!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');  
         
-              // update modified (jika di perlukan dalam tabel)
-              $query = $this->m_data->update_data($where,$data2,'transaksi');
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('keranjang/'));
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).".".$ext;
 
+        $config['upload_path']          = './konf_pembayaran/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
 
-              $this->session->set_flashdata('message', '
-                <div class="alert alert-success"> Berhasil!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                </div>
-              ');  
-              
-              // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
-              redirect(base_url('invoice/'.$kode));
-          } else {
-              # code...
-              #code 3
-              $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
-              $img_name = MD5($nama_gambar).".".$ext;
-  
-              $config['upload_path']          = './produk_img/';
-              $config['allowed_types']        = 'jpg|jpeg|png';
-              $config['max_size']             = 2048;
-              $config['file_name']            = $img_name;
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');
+          redirect(base_url('invoice/'.$kode));
+        }else{              
+
+            $data = array(                
+                'kode_invoice'      => $kode,
+                'bank_tujuan'       => $banktujuan,
+                'bank_pengirim'     => $bankpengirim,
+                'no_rekening'       => $norek,
+                'nama_pengirim'     => $nama,
+                'tanggal_transfer'  => $tanggal,
+                'jumlah_transfer'   => $jumlah,
+                'gambar'            => $img_name,
+                'catatan'           => $catatan,
+            );
+
+            // ===== input data ke tabel =====             
+            $this->m_data->input_data($data,'konfirmasi_pembayaran');
+
+            $where = array(
+              'kode_transaksi' => $kode,
+            );
       
-              $this->load->library('upload', $config);
+            $data2 = array(
+              'status'      => 1,
+            );
       
-              if ( ! $this->upload->do_upload('file')){
-                  $error = array('error' => $this->upload->display_errors());
-                  // $this->load->view('v_upload', $error);
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                ');
-                redirect(base_url('pesan/'.$kode));
-              }else{              
+            // update modified (jika di perlukan dalam tabel)
+            $query = $this->m_data->update_data($where,$data2,'transaksi');
 
-                  $data = array(                   
-                    'id_transaksi' => $id_transaksi,
-                    'nm1' => $nm1,
-                    'nm_pang1' => $nm_pang1,
-                    'nm_ayah1' => $nm_ayah1,
-                    'nm_ibu1' => $nm_ibu1,
-                    'anak1' => $anak1,
-                    'nm2' => $nm2,
-                    'nm_pang2' => $nm_pang2,
-                    'nm_ayah2' => $nm_ayah2,
-                    'nm_ibu2' => $nm_ibu2,
-                    'anak2' => $anak2,
-                    'tgl1' => $tgl1,
-                    'jam1' => $jam1,
-                    'tempat1' => $tempat1,
-                    'tgl2' => $tgl2,
-                    'jam2' => $jam2,
-                    'tempat2' => $tempat2,
-                    'hiburan' => $hiburan,
-                    'mengundang' => $mengundang,
-                    'ket_lain' => $ket_lain,
-                    'gambar'  => $img_name,
-                  );
-  
-                  // ===== input data ke tabel =====             
-                  $this->m_data->input_data($data,'detail_pemesanan');
-
-                  $where = array(
-                    'id_transaksi' => $id_transaksi,
-                  );
-            
-                  $data2 = array(
-                    'alamat'      => $alamat,
-                  );
-            
-                  // update modified (jika di perlukan dalam tabel)
-                  $query = $this->m_data->update_data($where,$data2,'transaksi');
-
-
-                  $this->session->set_flashdata('message', '
-                  <div class="alert alert-success"> Berhasil!
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                  </div>
-                ');  
-                  // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
-                  redirect(base_url('invoice/'.$kode));
-              }
-          }
-          }
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success"> Berhasil!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');  
+            // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+            redirect(base_url('keranjang'));
+        }
+    }
+  }
 
 
 

@@ -132,6 +132,27 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/cara_pesan',$data);
 		$this->load->view('landingpage/footer',$data);
 	}
+	
+	
+	public function keranjang()
+	{
+		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
+		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
+		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
+		$kategori = $this->m_data->tampil_data('kategori')->result();
+		$id = $this->session->userdata('id_user');
+		$transaksi = $this->db->query("SELECT * FROM transaksi WHERE id_user = '$id' ORDER BY id_transaksi DESC")->result();
+		$data = array(
+			'transaksi' => $transaksi,
+			'web' => $web,
+			'kategori' 	=> $kategori,
+			'admin' => $admin,
+			'cara' => $cara,
+		);
+		$this->load->view('landingpage/header',$data);
+		$this->load->view('landingpage/keranjang',$data);
+		$this->load->view('landingpage/footer',$data);
+	}
 
 	public function tentang_kami()
 	{

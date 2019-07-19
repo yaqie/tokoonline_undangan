@@ -87,7 +87,7 @@
 								} else {
 								?>
 								<li><a href="<?= base_url('profil'); ?>"><i class="fa fa-user-o"></i> Profil</a></li>
-								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+								<!-- <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li> -->
 								<li><a href="<?= base_url('p_user/logout'); ?>"><i class="fa fa-sign-out"></i> Keluar</a></li>
 								<?php
 								}
@@ -98,14 +98,11 @@
 
 						<!-- Cart -->
 						<li class="header-cart dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+						<a class="dropdown-toggle" href="<?= base_url('keranjang'); ?>" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
-									<span class="qty">3</span>
 								</div>
-								<strong class="text-uppercase">My Cart:</strong>
-								<br>
-								<span>35.20$</span>
+								<strong class="text-uppercase">Keranjang</strong>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
