@@ -493,6 +493,22 @@ redirect(base_url('admin/semua_produk'));
         redirect(base_url('admin/semua_produk'));
     }
 
+    public function hapus_user_pembeli($kode)
+    {
+        $where = array('id_user' => $kode);
+
+        $this->m_data->hapus_data($where,'user');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> User berhasil dihapus!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/user_pembeli'));
+    }
+
   function edit_setting()
   {
     if ($this->session->userdata('status') != "loginadmin"){
@@ -539,8 +555,8 @@ redirect(base_url('admin/semua_produk'));
             $config['create_thumb']= FALSE;
             $config['maintain_ratio']= FALSE;
             $config['quality']= '80%';
-            $config['width']= 166;
-            $config['height']= 33;
+            $config['width']= 155;
+            $config['height']= 70;
             $config['new_image']= './img_web/'.$img_name;
             $this->load->library('image_lib', $config);
             $this->image_lib->resize();
@@ -594,6 +610,52 @@ redirect(base_url('admin/semua_produk'));
       }
     }
   }
+
+  public function konfirmasi($kode)
+  {
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+
+        $where = array(
+          'id_transaksi' => $kode,
+        );
+  
+        $data2 = array(
+          'status'      => 2,
+        );
+  
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data2,'transaksi');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/konfirmasi_pembayaran'));
+
+      }
+
+  public function tolak($kode)
+  {
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+
+        $where = array(
+          'id_transaksi' => $kode,
+        );
+  
+        $data2 = array(
+          'status'      => -1,
+        );
+  
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data2,'transaksi');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/konfirmasi_pembayaran'));
+
+      }
 
 
   function edit_profil()

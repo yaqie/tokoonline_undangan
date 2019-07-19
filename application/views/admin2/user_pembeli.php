@@ -2,7 +2,7 @@
   
 
   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -11,79 +11,91 @@
     </section>
 
     <!-- Main content -->
-    
-    <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
+    <?php echo $this->session->flashdata('message');?>
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3><?= $hitung_produk ?></h3>
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          
+          <!-- /.box -->
 
-              <p>Jumlah Produk</p>
+
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Data Semua Produk</h3>
             </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Id User</th>
+                  <th>Username</th>
+                  <th>Nama</th>
+                  <th>E-mail</th>
+                  <th>No Hp</th>                 
+                  <th>Alamat</th>   
+                  <th>#</th>               
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($user as $u):           
+                ?>
+                <tr>
+                  <td><?= $u->id_user ?></td>
+                  <td><?= $u->username ?></td>
+                  <td><?= $u->nama ?></td>
+                  <td><?= $u->email ?></td>
+                  <td><?= $u->nohp ?></td>                  
+                  <td><?= $u->alamat ?></td>
+                  <td><a href="<?= base_url('p_admin/hapus_user_pembeli/'.$u->id_user) ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')"><i class="fa fa-trash"></i></a> 
+                  <a href="<?= base_url('admin/edit_user_pembeli/'.$u->id_user) ?>" class="btn btn-success"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                <?php endforeach ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Id User</th>
+                  <th>Username</th>
+                  <th>Nama</th>
+                  <th>E-mail</th>
+                  <th>No Hp</th>                 
+                  <th>Alamat</th>   
+                  <th>#</th>                
+                </tr>
+                </tfoot>
+              </table>
             </div>
+
           </div>
-        </div>
+          <!-- /.box -->
+          <?php foreach ($user as $u): ?>    
+            <div class="modal fade" id="modal-default<?= $u->id_user ?>">                        
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>                    
+                </div>
+                <div class="modal-body">
+                
+                
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <?php endforeach ?>
 
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?= $hitung_user ?></h3>
-
-              <p>User yang Terdafar</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div> </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><?= $hitung_masuk ?></h3>
-
-              <p>Pesanan Masuk</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><?= $hitung_konfirmasi ?></h3>
-
-              <p>Pesanan Terkonfirmasi</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-          </div>
-        </div>
-        <!-- ./col -->
+        <!--/.col (left) -->
       </div>
       <!-- /.row -->
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-7 connectedSortable">
-         
-
-        </section>
-    <!-- /.content -->
     </section>
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
@@ -175,5 +187,33 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<script>
+    $(document).ready(function () {
+    
+
+    $('#form_setting').submit(function(){
+        $('#btnSubmit2').attr('disabled',true);
+        $('#btnSubmit2').html('Mengirim ...');
+    });
+
+    
+    });
+</script>
+
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+
+
 
   

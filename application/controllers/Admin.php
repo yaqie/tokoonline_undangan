@@ -20,7 +20,15 @@ class Admin extends CI_Controller {
     } else if ($this->session->userdata('status') == "loginadmin"){
       $id_user = $this->session->userdata('id');
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $hitung_user = $this->m_data->select_where(array('level' => 'user' ),'user')->num_rows();
+      $hitung_masuk = $this->m_data->select_where(array('status' => '1' ),'transaksi')->num_rows();
+      $hitung_konfirmasi = $this->m_data->select_where(array('status' => '2' ),'transaksi')->num_rows();
+      $hitung_produk = $this->m_data->tampil_data('produk')->num_rows();
       $data = array(
+        'hitung_user' => $hitung_user,
+        'hitung_masuk' => $hitung_masuk,
+        'hitung_konfirmasi' => $hitung_konfirmasi,
+        'hitung_produk' => $hitung_produk,
         'admin' => $admin,
         'breadcrumb' => 'Beranda',
       );
@@ -130,6 +138,74 @@ class Admin extends CI_Controller {
       );
       $this->load->view('admin2/header',$data);
       $this->load->view('admin2/kategori',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
+  public function konfirmasi_pembayaran()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $konfirmasi_pembayaran = $this->m_data->tampil_data('konfirmasi_pembayaran')->result();
+      $transaksi = $this->m_data->tampil_data('transaksi')->result();
+      $data = array(
+        'konfirmasi_pembayaran' => $konfirmasi_pembayaran,
+        'transaksi' => $transaksi,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'konfirmasi pembayaran',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/konfirmasi_pembayaran',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
+
+  public function laporan()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $konfirmasi_pembayaran = $this->m_data->tampil_data('konfirmasi_pembayaran')->result();
+      $transaksi = $this->m_data->select_where(array('status' => '2'),'transaksi')->result();
+      $data = array(
+        'konfirmasi_pembayaran' => $konfirmasi_pembayaran,
+        'transaksi' => $transaksi,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'laporan',
+      );
+      $this->load->view('admin2/laporan',$data);
+      
+    }
+  }
+
+  public function user_pembeli()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
+      $konfirmasi_pembayaran = $this->m_data->tampil_data('konfirmasi_pembayaran')->result();
+      $transaksi = $this->m_data->select_where(array('status' => '2'),'transaksi')->result();
+      $user = $this->m_data->select_where(array('level' => 'user'),'user')->result();
+      $data = array(
+        'user' => $user,
+        'setting' => $setting,
+        'admin' => $admin,
+        'breadcrumb' => 'laporan',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/user_pembeli',$data);
       $this->load->view('admin2/footer',$data);
     }
   }

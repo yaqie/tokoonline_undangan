@@ -38,6 +38,12 @@
 											} else if($t->status == 1){
 												echo '<span class="label label-primary">Konfirmasi sedang di tinjau</span>';
 											}
+											else if($t->status == 2){
+												echo '<span class="label label-success">Pesanan Telah diKonfirmasi</span>';
+											}
+											else if($t->status == -1){
+												echo '<span class="label label-danger">Pesanan diTolak</span>';
+											}
 											?>
 										</td>
 									</tr>

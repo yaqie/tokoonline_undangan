@@ -30,6 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
 
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -156,6 +157,9 @@ desired effect
             <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>            
           </ul>
         </li>
+        <li><a href="<?= base_url('admin/konfirmasi_pembayaran') ?>"><i class="fa fa-money"></i> <span>Konfirmasi Pembayaran</span></a></li>
+        <li><a href="<?= base_url('admin/laporan') ?>"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
+        <li><a href="<?= base_url('admin/user_pembeli') ?>"><i class="fa fa-users"></i> <span>User Pembeli</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-gear"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
