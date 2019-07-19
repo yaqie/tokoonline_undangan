@@ -133,6 +133,23 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/footer',$data);
 	}
 	
+	public function produk()
+	{
+		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
+		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
+		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
+		$kategori = $this->m_data->tampil_data('kategori')->result();
+		$data = array(
+			'web' => $web,
+			'kategori' 	=> $kategori,
+			'admin' => $admin,
+			'cara' => $cara,
+		);
+		$this->load->view('landingpage/header',$data);
+		$this->load->view('landingpage/produk',$data);
+		$this->load->view('landingpage/footer',$data);
+	}
+	
 	
 	public function keranjang()
 	{

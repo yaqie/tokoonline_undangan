@@ -624,7 +624,6 @@ redirect(base_url('admin/semua_produk'));
           'username' => $username,
           'email' => $email,
           'nohp' => $nomor1,
-          'nowa' => $nomor2,
         );
 
         // update modified (jika di perlukan dalam tabel)
@@ -659,7 +658,6 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
-              'nowa' => $nomor2,
             );
 
             // update modified (jika di perlukan dalam tabel)
@@ -693,7 +691,6 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
-              'nowa' => $nomor2,
             );
 
             // update modified (jika di perlukan dalam tabel)
@@ -737,7 +734,6 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
-              'nowa' => $nomor2,
             );
 
             // update modified (jika di perlukan dalam tabel)
