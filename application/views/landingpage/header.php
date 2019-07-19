@@ -48,21 +48,25 @@
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="#">
-							<img src="<?= base_url('assets/landingpage/img/') ?>/logo.png" alt="">
+							<img src="<?= base_url('img_web/') ?><?= $web->logo ?>" alt="">
 						</a>
 					</div>
 					<!-- /Logo -->
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
-								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
+						<form action="<?= base_url('p_user/search'); ?>" method="post">
+						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+							<input class="input search-input" name="keyword" type="text" placeholder="Apa yang anda cari ?" required>
+							<select class="input search-categories" name="kategori" required>
+								<option value="0">Semua Kategori</option>
+								<?php
+								foreach($kategori as $k2){
+									echo "<option value='$k2->slug'>$k2->nama_kategori</option>";
+								}
+								?>
 							</select>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
+							<button type="button" class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
 					<!-- /Search -->
@@ -96,6 +100,10 @@
 						</li>
 						<!-- /Account -->
 
+						<?php
+						if ($this->session->userdata('status') == "login"){
+						?>
+
 						<!-- Cart -->
 						<li class="header-cart dropdown default-dropdown">
 						<a class="dropdown-toggle" href="<?= base_url('keranjang'); ?>" aria-expanded="true">
@@ -104,38 +112,10 @@
 								</div>
 								<strong class="text-uppercase">Keranjang</strong>
 							</a>
-							<div class="custom-menu">
-								<div id="shopping-cart">
-									<div class="shopping-cart-list">
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="<?= base_url('assets/landingpage/img/') ?>/thumb-product01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="<?= base_url('assets/landingpage/img/') ?>/thumb-product01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-									</div>
-									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
-										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
-									</div>
-								</div>
-							</div>
 						</li>
 						<!-- /Cart -->
+
+						<?php } ?>
 
 						<!-- Mobile nav toggle-->
 						<li class="nav-toggle">

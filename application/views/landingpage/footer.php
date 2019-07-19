@@ -10,8 +10,8 @@
 						<!-- footer logo -->
 						<div class="footer-logo">
 							<a class="logo" href="#">
-		            <img src="<?= base_url('assets/landingpage/img/') ?>/logo.png" alt="">
-		          </a>
+								<img src="<?= base_url('img_web/') ?><?= $web->logo ?>" alt="">
+							</a>
 						</div>
 						<!-- /footer logo -->
 

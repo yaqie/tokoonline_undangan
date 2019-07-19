@@ -9,7 +9,17 @@ class P_user extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('m_data');
-	}
+  }
+  
+  function search(){
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    $kategori = mysqli_real_escape_string($db, $this->input->post('kategori'));
+    $keyword = mysqli_real_escape_string($db, $this->input->post('keyword'));
+
+    redirect(base_url("search/$kategori/$keyword"));
+  }
 
 
   function login(){

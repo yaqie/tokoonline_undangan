@@ -13,4 +13,5 @@ $route['produk'] = 'home/produk';
 $route['keranjang'] = 'home/keranjang';
 $route['pesan/(:any)'] = 'home/pesan/$1';
 $route['detail/(:num)'] = 'home/detail/$1';
+$route['search/(:any)/(:any)'] = 'home/search/$1/$2';
 $route['invoice/(:any)'] = 'home/invoice/$1';
