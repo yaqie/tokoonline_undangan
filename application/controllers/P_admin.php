@@ -493,6 +493,22 @@ redirect(base_url('admin/semua_produk'));
         redirect(base_url('admin/semua_produk'));
     }
 
+    public function hapus_user_pembeli($kode)
+    {
+        $where = array('id_user' => $kode);
+
+        $this->m_data->hapus_data($where,'user');
+
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> User berhasil dihapus!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/user_pembeli'));
+    }
+
   function edit_setting()
   {
     if ($this->session->userdata('status') != "loginadmin"){
