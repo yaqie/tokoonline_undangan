@@ -11,14 +11,79 @@
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
+    
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3><?= $hitung_produk ?></h3>
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+              <p>Jumlah Produk</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+        </div>
 
-    </section>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?= $hitung_user ?></h3>
+
+              <p>User yang Terdafar</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div> </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3><?= $hitung_masuk ?></h3>
+
+              <p>Pesanan Masuk</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3><?= $hitung_konfirmasi ?></h3>
+
+              <p>Pesanan Terkonfirmasi</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+         
+
+        </section>
     <!-- /.content -->
+    </section>
   </div>
   <!-- /.content-wrapper -->
 

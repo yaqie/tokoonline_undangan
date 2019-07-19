@@ -40,7 +40,7 @@
                             <label for="email1" class="col-sm-2 text-right control-label col-form-label">Logo Depan</label>
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" id="file" name="file">
-                                Ukuran logo : 166x33
+                                Ukuran logo : 155x70
                             </div>
                         </div>
                     </div>

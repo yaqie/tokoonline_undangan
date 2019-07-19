@@ -20,7 +20,15 @@ class Admin extends CI_Controller {
     } else if ($this->session->userdata('status') == "loginadmin"){
       $id_user = $this->session->userdata('id');
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $hitung_user = $this->m_data->select_where(array('level' => 'user' ),'user')->num_rows();
+      $hitung_masuk = $this->m_data->select_where(array('status' => '1' ),'transaksi')->num_rows();
+      $hitung_konfirmasi = $this->m_data->select_where(array('status' => '2' ),'transaksi')->num_rows();
+      $hitung_produk = $this->m_data->tampil_data('produk')->num_rows();
       $data = array(
+        'hitung_user' => $hitung_user,
+        'hitung_masuk' => $hitung_masuk,
+        'hitung_konfirmasi' => $hitung_konfirmasi,
+        'hitung_produk' => $hitung_produk,
         'admin' => $admin,
         'breadcrumb' => 'Beranda',
       );
