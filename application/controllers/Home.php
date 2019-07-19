@@ -139,7 +139,19 @@ class Home extends CI_Controller {
 		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
 		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
 		$kategori = $this->m_data->tampil_data('kategori')->result();
+
+
+		$this->db->limit(6);
+		$this->db->order_by("id_produk", "desc");
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+		$query=$this->db->get();
+		$produk= $query->result();
+
+
 		$data = array(
+			'produk' => $produk,
 			'web' => $web,
 			'kategori' 	=> $kategori,
 			'admin' => $admin,
@@ -151,6 +163,27 @@ class Home extends CI_Controller {
 	}
 	
 	
+	public function loadmoredata($id){
+		
+		$this->db->limit(6);
+		$this->db->order_by("id_produk", "desc");
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->where('id_produk < ',$id);
+		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+		$query=$this->db->get();
+		$produk= $query->result();
+
+		$data = array(
+			'produk' => $produk,
+		);
+
+
+		$json = $this->load->view('landingpage/data',$data);
+
+
+		echo json_encode($json);
+	}
 	public function keranjang()
 	{
 		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
