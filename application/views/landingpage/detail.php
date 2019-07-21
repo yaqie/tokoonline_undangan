@@ -16,7 +16,7 @@
 					<div class="col-md-6">
 						<div class="product-body">							
 							<h2 class="product-name"><?= $produk->nama_produk ?></h2>
-							<h3 class="product-price">Rp <?= nominal($produk->harga) ?> <?= $produk->satuan ?> </h3>
+							<h3 class="product-price">Rp <?= nominal($produk->harga) ?></h3>
 							<br>
 							<p><?= $produk->deskripsi ?></p>
 							<br>

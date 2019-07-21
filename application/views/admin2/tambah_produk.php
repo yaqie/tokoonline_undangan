@@ -45,13 +45,13 @@
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Harga</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="harga" name="harga" maxlength="150" value="" placeholder="Masukkan harga (Contoh: 50000)" required="true">
+                        <input type="number" class="form-control" id="harga" name="harga" maxlength="150" value="" placeholder="Masukkan harga (Contoh: 50000)" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Satuan</label>
+                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Berat</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="satuan" name="satuan" maxlength="150" value="" placeholder="Masukkan Satuan (Contoh: 10 Buah)" required="true">
+                        <input type="number" class="form-control" id="berat" name="berat" maxlength="150" value="" placeholder="Masukkan berat dalam gram (Contoh: 10) " required="true">
                     </div>
                 </div>
                 <div class="form-group row">

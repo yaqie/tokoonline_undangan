@@ -33,7 +33,8 @@
                   <th>ID Produk</th>
                   <th>Nama Produk</th>
                   <th>Kategori</th>
-                  <th>Harga/Satuan</th>
+                  <th>Harga</th>
+                  <th>Berat</th>
                   <th>Gambar</th>
                   <th>#</th>
                 </tr>
@@ -46,7 +47,8 @@
                   <td><?= $p->id_produk ?></td>
                   <td><?= $p->nama_produk ?></td>
                   <td><?= $p->nama_kategori ?></td>
-                  <td><?= $p->harga ?>/<?= $p->satuan ?></td>
+                  <td><?= $p->harga ?></td>
+                  <td><?= $p->berat ?> gram</td>
                   <td><img src="<?= base_url('produk_img/') ?><?= $p->gambar ?>" style="width:60px; height:60px;"></td>
                   <td><a href="<?= base_url('p_admin/hapus_produk/'.$p->id_produk) ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')">Hapus</a> 
                   <a href="<?= base_url('admin/edit_produk/'.$p->id_produk) ?>" class="btn btn-success">Edit</a>
@@ -59,7 +61,8 @@
                 <th>ID Produk</th>
                   <th>Nama Produk</th>
                   <th>Kategori</th>
-                  <th>Harga/Satuan</th>
+                  <th>Harga</th>
+                  <th>Berat</th>
                   <th>Gambar</th>
                   <th>#</th>
                 </tr>
@@ -90,9 +93,9 @@
                           <option value="2">Undangan Khitanan</option>
                         </select>
                         <label for="side-overlay-profile-email">Harga</label>
-                        <input type="text" name="harga" class="form-control" value="<?= $p->harga ?>">
-                        <label for="side-overlay-profile-email">Satuan</label>
-                        <input type="text" name="satuan" class="form-control" value="<?= $p->satuan ?>">
+                        <input type="number" name="harga" class="form-control" value="<?= $p->harga ?>">
+                        <label for="side-overlay-profile-email">Berat</label>
+                        <input type="number" name="berat" class="form-control" value="<?= $p->berat ?>">
                         <label for="side-overlay-profile-email">Deskripsi</label>
                         <textarea id="editor" name="deskripsi" rows="10" cols="80"><?= $p->deskripsi ?></textarea>
                         <label for="side-overlay-profile-email">Gambar</label>

@@ -283,7 +283,7 @@ class P_admin extends CI_Controller {
           $nama_produk   = mysqli_real_escape_string($db, $this->input->post('nama_produk'));
           $kategori      = mysqli_real_escape_string($db, $this->input->post('kategori'));
           $harga         = mysqli_real_escape_string($db, $this->input->post('harga'));
-          $satuan        = mysqli_real_escape_string($db, $this->input->post('satuan'));
+          $berat         = mysqli_real_escape_string($db, $this->input->post('berat'));
           $deskripsi     = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
           $deskripsi = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
           $nama_gambar = $_FILES["file"]["name"];
@@ -294,7 +294,7 @@ class P_admin extends CI_Controller {
                   'nama_produk'       => $nama_produk,
                   'kategori'          => $kategori,
                   'harga'             => $harga,
-                  'satuan'            => $satuan,
+                  'berat'             => $berat,
                   'deskripsi'         => $deskripsi,
                   'tgljam'            => $date,
               );
@@ -331,32 +331,14 @@ class P_admin extends CI_Controller {
                   </div>
                 ');
                 redirect(base_url('admin/tambah_produk'));
-              }else{
-
-                  
-
-                  
-                  $gbr = $this->upload->data();
-                  //Compress Image
-                  $config['image_library']='gd2';
-                  $config['source_image']='./produk_img/'.$gbr['file_name'];
-                  $config['create_thumb']= FALSE;
-                  $config['maintain_ratio']= FALSE;
-                  $config['quality']= '80%';
-                  $config['width']= 200;
-                  $config['height']= 300;
-                  $config['new_image']= './produk_img/'.$gbr['file_name'];
-                  $this->load->library('image_lib', $config);
-                  $this->image_lib->resize();
-
-                  echo json_encode(['code'=>1, 'msg'=>'sukses']);
+              }else{                        
 
                   $data = array(                   
                       
                     'nama_produk'       => $nama_produk,
                     'kategori'          => $kategori,
                     'harga'             => $harga,
-                    'satuan'            => $satuan,
+                    'berat'             => $berat,
                     'deskripsi'         => $deskripsi,
                     'tgljam'            => $date,
                     'gambar'            => $img_name,
@@ -386,7 +368,7 @@ class P_admin extends CI_Controller {
         $nama_produk = mysqli_real_escape_string($db, $this->input->post('nama_produk'));
         $kategori    = mysqli_real_escape_string($db, $this->input->post('kategori'));
         $harga       = mysqli_real_escape_string($db, $this->input->post('harga'));
-        $satuan      = mysqli_real_escape_string($db, $this->input->post('satuan'));
+        $berat       = mysqli_real_escape_string($db, $this->input->post('berat'));
         $deskripsi   = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
         $deskripsi   = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
         $nama_gambar = $_FILES["file"]["name"];
@@ -399,7 +381,7 @@ class P_admin extends CI_Controller {
                 'nama_produk'       => $nama_produk,
                 'kategori'          => $kategori,
                 'harga'             => $harga,
-                'satuan'            => $satuan,
+                'berat'             => $berat,
                 'deskripsi'         => $deskripsi,
             );
 
@@ -434,33 +416,16 @@ redirect(base_url('admin/semua_produk'));
                     // $this->load->view('v_upload', $error);
                     echo json_encode(['code'=>200, 'msg'=>'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
                 }else{
-
-                    
-
-                    
-                    $gbr = $this->upload->data();
-                    //Compress Image
-                    $config['image_library']='gd2';
-                    $config['source_image']='./produk_img/'.$gbr['file_name'];
-                    $config['create_thumb']= FALSE;
-                    $config['maintain_ratio']= FALSE;
-                    $config['quality']= '80%';
-                    $config['width']= 200;
-                    $config['height']= 300;
-                    $config['new_image']= './produk_img/'.$gbr['file_name'];
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
-
-                    echo json_encode(['code'=>1, 'msg'=>'sukses']);
+                   
 
                     $data = array(                   
                         
                       'nama_produk'       => $nama_produk,
                       'kategori'          => $kategori,
                       'harga'             => $harga,
-                      'satuan'            => $satuan,
+                      'berat'             => $berat,
                       'deskripsi'         => $deskripsi,
-                      'gambar'              => $img_name,
+                      'gambar'            => $img_name,
                     );
 
         // ===== input data ke tabel =====             
@@ -533,10 +498,21 @@ redirect(base_url('admin/semua_produk'));
 
         $this->load->library('upload', $config);
 
-        if ( ! $this->upload->do_upload('file')){
-            $error = array('error' => $this->upload->display_errors());
+        if ($nama_gambar == ""){
+          
+          $where = array(
+            'id_setting' => 1
+          );
+
+          $data = array(                   
+                
+            'judul'              => $judul,
+            'deskripsi'          => $deskripsi,
+        );
+
+        $query = $this->m_data->update_data($where,$data,'setting_web');
             $this->session->set_flashdata('message', '
-            <div class="alert alert-danger"> File tidak diijinkan!
+            <div class="alert alert-success"> Perubahan Berhasil!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
             </div>
             ');
@@ -655,6 +631,67 @@ redirect(base_url('admin/semua_produk'));
         // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
         redirect(base_url('admin/konfirmasi_pembayaran'));
 
+      }
+
+      function tambah_admin(){
+        global $date;
+        $db = get_instance()->db->conn_id;
+    
+        // mysqli_real_escape_string anti injeksi
+        $username = mysqli_real_escape_string($db, $this->input->post('username'));
+        $email = mysqli_real_escape_string($db, $this->input->post('email'));
+        $password = mysqli_real_escape_string($db, $this->input->post('password'));
+        $password2 = mysqli_real_escape_string($db, $this->input->post('password2'));
+    
+        if($password != $password2){
+          $this->session->set_flashdata('message', '
+            <div class="alert alert-danger"> Konfirmasi Password Salah!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');
+          // jika password salah,
+          // maka akan di arahkan ke halaman login
+          redirect(base_url('admin/tambah_admin'));
+        } else {
+          $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'super_admin' ),'user')->num_rows();
+          $hitung_email = $this->m_data->select_where(array('email' => $email,'level' => 'super_admin' ),'user')->num_rows();
+          if($hitung_username > 0){
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-danger"> Username sudah tersedia, gunakan username lain!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            redirect(base_url('admin/tambah_admin'));
+          } else if($hitung_email > 0) {
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-danger"> E-mail sudah tersedia, gunakan e-mail lain!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            redirect(base_url('admin/tambah_admin'));
+          } else {
+            $pass = hash('sha512', $password);
+            $hash = password_hash($pass, PASSWORD_DEFAULT);
+            $data = array(
+                'username' => $username,
+                'email' => $email,
+                'password' => $hash,
+                'level' => super_admin,
+                'tanggaljam' => $date,
+            );
+        
+            // ===== input data ke tabel =====
+            $this->m_data->input_data($data,'user');
+    
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-success"> Pendaftaran berhasil
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            // maka akan di arahkan ke halaman login
+            redirect(base_url('admin/tambah_admin'));
+          }
+        }
       }
 
 
