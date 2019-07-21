@@ -241,8 +241,10 @@ class Admin extends CI_Controller {
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
       $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
       $produk = $this->m_data->tampil_data('produk')->result();
+      $kategori = $this->m_data->tampil_data('kategori')->result();
       $data = array(
         'produk' => $produk,
+        'kategori' => $kategori,
         'setting' => $setting,
         'admin' => $admin,
         'breadcrumb' => 'tambah produk',

@@ -476,9 +476,7 @@ redirect(base_url('admin/semua_produk'));
 
   function edit_setting()
   {
-    if ($this->session->userdata('status') != "loginadmin"){
-      redirect(base_url('admin'));
-    } else {
+   
       global $date,$rand;
       $db = get_instance()->db->conn_id;
 
@@ -486,18 +484,8 @@ redirect(base_url('admin/semua_produk'));
       $deskripsi = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
 
       $nama_gambar = $_FILES["file"]["name"];
-      if(isset($nama_gambar))
-      {
-        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
-        $img_name = $rand.".". $ext;
-
-        $config['upload_path']          = './img_web/';
-        $config['allowed_types']        = 'jpg|jpeg|png';
-        $config['max_size']             = 2048;
-        $config['file_name']            = $img_name;
-
-        $this->load->library('upload', $config);
-
+      
+       
         if ($nama_gambar == ""){
           
           $where = array(
@@ -520,11 +508,27 @@ redirect(base_url('admin/semua_produk'));
             redirect(base_url('admin/profil'));
         }else{
 
+          $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+          $img_name = $rand.".". $ext;
+  
+          $config['upload_path']          = './img_web/';
+          $config['allowed_types']        = 'jpg|jpeg|png';
+          $config['max_size']             = 2048;
+          $config['file_name']            = $img_name;
+  
+          $this->load->library('upload', $config);
+  
+          if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            echo json_encode(['code'=>200, 'msg'=>'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+        }else{
+
             $c = $this->m_data->select_where(array('id_setting' => 1 ),'setting_web')->row();
 
-            if ($c->logo != "" ) {
+            
               unlink("./img_web/$c->logo");
-            }
+            
             //Compress Image
             $config['image_library']='gd2';
             $config['source_image']='./img_web/'.$img_name;
@@ -549,29 +553,6 @@ redirect(base_url('admin/semua_produk'));
               'deskripsi' => $deskripsi,
               'logo'      => $img_name,
             );
-
-            // update modified (jika di perlukan dalam tabel)
-            $query = $this->m_data->update_data($where,$data,'setting_web');
-
-            $this->session->set_flashdata('message', '
-            <div class="alert alert-success"> Perubahan berhasil!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-            </div>
-            ');
-
-            redirect(base_url('admin/profil'));
-        }
-
-
-      } else {
-        $where = array(
-          'id_setting' => 1
-        );
-
-        $data = array(
-          'judul' => $judul,
-          'deskripsi' => $deskripsi,
-        );
 
         // update modified (jika di perlukan dalam tabel)
         $query = $this->m_data->update_data($where,$data,'setting_web');
@@ -711,6 +692,7 @@ redirect(base_url('admin/semua_produk'));
       $email = mysqli_real_escape_string($db, $this->input->post('email'));
       $nomor1 = mysqli_real_escape_string($db, $this->input->post('nomor1'));
       $nomor2 = mysqli_real_escape_string($db, $this->input->post('nomor2'));
+      $alamat = mysqli_real_escape_string($db, $this->input->post('alamat'));
 
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
 
@@ -723,6 +705,7 @@ redirect(base_url('admin/semua_produk'));
           'username' => $username,
           'email' => $email,
           'nohp' => $nomor1,
+          'alamat' => $alamat,
         );
 
         // update modified (jika di perlukan dalam tabel)
@@ -757,6 +740,7 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
+              'alamat' => $alamat,
             );
 
             // update modified (jika di perlukan dalam tabel)
@@ -790,6 +774,7 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
+              'alamat' => $alamat,
             );
 
             // update modified (jika di perlukan dalam tabel)
@@ -833,6 +818,7 @@ redirect(base_url('admin/semua_produk'));
               'username' => $username,
               'email' => $email,
               'nohp' => $nomor1,
+              'alamat' => $alamat,
             );
 
             // update modified (jika di perlukan dalam tabel)

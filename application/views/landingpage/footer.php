@@ -10,7 +10,7 @@
 						<!-- footer logo -->
 						<div class="footer-logo">
 							<a class="logo" href="#">
-		            <img src="<?= base_url('assets/landingpage/img/') ?>/logo.png" alt="">
+		            <img src="<?= base_url('img_web/') ?><?= $web->logo ?>" alt="">
 		          </a>
 						</div>
 						<!-- /footer logo -->
@@ -24,13 +24,11 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">My Account</h3>
+						<h3 class="footer-header">Informasi</h3>
 						<ul class="list-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Compare</a></li>
-							<li><a href="#">Checkout</a></li>
-							<li><a href="#">Login</a></li>
+							<li>E-mail : <?= $admin->email ?></a></li>
+							<li>No Telepon : <?= $admin->nohp ?></a></li>
+							<li>Alamat : <?= $admin->alamat ?></a></li>
 						</ul>
 					</div>
 				</div>
@@ -41,12 +39,11 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Customer Service</h3>
+						<h3 class="footer-header">Kategori Undangan</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Shiping & Return</a></li>
-							<li><a href="#">Shiping Guide</a></li>
-							<li><a href="#">FAQ</a></li>
+						<?php foreach ($kategori as $k): ?>    
+							<li><a href="#"><?= $k->nama_kategori ?></a></li>
+						<?php endforeach ?>
 						</ul>
 					</div>
 				</div>
@@ -55,14 +52,11 @@
 				<!-- footer subscribe -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Stay Connected</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-						<form>
-							<div class="form-group">
-								<input class="input" placeholder="Enter Email Address">
-							</div>
-							<button class="primary-btn">Join Newslatter</button>
-						</form>
+						<h3 class="footer-header">Link</h3>
+						<ul class="list-links">
+							<li><a href="<?= base_url('tentang_kami') ?>">Tentang kami</a></li>
+							<li><a href="https://api.whatsapp.com/send?phone=<?= $admin->nohp ?>">Kontak</a></li>
+						</ul>
 					</div>
 				</div>
 				<!-- /footer subscribe -->
@@ -94,7 +88,9 @@
 	<script src="<?= base_url('assets/landingpage/js/') ?>nouislider.min.js"></script>
 	<script src="<?= base_url('assets/landingpage/js/') ?>jquery.zoom.min.js"></script>
 	<script src="<?= base_url('assets/landingpage/js/') ?>main.js"></script>
-
+	<a href="https://api.whatsapp.com/send?phone=<?= $admin->nohp ?>" class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
 </body>
 
 </html>
