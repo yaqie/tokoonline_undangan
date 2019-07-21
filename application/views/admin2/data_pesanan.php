@@ -207,10 +207,10 @@ desired effect
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Laporan</h3>
+              <h3 class="box-title">Data Pesanan Undangan yang harus Dibuat</h3>
             </div>
             <div class="box-body">
-              <table id="example" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Kode Invoice</th>
@@ -219,11 +219,7 @@ desired effect
                   <th>Tipe</th>
                   <th>Produk</th>
                   <th>Kuantiti</th>
-                  <th>Bank Pengirim</th>
-                  <th>No Rekening</th>
-                  <th>Nama Pengirim</th>
-                  <th>Tanggal Kirim</th>
-                  <th>Jumlah Transfer</th>             
+                  <th>#</th>             
                 </tr>
                 </thead>
                 <tbody>
@@ -232,7 +228,8 @@ desired effect
                   $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$k->kode_transaksi'")->row();             
                   $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
                   $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$k->id_produk'")->row();             
-                  $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();             
+                  $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();         
+                  $detail_pemesanan = $this->db->query("SELECT * FROM detail_pemesanan WHERE id_transaksi = '$k->id_transaksi'")->row();             
                 ?>
                 <tr>
                   <td><?= $konfirmasi_pembayaran->kode_invoice ?></td>
@@ -249,11 +246,9 @@ desired effect
                   </td>
                   <td><?= $produk->nama_produk ?></td>
                   <td><?= $k->kuantiti ?></td>
-                  <td><?= $konfirmasi_pembayaran->bank_pengirim ?></td>
-                  <td><?= $konfirmasi_pembayaran->no_rekening ?></td>
-                  <td><?= $konfirmasi_pembayaran->nama_pengirim ?></td>
-                  <td><?= $konfirmasi_pembayaran->tanggal_transfer ?></td>
-                  <td>Rp <?= nominal($konfirmasi_pembayaran->jumlah_transfer) ?>,-</td>   
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?= $k->id_transaksi ?>">
+                        Data Undangan
+                    </button></td>   
                 </tr>
                 <?php endforeach ?>
                 </tbody>
@@ -265,11 +260,7 @@ desired effect
                   <th>Tipe</th>
                   <th>Produk</th>
                   <th>Kuantiti</th>
-                  <th>Bank Pengirim</th>
-                  <th>No Rekening</th>
-                  <th>Nama Pengirim</th>
-                  <th>Tanggal Kirim</th>
-                  <th>Jumlah Transfer</th>                
+                  <th>#</th>                
                 </tr>
                 </tfoot>
               </table>
@@ -277,7 +268,188 @@ desired effect
 
           </div>
           <!-- /.box -->
-          
+          <?php foreach ($transaksi as $k): 
+             $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$k->kode_transaksi'")->row();             
+             $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
+             $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$k->id_produk'")->row();             
+             $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();         
+             $detail_pemesanan = $this->db->query("SELECT * FROM detail_pemesanan WHERE id_transaksi = '$k->id_transaksi'")->row();   
+          ?>    
+            <div class="modal fade" id="modal-default<?= $k->id_transaksi ?>">                        
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Data Undangan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>                    
+                </div>
+                <div class="modal-body">
+                <div class="modal-body">
+                            <table class="table table-bordered">
+                              <tbody>
+                                <?php
+                                    if ($k->tipe == 1){
+                                ?>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Nama Pengantin Pria / Nama Panggilan / Anak Ke</b>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm1 ?> / <?= $detail_pemesanan->nm_pang1 ?> / <?= $detail_pemesanan->anak1 ?></p></td>  
+                                </tr>
+                                <?php } else if ($k->tipe == 2) { ?>
+                                    <tr>
+                                  <th width="50%">
+                                    <b>Nama Pengantin Khitan / Nama Panggilan / Anak Ke</b>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm1 ?> / <?= $detail_pemesanan->nm_pang1 ?> / <?= $detail_pemesanan->anak1 ?></p></td>  
+                                </tr>
+                                <?php } ?>
+                              </tbody>  
+                                <tr>
+                                  <th width="50%">
+                                  <?php
+                                    if ($k->tipe == 1){
+                                  ?>
+                                    <b>Nama Ayah Pengantin Pria</b>
+                                  <?php } else if ($k->tipe == 2) { ?>
+                                    <b>Nama Ayah</b>
+                                  <?php } ?>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm_ayah1 ?></p></td>  
+                                </tr>
+                              </tbody> 
+                                <tr>
+                                  <th width="50%">
+                                  <?php
+                                    if ($k->tipe == 1){
+                                  ?>
+                                    <b>Nama Ibu Pengantin Pria</b>
+                                  <?php } else if ($k->tipe == 2) { ?>
+                                    <b>Nama Ibu</b>
+                                  <?php } ?>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm_ibu1 ?></p></td>  
+                                </tr>
+                              </tbody> 
+                              <?php
+                                    if ($k->tipe == 1){
+                              ?>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Nama Pengantin Wanita / Nama Panggilan / Anak Ke</b>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm2 ?> / <?= $detail_pemesanan->nm_pang2 ?> / <?= $detail_pemesanan->anak2 ?></p></td>  
+                                </tr>
+                              </tbody>
+                              <?php } ?>  
+                              <?php
+                                    if ($k->tipe == 1){
+                              ?>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Nama Ayah Pengantin Wanita</b>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm_ayah2 ?></p></td>  
+                                </tr>
+                              </tbody>
+                              <?php } ?> 
+                              <?php
+                                    if ($k->tipe == 1){
+                              ?>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Nama Ibu Pengantin Wanita</b>
+                                  </th>
+                                  <td><p><?= $detail_pemesanan->nm_ibu2 ?></p></td>  
+                                </tr>
+                              </tbody>
+                              <?php } ?>  
+                                <tr>
+                                  <th width="50%">
+                                  <?php
+                                    if ($k->tipe == 1){
+                                  ?>
+                                    <b>Tgl & Jam Akad Nikah</b>
+                                  <?php } else if ($k->tipe == 2) { ?>
+                                    <b>Tgl & Jam Acara</b>
+                                  <?php } ?>  
+                                  </th>
+                                  <td><?= $detail_pemesanan->tgl1 ?>, <?= $detail_pemesanan->jam1 ?> </td>  
+                                </tr>
+                              </tbody> 
+                                <tr>
+                                  <th width="50%">
+                                  <?php
+                                    if ($k->tipe == 1){
+                                  ?>
+                                    <b>Tempat Akad</b>
+                                  <?php } else if ($k->tipe == 2) { ?>
+                                    <b>Tempat Acara</b>
+                                  <?php } ?>  
+                                  </th>
+                                  <td><?= $detail_pemesanan->tempat1 ?></td>  
+                                </tr>
+                              </tbody> 
+                              <?php
+                                    if ($k->tipe == 1){
+                              ?>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Tgl & Jam Resepsi</b>
+                                  </th>
+                                  <td><?= $detail_pemesanan->tgl2 ?>, <?= $detail_pemesanan->jam2 ?></td>  
+                                </tr>
+                              </tbody>
+                              <?php } ?>
+                              <?php
+                                    if ($k->tipe == 1){
+                              ?>   
+                                <tr>
+                                  <th width="50%">
+                                    <b>Tempat Resepsi</b>
+                                  </th>
+                                  <td><?= $detail_pemesanan->tempat2 ?></td>  
+                                </tr>
+                              </tbody>
+                              <?php } ?> 
+                                <tr>
+                                  <th width="50%">
+                                    <b>Hiburan</b>
+                                  </th>
+                                  <td><?= $detail_pemesanan->hiburan ?></td>  
+                                </tr>
+                              </tbody> 
+                                <tr>
+                                  <th width="50%">
+                                    <b>Turut Mengundang</b>
+                                  </th>
+                                  <td><?= $detail_pemesanan->mengundang ?></td>  
+                                </tr>
+                              </tbody> 
+                                <tr>
+                                  <th width="50%">
+                                    <b>Keterangan Lain</b>
+                                  </th>
+                                  <td><?= $detail_pemesanan->ket_lain ?></td>  
+                                </tr>
+                              </tbody>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Gambar</b>
+                                  </th>
+                                  <td><a href="<?= base_url('produk_img/') ?><?= $detail_pemesanan->gambar ?>" download><?= $detail_pemesanan->gambar ?></a></td>  
+                                </tr>
+                              </tbody> 
+                            </table>
+                          </div>
+                </div>
+                
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <?php endforeach ?>
 
         </div>
         <!--/.col (left) -->

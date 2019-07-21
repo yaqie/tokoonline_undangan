@@ -158,6 +158,7 @@ desired effect
           </ul>
         </li>
         <li><a href="<?= base_url('admin/konfirmasi_pembayaran') ?>"><i class="fa fa-money"></i> <span>Konfirmasi Pembayaran</span></a></li>
+        <li><a href="<?= base_url('admin/data_pesanan') ?>"><i class="fa fa-map-o"></i> <span>Data Pesanan Terkonfirmasi</span></a></li>
         <li><a href="<?= base_url('admin/laporan') ?>"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
         <li><a href="<?= base_url('admin/user_pembeli') ?>"><i class="fa fa-users"></i> <span>User Pembeli</span></a></li>
         <li class="treeview">
