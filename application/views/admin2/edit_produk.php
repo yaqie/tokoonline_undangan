@@ -72,7 +72,8 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-              <button type="submit" id="btnSubmit2" class="btn btn-info waves-effect waves-light">Edit</button>
+              <button type="button" class="btn btn-danger" onclick="history.back(-1)">Batal</button>
+              <button type="submit" id="btnSubmit2" class="btn btn-success">Simpan</button>
               </div>
             </form>
           </div>

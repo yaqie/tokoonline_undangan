@@ -533,10 +533,21 @@ redirect(base_url('admin/semua_produk'));
 
         $this->load->library('upload', $config);
 
-        if ( ! $this->upload->do_upload('file')){
-            $error = array('error' => $this->upload->display_errors());
+        if ($nama_gambar == ""){
+          
+          $where = array(
+            'id_setting' => 1
+          );
+
+          $data = array(                   
+                
+            'judul'              => $judul,
+            'deskripsi'          => $deskripsi,
+        );
+
+        $query = $this->m_data->update_data($where,$data,'setting_web');
             $this->session->set_flashdata('message', '
-            <div class="alert alert-danger"> File tidak diijinkan!
+            <div class="alert alert-success"> Perubahan Berhasil!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
             </div>
             ');
@@ -655,6 +666,67 @@ redirect(base_url('admin/semua_produk'));
         // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
         redirect(base_url('admin/konfirmasi_pembayaran'));
 
+      }
+
+      function tambah_admin(){
+        global $date;
+        $db = get_instance()->db->conn_id;
+    
+        // mysqli_real_escape_string anti injeksi
+        $username = mysqli_real_escape_string($db, $this->input->post('username'));
+        $email = mysqli_real_escape_string($db, $this->input->post('email'));
+        $password = mysqli_real_escape_string($db, $this->input->post('password'));
+        $password2 = mysqli_real_escape_string($db, $this->input->post('password2'));
+    
+        if($password != $password2){
+          $this->session->set_flashdata('message', '
+            <div class="alert alert-danger"> Konfirmasi Password Salah!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+          ');
+          // jika password salah,
+          // maka akan di arahkan ke halaman login
+          redirect(base_url('admin/tambah_admin'));
+        } else {
+          $hitung_username = $this->m_data->select_where(array('username' => $username,'level' => 'super_admin' ),'user')->num_rows();
+          $hitung_email = $this->m_data->select_where(array('email' => $email,'level' => 'super_admin' ),'user')->num_rows();
+          if($hitung_username > 0){
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-danger"> Username sudah tersedia, gunakan username lain!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            redirect(base_url('admin/tambah_admin'));
+          } else if($hitung_email > 0) {
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-danger"> E-mail sudah tersedia, gunakan e-mail lain!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            redirect(base_url('admin/tambah_admin'));
+          } else {
+            $pass = hash('sha512', $password);
+            $hash = password_hash($pass, PASSWORD_DEFAULT);
+            $data = array(
+                'username' => $username,
+                'email' => $email,
+                'password' => $hash,
+                'level' => super_admin,
+                'tanggaljam' => $date,
+            );
+        
+            // ===== input data ke tabel =====
+            $this->m_data->input_data($data,'user');
+    
+            $this->session->set_flashdata('message', '
+              <div class="alert alert-success"> Pendaftaran berhasil
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+              </div>
+            ');
+            // maka akan di arahkan ke halaman login
+            redirect(base_url('admin/tambah_admin'));
+          }
+        }
       }
 
 
