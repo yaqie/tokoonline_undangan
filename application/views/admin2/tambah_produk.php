@@ -37,8 +37,9 @@
                     <div class="col-sm-9">
                     <select class="form-control" name="kategori" required="true">
                         <option value="none" selected="" disabled="">Pilih Salah Satu</option>
-                        <option value="1">Undangan Pernikahan</option>
-                        <option value="2">Undangan Khitanan</option>
+                        <?php foreach ($kategori as $k): ?>    
+                        <option value="<?= $k->id_kategori ?>"><?= $k->nama_kategori ?></option>
+                        <?php endforeach ?>
                     </select>
                     </div>
                 </div>

@@ -68,6 +68,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Alamat</label>
+                            <div class="col-sm-9">
+                            <textarea class="form-control" name="alamat"  id="" ><?= $admin->alamat ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="lname" class="col-sm-2 text-right control-label col-form-label">E-mail</label>
                             <div class="col-sm-9">
                                 <input type="email" class="form-control" id="email" name="email" value="<?= $admin->email ?>">
