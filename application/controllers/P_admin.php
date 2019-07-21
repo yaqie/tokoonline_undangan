@@ -283,7 +283,7 @@ class P_admin extends CI_Controller {
           $nama_produk   = mysqli_real_escape_string($db, $this->input->post('nama_produk'));
           $kategori      = mysqli_real_escape_string($db, $this->input->post('kategori'));
           $harga         = mysqli_real_escape_string($db, $this->input->post('harga'));
-          $satuan        = mysqli_real_escape_string($db, $this->input->post('satuan'));
+          $berat         = mysqli_real_escape_string($db, $this->input->post('berat'));
           $deskripsi     = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
           $deskripsi = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
           $nama_gambar = $_FILES["file"]["name"];
@@ -294,7 +294,7 @@ class P_admin extends CI_Controller {
                   'nama_produk'       => $nama_produk,
                   'kategori'          => $kategori,
                   'harga'             => $harga,
-                  'satuan'            => $satuan,
+                  'berat'             => $berat,
                   'deskripsi'         => $deskripsi,
                   'tgljam'            => $date,
               );
@@ -331,32 +331,14 @@ class P_admin extends CI_Controller {
                   </div>
                 ');
                 redirect(base_url('admin/tambah_produk'));
-              }else{
-
-                  
-
-                  
-                  $gbr = $this->upload->data();
-                  //Compress Image
-                  $config['image_library']='gd2';
-                  $config['source_image']='./produk_img/'.$gbr['file_name'];
-                  $config['create_thumb']= FALSE;
-                  $config['maintain_ratio']= FALSE;
-                  $config['quality']= '80%';
-                  $config['width']= 200;
-                  $config['height']= 300;
-                  $config['new_image']= './produk_img/'.$gbr['file_name'];
-                  $this->load->library('image_lib', $config);
-                  $this->image_lib->resize();
-
-                  echo json_encode(['code'=>1, 'msg'=>'sukses']);
+              }else{                        
 
                   $data = array(                   
                       
                     'nama_produk'       => $nama_produk,
                     'kategori'          => $kategori,
                     'harga'             => $harga,
-                    'satuan'            => $satuan,
+                    'berat'             => $berat,
                     'deskripsi'         => $deskripsi,
                     'tgljam'            => $date,
                     'gambar'            => $img_name,
@@ -386,7 +368,7 @@ class P_admin extends CI_Controller {
         $nama_produk = mysqli_real_escape_string($db, $this->input->post('nama_produk'));
         $kategori    = mysqli_real_escape_string($db, $this->input->post('kategori'));
         $harga       = mysqli_real_escape_string($db, $this->input->post('harga'));
-        $satuan      = mysqli_real_escape_string($db, $this->input->post('satuan'));
+        $berat       = mysqli_real_escape_string($db, $this->input->post('berat'));
         $deskripsi   = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
         $deskripsi   = str_ireplace(array("\r","\n",'\r','\n'),'', $deskripsi);
         $nama_gambar = $_FILES["file"]["name"];
@@ -399,7 +381,7 @@ class P_admin extends CI_Controller {
                 'nama_produk'       => $nama_produk,
                 'kategori'          => $kategori,
                 'harga'             => $harga,
-                'satuan'            => $satuan,
+                'berat'             => $berat,
                 'deskripsi'         => $deskripsi,
             );
 
@@ -434,33 +416,16 @@ redirect(base_url('admin/semua_produk'));
                     // $this->load->view('v_upload', $error);
                     echo json_encode(['code'=>200, 'msg'=>'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
                 }else{
-
-                    
-
-                    
-                    $gbr = $this->upload->data();
-                    //Compress Image
-                    $config['image_library']='gd2';
-                    $config['source_image']='./produk_img/'.$gbr['file_name'];
-                    $config['create_thumb']= FALSE;
-                    $config['maintain_ratio']= FALSE;
-                    $config['quality']= '80%';
-                    $config['width']= 200;
-                    $config['height']= 300;
-                    $config['new_image']= './produk_img/'.$gbr['file_name'];
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
-
-                    echo json_encode(['code'=>1, 'msg'=>'sukses']);
+                   
 
                     $data = array(                   
                         
                       'nama_produk'       => $nama_produk,
                       'kategori'          => $kategori,
                       'harga'             => $harga,
-                      'satuan'            => $satuan,
+                      'berat'             => $berat,
                       'deskripsi'         => $deskripsi,
-                      'gambar'              => $img_name,
+                      'gambar'            => $img_name,
                     );
 
         // ===== input data ke tabel =====             
