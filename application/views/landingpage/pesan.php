@@ -173,7 +173,60 @@
                             <div class="caption">
 								<div class="billing-details">
 									<div class="form-group">
-										<textarea class="input" name="alamat" style="height:100px;"><?= $profil->alamat ?></textarea>
+										<?php
+															
+										$curl = curl_init();
+
+										curl_setopt_array($curl, array(
+										CURLOPT_URL => "http://api.rajaongkir.com/starter/province",
+										CURLOPT_RETURNTRANSFER => true,
+										CURLOPT_ENCODING => "",
+										CURLOPT_MAXREDIRS => 10,
+										CURLOPT_TIMEOUT => 30,
+										CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+										CURLOPT_CUSTOMREQUEST => "GET",
+										CURLOPT_HTTPHEADER => array(
+											"key: c9cabd216f6e1c41af6e72b952a3c070"
+										),
+										));
+
+										$response = curl_exec($curl);
+										$err = curl_error($curl);
+																
+										echo "<select name='provinsi' class='input' id='provinsi' required>";
+										echo "<option>Pilih Provinsi Tujuan</option>";
+										$data = json_decode($response, true);
+										for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {
+											echo "<option value='".$data['rajaongkir']['results'][$i]['province_id']."'>".$data['rajaongkir']['results'][$i]['province']."</option>";
+										}
+										echo "</select>";
+													
+										?>
+									</div>
+									<div class="form-group">
+										<select class="input" id="kabupaten" name="kabupaten" required>
+											<option>Pilih Kabupaten Tujuan</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="input" id="kurir" name="kurir" required>
+											<option value="jne">JNE</option>
+											<option value="tiki">TIKI</option>
+											<option value="pos">POS INDONESIA</option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<textarea class="input" name="alamat" style="height:100px;" required placeholder="detail alamat pengiriman"></textarea>
+									</div>
+									<div class="form-group">
+										<!-- <button id="cek" class="primary-btn" onclick="myFunction()">Cek Biaya Pengiriman</button> -->
+										<input id="cek" type="button" value="Cek Biaya Pengiriman" class="primary-btn" onclick="myFunction()"/>
+									</div>
+									<input type="hidden" name="asal" id="asal" value="41">
+									<input id="berat" class="" type="hidden" name="berat" value="<?= $produk->berat * $transaksi->kuantiti ?>">
+									<div class="form-group">
+										Biaya Pengiriman <span  id="onp" >Rp.  <span id="ongkir" ></span></span>
 									</div>
 								</div>
 								<div class="form-group">

@@ -9,9 +9,12 @@ $route['profil'] = 'home/profil';
 $route['cara_pesan'] = 'home/cara_pesan';
 $route['tentang_kami'] = 'home/tentang_kami';
 $route['kontak'] = 'home/kontak';
+
 $route['produk'] = 'home/produk';
 $route['keranjang'] = 'home/keranjang';
 $route['pesan/(:any)'] = 'home/pesan/$1';
 $route['detail/(:num)'] = 'home/detail/$1';
 $route['search/(:any)/(:any)'] = 'home/search/$1/$2';
 $route['invoice/(:any)'] = 'home/invoice/$1';
+
+$route['kategori/(:any)'] = 'home/kategori/$1';

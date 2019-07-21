@@ -196,6 +196,38 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/search',$data);
 		$this->load->view('landingpage/footer',$data);
 	}
+	public function kategori($kode)
+	{
+		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
+		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
+		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
+		$kategori = $this->m_data->tampil_data('kategori')->result();
+
+		if($kode == "semua_kategori"){
+		} else if($kode != "semua_kategori"){
+			$this->db->where(array('slug' => $kode));
+		}
+
+		$this->db->limit(6);
+		$this->db->order_by("id_produk", "desc");
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+		$query=$this->db->get();
+		$produk= $query->result();
+
+
+		$data = array(
+			'produk' => $produk,
+			'web' => $web,
+			'kategori' 	=> $kategori,
+			'admin' => $admin,
+			'cara' => $cara,
+		);
+		$this->load->view('landingpage/header',$data);
+		$this->load->view('landingpage/kategori',$data);
+		$this->load->view('landingpage/footer',$data);
+	}
 	
 	
 	public function loadmoredata($id){
@@ -267,12 +299,14 @@ class Home extends CI_Controller {
 			$kategori = $this->m_data->tampil_data('kategori')->result();
 			$profil = $this->m_data->select_where(array('id_user' => $this->session->userdata('id_user') ),'user')->row();
 			$transaksi = $this->m_data->select_where(array('kode_transaksi' => $kode),'transaksi')->row();
+			$produk = $this->m_data->select_where(array('id_produk' => $transaksi->id_produk ),'produk')->row();
 			$data = array(
 				'transaksi' => $transaksi,
 				'web' => $web,
 				'kategori' 	=> $kategori,
 				'admin' => $admin,
 				'profil' => $profil,
+				'produk' => $produk,
 			);
 			$this->load->view('landingpage/header',$data);
 			$this->load->view('landingpage/pesan',$data);
@@ -305,6 +339,78 @@ class Home extends CI_Controller {
 			$this->load->view('landingpage/header',$data);
 			$this->load->view('landingpage/invoice',$data);
 			$this->load->view('landingpage/footer',$data);
+		}
+	}
+
+
+	function cek_kabupaten(){
+		$provinsi_id = $_GET['prov_id'];
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://api.rajaongkir.com/starter/city?province=$provinsi_id",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"key: c9cabd216f6e1c41af6e72b952a3c070"
+		),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+		echo "cURL Error #:" . $err;
+		} else {
+		//echo $response;
+		}
+
+		$data = json_decode($response, true);
+		for ($i=0; $i < count($data['rajaongkir']['results']); $i++) { 
+			echo "<option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."</option>";
+		}
+	}
+
+
+	function cek_ongkir(){
+		$asal = $_POST['asal'];
+		$id_kabupaten = $_POST['kab_id'];
+		$kurir = $_POST['kurir'];
+		$berat = $_POST['berat'];
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://api.rajaongkir.com/starter/cost",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		CURLOPT_POSTFIELDS => "origin=".$asal."&destination=".$id_kabupaten."&weight=".$berat."&courier=".$kurir."",
+		CURLOPT_HTTPHEADER => array(
+			"content-type: application/x-www-form-urlencoded",
+			"key: c9cabd216f6e1c41af6e72b952a3c070"
+		),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+		echo "cURL Error #:" . $err;
+		} else {
+			$harga = 20000;
+		$data = json_decode($response, true);
+		echo $data['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value'] + $harga;
 		}
 	}
 

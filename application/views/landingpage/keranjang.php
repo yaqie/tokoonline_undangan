@@ -34,15 +34,16 @@
 												echo '<span class="label label-danger">Belanja anda belum selesai</span><br>';
 												echo '<a style="color:blue;margin-top:100px;" href="'.base_url().'pesan/'.$t->kode_transaksi.'">Selesaikan belanjaan anda</a>';
 											} else if($hitung_invoice == 0){
-												echo '<span class="label label-warning">Belum konfirmasi pembayaran</span>';
+												echo '<span class="label label-warning">Belum konfirmasi pembayaran</span><br>';
+												echo '<a style="color:blue;margin-top:100px;" href="'.base_url().'invoice/'.$t->kode_transaksi.'">Konfirmasi belanjaan anda</a>';
 											} else if($t->status == 1){
 												echo '<span class="label label-primary">Konfirmasi sedang di tinjau</span>';
 											}
 											else if($t->status == 2){
-												echo '<span class="label label-success">Pesanan Telah diKonfirmasi</span>';
+												echo '<span class="label label-success">Pesanan Telah di Konfirmasi</span>';
 											}
 											else if($t->status == -1){
-												echo '<span class="label label-danger">Pesanan diTolak</span>';
+												echo '<span class="label label-danger">Pesanan di Tolak</span>';
 											}
 											?>
 										</td>
