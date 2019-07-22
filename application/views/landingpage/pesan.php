@@ -130,8 +130,6 @@
 								</div>
                             </div>
 						</div>
-                    </div>
-					<div class="col-md-4">
 						<div class="shiping-methods">
 							<div class="section-title">
 								<h4 class="title">Turut Mengundang</h4>
@@ -144,6 +142,9 @@
 								</div>
                             </div>
 						</div>
+						
+                    </div>
+					<div class="col-md-4">
 						<div class="shiping-methods">
 							<div class="section-title">
 								<h4 class="title">Keterangan Tambahan</h4>
@@ -220,18 +221,31 @@
 										<textarea class="input" name="alamat" style="height:100px;" required placeholder="detail alamat pengiriman"></textarea>
 									</div>
 									<div class="form-group">
+										<input type="hidden" name="ongkir" id="ongkir2">
+										Biaya Pengiriman <span  id="onp" >Rp.  <span id="ongkir" ></span></span>
+									</div>
+									<div class="form-group">
 										<!-- <button id="cek" class="primary-btn" onclick="myFunction()">Cek Biaya Pengiriman</button> -->
 										<input id="cek" type="button" value="Cek Biaya Pengiriman" class="primary-btn" onclick="myFunction()"/>
 									</div>
 									<input type="hidden" name="asal" id="asal" value="41">
 									<input id="berat" class="" type="hidden" name="berat" value="<?= $produk->berat * $transaksi->kuantiti ?>">
+								</div>
+								
+							</div>
+							<div class="section-title">
+								<h4 class="title">Tipe Pembayaran</h4>
+							</div>
+                            <div class="caption">
+								<div class="billing-details">
 									<div class="form-group">
-										Biaya Pengiriman <span  id="onp" >Rp.  <span id="ongkir" ></span></span>
+										<input type="radio" value="1" name="tipe_pembayaran" checked> Langsung
+										<input type="radio" value="1" name="tipe_pembayaran"> Dp 50%
+									</div>
+									<div class="form-group">
+										<button class="primary-btn">Simpan</button>
 									</div>
 								</div>
-								<div class="form-group">
-                                    <button class="primary-btn">Simpan</button>
-                                </div>
 							</div>
 						</div>						
 					</form>

@@ -42,7 +42,7 @@
 						<h3 class="footer-header">Kategori Undangan</h3>
 						<ul class="list-links">
 						<?php foreach ($kategori as $k): ?>    
-							<li><a href="#"><?= $k->nama_kategori ?></a></li>
+							<li><a href="<?= base_url('kategori/'.$k->slug) ?>"><?= $k->nama_kategori ?></a></li>
 						<?php endforeach ?>
 						</ul>
 					</div>

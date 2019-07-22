@@ -320,6 +320,10 @@ class P_user extends CI_Controller {
     $hiburan     = mysqli_real_escape_string($db, $this->input->post('hiburan'));
     $mengundang     = mysqli_real_escape_string($db, $this->input->post('mengundang'));
     $ket_lain     = mysqli_real_escape_string($db, $this->input->post('ket_lain'));
+    $provinsi     = mysqli_real_escape_string($db, $this->input->post('provinsi'));
+    $kabupaten     = mysqli_real_escape_string($db, $this->input->post('kabupaten'));
+    $kurir     = mysqli_real_escape_string($db, $this->input->post('kurir'));
+    $ongkir     = mysqli_real_escape_string($db, $this->input->post('ongkir'));
     $alamat     = mysqli_real_escape_string($db, $this->input->post('alamat'));
     $ket_lain = str_ireplace(array("\r","\n",'\r','\n'),'', $ket_lain);
     $nama_gambar = $_FILES["file"]["name"];
