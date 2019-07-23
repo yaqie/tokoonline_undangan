@@ -68,7 +68,7 @@
 						<img src="<?= base_url('assets/img_undangan') ?>/pernikahan.jpg" style="object-fit:cover;height:350px;" alt="">
 						<div class="banner-caption">
 							<h2 class="white-color" style="color:#F8694A;"><?= $kategori2->nama_kategori ?></h2>
-							<button class="primary-btn">Shop Now</button>
+							<a href="<?= base_url('kategori/'.$kategori2->slug)?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 				</div>
@@ -122,7 +122,7 @@
 					<img src="<?= base_url('assets/img_undangan') ?>/khitanan.png" style="object-fit:cover;height:350px;" alt="">
 						<div class="banner-caption">
 							<h2 style="color:black;" class="white-color"><?= $kategori3->nama_kategori ?></h2>
-							<button class="primary-btn">Shop Now</button>
+							<a href="<?= base_url('kategori/'.$kategori3->slug)?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 				</div>

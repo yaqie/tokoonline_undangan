@@ -240,7 +240,7 @@
 								<div class="billing-details">
 									<div class="form-group">
 										<input type="radio" value="1" name="tipe_pembayaran" checked> Langsung
-										<input type="radio" value="1" name="tipe_pembayaran"> Dp 50%
+										<input type="radio" value="2" name="tipe_pembayaran"> Dp 50%
 									</div>
 									<div class="form-group">
 										<button class="primary-btn">Simpan</button>

@@ -31,6 +31,7 @@
                 <thead>
                 <tr>
                   <th>Kode Invoice</th>
+                  <th>Tipe Pembayaran</th>
                   <th>Bank Pengirim</th>
                   <th>User Pembeli</th>
                   <th>Tanggal Kirim</th>
@@ -42,20 +43,23 @@
                 <tbody>
                 <?php
                 foreach ($konfirmasi_pembayaran as $k): 
-                  $transaksi = $this->db->query("SELECT * FROM transaksi WHERE kode_transaksi = '$k->kode_invoice'")->row();             
-                  $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$transaksi->id_user'")->row(); 
+                  $transaksi = $this->db->query("SELECT * FROM transaksi WHERE kode_transaksi = '$k->kode_invoice'")->row();
+                  // echo $transaksi->id_user;
+                  $profiluser = $this->db->query("SELECT * FROM user WHERE id_user = '$transaksi->id_user'")->row();
+                  // echo $profiluser->nama;
                 ?>
                 <tr>
                   <td><?= $k->kode_invoice ?></td>
+                  <td><?php if ($transaksi->tipe_pembayaran == 1){ echo '<span class="label label-success">Lunas</span>'; } else if ($transaksi->tipe_pembayaran == 2 && $k->status == 0){ echo '<span class="label label-danger">Dp 50%</span>'; } else if ($transaksi->tipe_pembayaran == 2 && $k->status == 1){ echo '<span class="label label-success">Pelunasan</span>'; } ?></td>
                   <td><?= $k->bank_pengirim ?></td>
-                  <td><?= $admin->nama ?></td>
+                  <td><?= $profiluser->nama ?></td>
                   <td><?= $k->tanggal_transfer ?></td>               
                   <td>
                   <?php
                     if ($transaksi->status == 1){
                   ?> 
                    <span class="label label-primary"> <b>Belum Dikonfirmasi</b></span>
-                  <?php } else if ($transaksi->status == 2) { ?>
+                  <?php } else if ($transaksi->status == 2 || $transaksi->status == 3 || $transaksi->status == 4) { ?>
                    <span class="label label-success"> <b>Dikonfirmasi</b></span>
                   <?php } else { ?>
                    <span class="label label-danger"> <b>Ditolak</b></span>
@@ -68,18 +72,28 @@
                   </td> 
                   <td>
                   <?php
-                    if ($transaksi->status == 1){
+                    if ($transaksi->status == 1 && $transaksi->tipe_pembayaran == 1){
                   ?> 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?= $k->id_konfirmasi ?>">
-                                Lihat Detail
-                    </button>
+                    
                     <a href="<?= base_url('p_admin/konfirmasi/'.$transaksi->id_transaksi); ?>" class="btn btn-success" onclick="return confirm('Apakah anda yakin ingin mengkonfirmasi ?')">Konfirmasi</a>
                     <a href="<?= base_url('p_admin/tolak/'.$transaksi->id_transaksi); ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menolak ?')">Tolak</a>
-                  <?php } else { ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?= $k->id_konfirmasi ?>">
+                  <?php } else if ($transaksi->status == 2 && $transaksi->tipe_pembayaran == 1){ ?>
+                  <?php } else if (($transaksi->status == 4 || $transaksi->status == 3) && $transaksi->tipe_pembayaran == 2 && $k->status == 0){ ?>
+                  <?php } else if ($transaksi->status == 1 && $transaksi->tipe_pembayaran == 2){ ?>
+                    <?php
+                    if ($transaksi->status == 1 && $transaksi->tipe_pembayaran == 2){
+                    ?> 
+                    <a href="<?= base_url('p_admin/konfirmasi1/'.$transaksi->id_transaksi); ?>" class="btn btn-success" onclick="return confirm('Apakah anda yakin ingin mengkonfirmasi ?')">Konfirmasi DP</a>
+                    <a href="<?= base_url('p_admin/tolak/'.$transaksi->id_transaksi); ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menolak ?')">Tolak</a>
+                    
+                  <?php } ?>
+                  <?php } else if ($transaksi->status == 4 && $transaksi->tipe_pembayaran == 2 && $k->status == 1){ ?>
+                      <a href="<?= base_url('p_admin/konfirmasi/'.$transaksi->id_transaksi); ?>" class="btn btn-success" onclick="return confirm('Apakah anda yakin ingin mengkonfirmasi ?')">Konfirmasi Lunas</a>
+                      <a href="<?= base_url('p_admin/tolak/'.$transaksi->id_transaksi); ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menolak ?')">Tolak</a>
+                  <?php } ?>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?= $k->id_konfirmasi ?>">
                                 Lihat Bukti
                     </button>
-                  <?php } ?>
                   </td>
                 </tr>
                 <?php endforeach ?>
@@ -87,11 +101,12 @@
                 <tfoot>
                 <tr>
                   <th>Kode Invoice</th>
+                  <th>Tipe Pembayaran</th>
                   <th>Bank Pengirim</th>
                   <th>User Pembeli</th>
                   <th>Tanggal Kirim</th>
-                  <th>Status</th> 
-                  <th>Data Pesanan</th>                  
+                  <th>Status</th>   
+                  <th>Data Pesanan</th>                 
                   <th>#</th>                 
                 </tr>
                 </tfoot>
@@ -161,7 +176,7 @@
                                   <th width="30%">
                                     <b>Gambar</b>
                                   </th>
-                                  <td><a target="blank" href="<?= base_url('produk_img/') ?><?= $k->gambar ?>"><img src="<?= base_url('produk_img/') ?><?= $k->gambar ?>"></a></td>  
+                                  <td><a target="blank" href="<?= base_url('konf_pembayaran/') ?><?= $k->gambar ?>"><img width="250px" height="300px" src="<?= base_url('konf_pembayaran/') ?><?= $k->gambar ?>"></a></td>  
                                 </tr>
                               </tbody> 
                               <tr>
@@ -372,7 +387,7 @@
                                   <th width="50%">
                                     <b>Gambar</b>
                                   </th>
-                                  <td><a href="<?= base_url('produk_img/') ?><?= $detail_pemesanan->gambar ?>" download><?= $detail_pemesanan->gambar ?></a></td>  
+                                  <td><a href="<?= base_url('konf_pembayaran/') ?><?= $detail_pemesanan->gambar ?>" download><?= $detail_pemesanan->gambar ?></a></td>  
                                 </tr>
                               </tbody> 
                             </table>

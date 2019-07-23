@@ -320,13 +320,23 @@ class P_user extends CI_Controller {
     $hiburan     = mysqli_real_escape_string($db, $this->input->post('hiburan'));
     $mengundang     = mysqli_real_escape_string($db, $this->input->post('mengundang'));
     $ket_lain     = mysqli_real_escape_string($db, $this->input->post('ket_lain'));
+    
     $provinsi     = mysqli_real_escape_string($db, $this->input->post('provinsi'));
     $kabupaten     = mysqli_real_escape_string($db, $this->input->post('kabupaten'));
     $kurir     = mysqli_real_escape_string($db, $this->input->post('kurir'));
     $ongkir     = mysqli_real_escape_string($db, $this->input->post('ongkir'));
+    $tipe_pembayaran     = mysqli_real_escape_string($db, $this->input->post('tipe_pembayaran'));
+    
     $alamat     = mysqli_real_escape_string($db, $this->input->post('alamat'));
     $ket_lain = str_ireplace(array("\r","\n",'\r','\n'),'', $ket_lain);
     $nama_gambar = $_FILES["file"]["name"];
+
+
+
+    $transaksi = $this->m_data->select_where(array('kode_transaksi' => $kode),'transaksi')->row();
+    $produk = $this->m_data->select_where(array('id_produk' => $transaksi->id_produk),'produk')->row();
+    
+    $total = ($transaksi->kuantiti * $produk->harga) + $ongkir;
 
     if ($nama_gambar == "") {
         $data = array(                
@@ -361,6 +371,12 @@ class P_user extends CI_Controller {
         );
   
         $data2 = array(
+          'provinsi'      => $provinsi,
+          'kabupaten'      => $kabupaten,
+          'kurir'      => $kurir,
+          'ongkir'      => $ongkir,
+          'tipe_pembayaran'      => $tipe_pembayaran,
+          'total'      => $total,
           'alamat'      => $alamat,
         );
   
@@ -432,6 +448,12 @@ class P_user extends CI_Controller {
             );
       
             $data2 = array(
+              'provinsi'      => $provinsi,
+              'kabupaten'      => $kabupaten,
+              'kurir'      => $kurir,
+              'ongkir'      => $ongkir,
+              'tipe_pembayaran'      => $tipe_pembayaran,
+              'total'      => $total,
               'alamat'      => $alamat,
             );
       
@@ -470,6 +492,15 @@ class P_user extends CI_Controller {
     $catatan        = mysqli_real_escape_string($db, $this->input->post('catatan'));
     $nama_gambar    = $_FILES["file"]["name"];
 
+    $transaksi = $this->m_data->select_where(array('kode_transaksi' => $kode),'transaksi')->row();
+    $hitung_konf = $this->m_data->select_where(array('kode_invoice' => $kode),'konfirmasi_pembayaran')->num_rows();
+
+    if($hitung_konf == 0 && $transaksi->tipe_pembayaran == 2){
+      $status = 0;
+    } else {
+      $status = 1;
+    }
+
     if ($nama_gambar == "") {
         $data = array(                
             'kode_invoice'      => $kode,
@@ -480,6 +511,7 @@ class P_user extends CI_Controller {
             'tanggal_transfer'  => $tanggal,
             'jumlah_transfer'   => $jumlah,
             'catatan'           => $catatan,
+            'status'           => $status,
         );
 
         // ===== input data ke tabel =====             
@@ -488,10 +520,18 @@ class P_user extends CI_Controller {
         $where = array(
           'kode_transaksi' => $kode,
         );
+
+        if ($transaksi->status == 3){
+          $data2 = array(
+            'status'      => 4,
+          );
+        } else if ($transaksi->status == 0){
+          $data2 = array(
+            'status'      => 1,
+          );
+        }
   
-        $data2 = array(
-          'status'      => 1,
-        );
+        
   
         // update modified (jika di perlukan dalam tabel)
         $query = $this->m_data->update_data($where,$data2,'transaksi');
@@ -539,6 +579,7 @@ class P_user extends CI_Controller {
                 'jumlah_transfer'   => $jumlah,
                 'gambar'            => $img_name,
                 'catatan'           => $catatan,
+                'status'           => $status,
             );
 
             // ===== input data ke tabel =====             
@@ -548,9 +589,15 @@ class P_user extends CI_Controller {
               'kode_transaksi' => $kode,
             );
       
-            $data2 = array(
-              'status'      => 1,
-            );
+            if ($transaksi->status == 3){
+              $data2 = array(
+                'status'      => 4,
+              );
+            } else if ($transaksi->status == 0){
+              $data2 = array(
+                'status'      => 1,
+              );
+            }
       
             // update modified (jika di perlukan dalam tabel)
             $query = $this->m_data->update_data($where,$data2,'transaksi');
@@ -564,6 +611,36 @@ class P_user extends CI_Controller {
             redirect(base_url('keranjang'));
         }
     }
+  }
+
+
+  public function hapus_pesanan($kode)
+  {
+    $transaksi = $this->m_data->select_where(array('kode_transaksi' => $kode),'transaksi')->row();
+    // echo $transaksi->id_transaksi;
+    echo $cek = $this->m_data->select_where(array('id_transaksi' => $transaksi->id_transaksi),'detail_pemesanan')->num_rows();
+
+
+    $where = array('kode_transaksi' => $kode);
+
+    $this->m_data->hapus_data($where,'transaksi');
+
+    $where2 = array('id_transaksi' => $transaksi->id_transaksi);
+
+    $this->m_data->hapus_data($where2,'detail_pemesanan');
+    
+    $where3 = array('kode_invoice' => $kode);
+
+    $this->m_data->hapus_data($where3,'konfirmasi_pembayaran');
+
+    $this->session->set_flashdata('message', '
+    <div class="alert alert-success"> Pesanan berhasil dihapus!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+      </div>
+    ');
+    
+    // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+    redirect(base_url('keranjang'));
   }
 
 

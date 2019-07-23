@@ -16,6 +16,7 @@
 										<th>Produk</th>
 										<th>Nama Produk</th>
 										<th>Status</th>
+										<th>#</th>
 									</tr>
 									<?php
 									foreach($transaksi as $t){
@@ -39,11 +40,38 @@
 											} else if($t->status == 1){
 												echo '<span class="label label-primary">Konfirmasi sedang di tinjau</span>';
 											}
+											else if($t->status == 3){
+												echo '<span class="label label-success">Dp Telah di Konfirmasi</span>';
+											}
+											else if($t->status == 4){
+												echo '<span class="label label-primary">Pelunasan sedang di tinjau</span>';
+											}
 											else if($t->status == 2){
 												echo '<span class="label label-success">Pesanan Telah di Konfirmasi</span>';
 											}
 											else if($t->status == -1){
 												echo '<span class="label label-danger">Pesanan di Tolak</span>';
+											}
+											?>
+										</td>
+										<td>
+											<?php
+											if($hitung_detail == 0){
+											?>
+											<a href="<?= base_url('p_user/hapus_pesanan/'.$t->kode_transaksi) ?>" class="label label-danger" onclick="return confirm('Anda yakin ingin menghapus pesanan ?')"><i class="fa fa-trash"></i></a>
+											<?php
+											} else if($hitung_invoice == 0){
+											?>
+											<a href="<?= base_url('p_user/hapus_pesanan/'.$t->kode_transaksi) ?>" class="label label-danger" onclick="return confirm('Anda yakin ingin menghapus pesanan ?')"><i class="fa fa-trash"></i></a>
+											<?php
+											} else if($t->status == -1){
+											?>
+											<a href="<?= base_url('p_user/hapus_pesanan/'.$t->kode_transaksi) ?>" class="label label-danger" onclick="return confirm('Anda yakin ingin menghapus pesanan ?')"><i class="fa fa-trash"></i></a>
+											<?php
+											} else if($t->status == 3){
+											?>
+											<a href="<?= base_url('invoice/'.$t->kode_transaksi) ?>" class="label label-success">Konfirmasi pelunasan pemesanan</a>
+											<?php
 											}
 											?>
 										</td>

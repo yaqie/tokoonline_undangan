@@ -61,13 +61,24 @@
 										<th>Nama Produk</th>
 										<th>Kuantiti</th>
 										<th>Harga</th>
+										<th>Tipe Pembayaran</th>
 									</tr>
 									<tr>
 										<td>#<?= $kode; ?></td>
 										<td><img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" style="width:70px;height:70px;border-radius:50%;" alt=""></td>
 										<td><?= $produk->nama_produk ?></td>
 										<td><?= $transaksi->kuantiti ?></td>
-										<td>Rp <?= nominal($produk->harga * $transaksi->kuantiti) ?></td>
+										<td>
+											<?php
+											if($transaksi->tipe_pembayaran == 1){
+												$total = $transaksi->total;
+											} else {
+												$total = $transaksi->total / 2;
+											}
+											?>
+											Rp <?= nominal($total) ?>
+										</td>
+										<td><?php if ($transaksi->tipe_pembayaran == 1){ echo '<span class="label label-success">Lunas</span>'; } else if($transaksi->tipe_pembayaran == 2 && $transaksi->status == 0) { echo '<span class="label label-danger">Dp 50%</span>'; } else if($transaksi->tipe_pembayaran == 2 && $transaksi->status == 3) { echo '<span class="label label-danger">Pelunasan Dp 50%</span>'; } ?></td>
 									</tr>
 								</table>
                             </div>
@@ -152,7 +163,7 @@
 											</div>
 											<div class="form-group">
 												<label for="">Jumlah Transfer</label>
-												<input type="text" name="jumlah" class="input" value="<?= $produk->harga * $transaksi->kuantiti ?>" readonly/>
+												<input type="text" name="jumlah" class="input" value="<?= $total ?>" readonly/>
 											</div>
 											<div class="form-group">
 												<label for="">Upload Bukti Pembayaran</label>

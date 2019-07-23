@@ -67,7 +67,7 @@ margin-top:16px;
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="#">
+						<a class="logo" href="<?= base_url('') ?>">
 							<img src="<?= base_url('img_web/') ?><?= $web->logo ?>" alt="">
 						</a>
 					</div>

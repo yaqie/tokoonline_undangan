@@ -590,6 +590,29 @@ redirect(base_url('admin/semua_produk'));
         redirect(base_url('admin/konfirmasi_pembayaran'));
 
       }
+      
+      public function konfirmasi1($kode)
+  {
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+
+        $where = array(
+          'id_transaksi' => $kode,
+        );
+  
+        $data2 = array(
+          'status'      => 3,
+        );
+  
+        // update modified (jika di perlukan dalam tabel)
+        $query = $this->m_data->update_data($where,$data2,'transaksi');
+        
+        // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+        redirect(base_url('admin/konfirmasi_pembayaran'));
+
+      }
 
   public function tolak($kode)
   {
