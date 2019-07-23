@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2019 at 10:28 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Jul 23, 2019 at 07:59 AM
+-- Server version: 10.1.40-MariaDB
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -78,9 +78,9 @@ CREATE TABLE `detail_pemesanan` (
 --
 
 INSERT INTO `detail_pemesanan` (`id_transaksi`, `nm1`, `nm_pang1`, `nm_ayah1`, `nm_ibu1`, `anak1`, `nm2`, `nm_pang2`, `nm_ayah2`, `nm_ibu2`, `anak2`, `tgl1`, `jam1`, `tempat1`, `tgl2`, `jam2`, `tempat2`, `hiburan`, `mengundang`, `ket_lain`, `gambar`) VALUES
-(3, 'Aprilianto Aji Nugroho', 'Aji', 'Steve', 'Natali', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Roger', 'Freya', 3, '2019-07-20', '08.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-21', '10.00 WIB -Selesai', 'Jl. Banjaran Rt03/Rw10, Donan, Cilacap Tengah, Cilacap', 'Wayang', 'Keluarga Besar Mbah Wira', '', '4a47a0db6e60853dedfcfdf08a5ca249.png'),
-(4, 'Yaqie Al Zahra', 'Yaqie', 'Diman', 'Tusiah', 5, '', '', '', '', 0, '2019-07-21', '08.00 WIB', 'Rumah Keidaman Zahra', '0000-00-00', '', '', 'Calung', 'Mbah Meja', '', 'bdec59f4f3ee485dca76fa5a006eb950.jpg'),
-(6, 'Nyujeng Alhadi', 'Nyujeng', 'amin', 'rulan', 2, '', '', '', '', 0, '2019-07-20', '08.00 WIB', 'Rumah Keidaman nyujeng', '0000-00-00', '', '', 'Ebeg', 'Mbah sastro', '', '333934bc28a93a5497d312f2e9dc0e74.png');
+(2, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, '', '', '', '', 0, '2019-07-23', '09.00 WIB', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', '', '', '', '2c719520c21aa4316a73fd870d3629ae.jpg'),
+(3, 'ahmad yahya asy syidqie', 'yaqie', 'Steven', 'Kimberley', 1, 'elvira devy larasati', 'yayas', 'Jackson', 'Ariana', 2, '2019-07-23', '09.00 WIB', 'Masjid Fatimatuzahro', '2019-07-24', '10.00 WIB - Selesai', 'purwokerto', '', '', '', 'f9d99830c5f7e8b2b95362dd19d8c1c1.jpg'),
+(4, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, '', '', '', '', 0, '2019-07-23', '09.00 WIB', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', 'asd as', 'd as dasd ', 'as dasd', 'f9d99830c5f7e8b2b95362dd19d8c1c1.jpg');
 
 -- --------------------------------------------------------
 
@@ -102,9 +102,7 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `id_parent`, `id_parent2`, `nama_kategori`, `slug`) VALUES
 (1, NULL, NULL, 'Soft Cover', 'soft-cover'),
-(2, NULL, NULL, 'Hard Cover', 'hard-cover'),
-(3, NULL, NULL, 'Undangan Pernikahan', 'undangan-pernikahan'),
-(4, NULL, NULL, 'Undangan Khitanan', 'undangan-khitanan');
+(2, NULL, NULL, 'Hard Cover', 'hard-cover');
 
 -- --------------------------------------------------------
 
@@ -123,7 +121,7 @@ CREATE TABLE `konfirmasi_pembayaran` (
   `jumlah_transfer` varchar(20) NOT NULL,
   `gambar` text NOT NULL,
   `catatan` text NOT NULL,
-  `status` int(2) NOT NULL
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -131,9 +129,11 @@ CREATE TABLE `konfirmasi_pembayaran` (
 --
 
 INSERT INTO `konfirmasi_pembayaran` (`id_konfirmasi`, `kode_invoice`, `bank_tujuan`, `bank_pengirim`, `no_rekening`, `nama_pengirim`, `tanggal_transfer`, `jumlah_transfer`, `gambar`, `catatan`, `status`) VALUES
-(1, 'TR-0004', '1', 'BNI', '13513413', 'Aji', '2019-07-19', '400000', '014ee7aa2b63fbb64191e1e80fbc2a00.jpg', '', -1),
-(2, 'TR-0003', '2', 'Mandiri', '46353414121', 'dilla', '2019-07-19', '700000', 'bdec59f4f3ee485dca76fa5a006eb950.jpg', '', 2),
-(3, 'TR-0006', '2', 'Muamalat', '623423413', 'Nyujeng', '2019-07-20', '1000000', 'acba6124f453cf41c7f59dc6efb0d93b.jpg', '', 0);
+(2, 'TR-0001', '1', 'BRI', '2342342', 'yahya', '2019-07-23', '429000', '3b317a6429affbf9afb03c131003a850.jpg', '', 1),
+(3, 'TR-0002', '1', 'BCA', '2342342', 'yahya', '2019-07-23', '264500', '3b317a6429affbf9afb03c131003a850.jpg', '', 0),
+(4, 'TR-0002', '1', 'BRI', '2342342', 'yahya', '2019-07-23', '264500', 'b04f1b627fd4f32542bf3d129ed90fad.jpg', '', 1),
+(5, 'TR-0003', '1', 'BCA', '2342342', 'yahya', '2019-07-23', '54500', '3b317a6429affbf9afb03c131003a850.jpg', '', 0),
+(6, 'TR-0003', '1', 'BRI', '2342342', 'yahya', '2019-07-23', '54500', 'b04f1b627fd4f32542bf3d129ed90fad.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -197,8 +197,8 @@ CREATE TABLE `setting_web` (
 --
 
 INSERT INTO `setting_web` (`id_setting`, `judul`, `deskripsi`, `logo`) VALUES
-(1, 'Market Places', 'Loren ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', '717623901.png'),
-(2, 'Cara Pesan', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, yaqieas</p>', ''),
+(1, 'Market Places', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', '992412941.jpg'),
+(2, 'Cara Pesan', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, yaqiea</p>', ''),
 (3, 'Tentang Kami', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,a</p>', '');
 
 -- --------------------------------------------------------
@@ -213,12 +213,16 @@ CREATE TABLE `transaksi` (
   `id_produk` int(11) NOT NULL,
   `kuantiti` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `provinsi` varchar(20) NOT NULL,
+  `kabupaten` varchar(20) NOT NULL,
+  `kurir` varchar(20) NOT NULL,
   `subtotal` varchar(100) NOT NULL,
   `ongkir` varchar(100) NOT NULL,
   `total` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `tipe` int(1) DEFAULT NULL,
+  `tipe_pembayaran` int(11) NOT NULL DEFAULT '1',
   `tanggaljam` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -226,10 +230,10 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `kode_transaksi`, `id_produk`, `kuantiti`, `id_user`, `subtotal`, `ongkir`, `total`, `alamat`, `status`, `tipe`, `tanggaljam`) VALUES
-(3, 'TR-0003', 7, 100, 6, '', '', '', 'Jl. Abimanyu No.18 Rt02/06, Kebonmanis, Cilacap Utara, Cilacap', 2, 1, '2019-07-19 19:03:59'),
-(4, 'TR-0004', 11, 100, 6, '', '', '', 'Jl. Abimanyu No.18 Rt02/06, Kebonmanis, Cilacap Utara, Cilacap', -1, 2, '2019-07-19 19:07:23'),
-(6, 'TR-0006', 9, 200, 6, '', '', '', 'Jl. Abimanyu No.18 Rt02/06, Kebonmanis, Cilacap Utara, Cilacap', 2, 2, '2019-07-19 20:55:12');
+INSERT INTO `transaksi` (`id_transaksi`, `kode_transaksi`, `id_produk`, `kuantiti`, `id_user`, `provinsi`, `kabupaten`, `kurir`, `subtotal`, `ongkir`, `total`, `alamat`, `status`, `tipe`, `tipe_pembayaran`, `tanggaljam`) VALUES
+(2, 'TR-0001', 22, 100, 4, '10', '41', 'jne', '', '29000', '429000', 'purwokerto', 2, 2, 1, '2019-07-23 11:22:04'),
+(3, 'TR-0002', 21, 100, 4, '10', '41', 'jne', '', '29000', '529000', 'purwokerto', 2, 1, 2, '2019-07-23 11:26:42'),
+(4, 'TR-0003', 20, 10, 4, '10', '41', 'jne', '', '29000', '109000', 'purwokerto', 2, 2, 2, '2019-07-23 11:38:58');
 
 -- --------------------------------------------------------
 
@@ -255,11 +259,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `nohp`, `alamat`, `level`, `validasi_akun`, `tanggaljam`) VALUES
-(1, 'admin', 'ahmad yahya', 'admin@admin.admin', '$2y$10$.RlhnGI2lpTfhNv7tU3t7.QcdB5ItFgFZE/WhskC61UEJ1zLG4u/i', '62895357948032', 'purwokerto', 'super_admin', 0, '2019-07-01 00:00:00'),
+(1, 'admin', 'ahmad yahya', 'admin@admin.admin', '$2y$10$.RlhnGI2lpTfhNv7tU3t7.QcdB5ItFgFZE/WhskC61UEJ1zLG4u/i', '62895357948031', 'purwokerto', 'super_admin', 0, '2019-07-01 00:00:00'),
 (4, 'yaqie', 'ahmad yahya asy-syidqie', 'ahmadyahyay@gmail.com', '$2y$10$N3TN158dH6YxqQdPsg8hAefYydr2ep8C.QD.9lzZbU6xHEhItfgxW', '0895357948031', 'purwokerto', 'user', 1, '2019-07-08 10:24:52'),
-(6, 'aji', 'Aprilianto Aji Nugroho', 'aji@aji.com', '$2y$10$rCYhRgVeROpq2PXwQEubx.JEWkIsJDgQ4JZXVV.CbCMqJWpnUoAf.', '085230330722', 'Jl. Abimanyu No.18 Rt02/06, Kebonmanis, Cilacap Utara, Cilacap', 'user', 0, '2019-07-19 19:02:01'),
-(7, 'root', '', 'root@root.com', '$2y$10$aLnxIpAdbBMvYjOit.kfa.wVucX3lge11WrPeUzqrQIO/ncyLqXo6', '6289535794802', '', 'super_admin', 0, '2019-07-21 23:53:40'),
-(8, 'admin2', '', 'admin2@admin.admin', '$2y$10$qeQ9ezrE1008DowDbDHO5OMpeA0kUq5mAHgLhW.R8qSHs4JzyBbUK', '6289535794802', '', 'super_admin', 0, '2019-07-22 00:16:46');
+(5, 'yahya', 'ahmad yahya asy-syidqie', 'ahmadyahyaasysyidqie@gmail.com', '$2y$10$tzTIHFy/OapxI/PFrKzFcuAr8Atl4zVf1Pln8F9lbIjMvQw.64JPq', '', '', 'user', 1, '2019-07-08 13:16:25'),
+(6, 'anggi', 'Anggaraeni Wijayanti', 'anggaraeniwijayanti@gmail.com', '$2y$10$F451zYC.5KBjgauuJm0hZetY1rIja00PqdziuEFilbPwnGA0.Gp3W', '0899999999999', 'Kaliori rt 05 rt 05', 'user', 0, '2019-07-20 08:53:21');
 
 --
 -- Indexes for dumped tables
@@ -323,36 +326,43 @@ ALTER TABLE `user`
 --
 ALTER TABLE `bank`
   MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `konfirmasi_pembayaran`
 --
 ALTER TABLE `konfirmasi_pembayaran`
-  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT for table `setting_web`
 --
 ALTER TABLE `setting_web`
   MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
