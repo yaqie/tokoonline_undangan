@@ -215,6 +215,7 @@ desired effect
               <table id="example" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Nomor</th>
                   <th>Kode Invoice</th>
                   <th>Pembeli</th>
                   <th>Kategori</th>
@@ -230,13 +231,16 @@ desired effect
                 </thead>
                 <tbody>
                 <?php
+                $no=0;
                 foreach ($transaksi as $k): 
+                  $no++;
                   $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$k->kode_transaksi'")->row();             
                   $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
                   $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$k->id_produk'")->row();             
                   $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();             
                 ?>
                 <tr>
+                  <td><?= $no ?></td>
                   <td><?= $konfirmasi_pembayaran->kode_invoice ?></td>
                   <td><?= $admin->nama ?></td>
                   <td><?= $kategori->nama_kategori ?></td>

@@ -11,6 +11,7 @@ $route['tentang_kami'] = 'home/tentang_kami';
 $route['kontak'] = 'home/kontak';
 
 $route['produk'] = 'home/produk';
+$route['termurah'] = 'home/termurah';
 $route['keranjang'] = 'home/keranjang';
 $route['pesan/(:any)'] = 'home/pesan/$1';
 $route['detail/(:num)'] = 'home/detail/$1';

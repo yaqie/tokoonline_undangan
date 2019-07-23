@@ -12,7 +12,7 @@
 						<div class="banner-caption text-center">
 							<h1>Bags sale</h1>
 							<h3 class="white-color font-weak">Up to 50% Discount</h3>
-							<button class="primary-btn">Shop Now</button>
+							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -22,7 +22,7 @@
 						<img src="<?= base_url('assets/landingpage/img/') ?>/banner02.jpg" alt="">
 						<div class="banner-caption">
 							<h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -32,7 +32,7 @@
 						<img src="<?= base_url('assets/landingpage/img/') ?>/banner03.jpg" alt="">
 						<div class="banner-caption">
 							<h1 class="white-color">New Product <span>Collection</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -67,7 +67,7 @@
 					<div class="banner banner-2">
 						<img src="<?= base_url('assets/img_undangan') ?>/pernikahan.jpg" style="object-fit:cover;height:350px;" alt="">
 						<div class="banner-caption">
-							<h2 class="white-color" style="color:#F8694A;"><?= $kategori2->nama_kategori ?></h2>
+							<h2 style="color:black;" class="white-color"><?= $kategori2->nama_kategori ?></h2>
 							<a href="<?= base_url('kategori/'.$kategori2->slug)?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>

@@ -37,7 +37,7 @@
                   <th>Tanggal Kirim</th>
                   <th>Status</th>   
                   <th>Data Pesanan</th>                 
-                  <th>#</th>               
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@
                   <?php } ?>
                   </td>
                   <td>
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info<?= $transaksi->id_transaksi ?>">
+                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-info<?= $transaksi->id_transaksi ?>">
                     Data Pesanan
                   </button>
                   </td> 
@@ -91,7 +91,7 @@
                       <a href="<?= base_url('p_admin/konfirmasi/'.$transaksi->id_transaksi); ?>" class="btn btn-success" onclick="return confirm('Apakah anda yakin ingin mengkonfirmasi ?')">Konfirmasi Lunas</a>
                       <a href="<?= base_url('p_admin/tolak/'.$transaksi->id_transaksi); ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menolak ?')">Tolak</a>
                   <?php } ?>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?= $k->id_konfirmasi ?>">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default<?= $k->id_konfirmasi ?>">
                                 Lihat Bukti
                     </button>
                   </td>
@@ -107,7 +107,7 @@
                   <th>Tanggal Kirim</th>
                   <th>Status</th>   
                   <th>Data Pesanan</th>                 
-                  <th>#</th>                 
+                  <th>Aksi</th>                 
                 </tr>
                 </tfoot>
               </table>
@@ -387,7 +387,7 @@
                                   <th width="50%">
                                     <b>Gambar</b>
                                   </th>
-                                  <td><a href="<?= base_url('konf_pembayaran/') ?><?= $detail_pemesanan->gambar ?>" download><?= $detail_pemesanan->gambar ?></a></td>  
+                                  <td><a href="<?= base_url('konf_pembayaran/') ?><?= $detail_pemesanan->gambar ?>">Download Gambar</a></td>  
                                 </tr>
                               </tbody> 
                             </table>

@@ -535,7 +535,7 @@ redirect(base_url('admin/semua_produk'));
             $config['create_thumb']= FALSE;
             $config['maintain_ratio']= FALSE;
             $config['quality']= '80%';
-            $config['width']= 155;
+            $config['width']= 400;
             $config['height']= 70;
             $config['new_image']= './img_web/'.$img_name;
             $this->load->library('image_lib', $config);
