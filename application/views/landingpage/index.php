@@ -8,10 +8,9 @@
 				<div id="home-slick" style="height:300px;">
 					<!-- banner -->
 					<div class="banner banner-1" style="height:300px;">
-						<img src="<?= base_url('assets/landingpage/img/') ?>/banner01.jpg" alt="">
+						<img src="<?= base_url('slider/'.$setting4->logo) ?>" alt="">
 						<div class="banner-caption text-center">
-							<h1>Bags sale</h1>
-							<h3 class="white-color font-weak">Up to 50% Discount</h3>
+							<h1 class="white-color"><?= $setting4->deskripsi ?></h1>
 							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
@@ -19,9 +18,9 @@
 
 					<!-- banner -->
 					<div class="banner banner-1" style="height:300px;">
-						<img src="<?= base_url('assets/landingpage/img/') ?>/banner02.jpg" alt="">
-						<div class="banner-caption">
-							<h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
+						<img src="<?= base_url('slider/'.$setting5->logo) ?>" alt="">
+						<div class="banner-caption text-center">
+							<h1 class="white-color"><?= $setting5->deskripsi ?></h1>
 							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
@@ -29,9 +28,9 @@
 
 					<!-- banner -->
 					<div class="banner banner-1" style="height:300px;">
-						<img src="<?= base_url('assets/landingpage/img/') ?>/banner03.jpg" alt="">
-						<div class="banner-caption">
-							<h1 class="white-color">New Product <span>Collection</span></h1>
+						<img src="<?= base_url('slider/'.$setting6->logo) ?>" alt="">
+						<div class="banner-caption text-center">
+							<h1 class="white-color"><?= $setting6->deskripsi ?></h1>
 							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>

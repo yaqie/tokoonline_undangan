@@ -10,13 +10,16 @@
 					<div class="store-filter clearfix">
 						<div class="pull-left">
 							<div class="sort-filter">
-								<span class="text-uppercase">Sort By:</span>
-								<select class="input">
-										<option value="0">Position</option>
-										<option value="0">Price</option>
-										<option value="0">Rating</option>
+								<form id="filter" action="<?= base_url('p_user/pindahfilter')?>" method="post">
+									<span class="text-uppercase">Sortir:</span>
+									<select class="input" id="valfilter" name="valfilter">
+										<option value="terbaru">Terbaru</option>
+										<option value="terlama">Terlama</option>
+										<option value="termurah">Termurah</option>
+										<option value="termahal">Termahal</option>
 									</select>
-								<a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
+									<button type="submit" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></button>
+								</form>
 							</div>
 						</div>
 					</div>

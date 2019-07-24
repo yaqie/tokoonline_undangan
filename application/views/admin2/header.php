@@ -157,7 +157,8 @@ desired effect
           <ul class="treeview-menu">
             <li><a href="<?= base_url('admin/tambah_produk'); ?>">Tambah Produk</a></li>
             <li><a href="<?= base_url('admin/semua_produk'); ?>">Semua Produk</a></li>            
-            <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>            
+            <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>
+            <li><a href="<?= base_url('admin/slider'); ?>">Slider</a></li>            
           </ul>
         </li>
         <li><a href="<?= base_url('admin/konfirmasi_pembayaran') ?>"><i class="fa fa-money"></i> <span>Konfirmasi Pembayaran</span></a></li>

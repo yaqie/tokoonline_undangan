@@ -157,6 +157,7 @@ desired effect
             <li><a href="<?= base_url('admin/tambah_produk'); ?>">Tambah Produk</a></li>
             <li><a href="<?= base_url('admin/semua_produk'); ?>">Semua Produk</a></li>            
             <li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>            
+            <li><a href="<?= base_url('admin/slider'); ?>">Slider</a></li>            
           </ul>
         </li>
         <li><a href="<?= base_url('admin/konfirmasi_pembayaran') ?>"><i class="fa fa-money"></i> <span>Konfirmasi Pembayaran</span></a></li>
@@ -205,6 +206,38 @@ desired effect
           
           <!-- /.box -->
 
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Pilih Tanggal</h3>
+            </div>
+            <div class="box-body">
+                <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/tampil_laporan'); ?>" method="post" enctype="multipart/form-data">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Tanggal 1</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="tgl1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Tanggal 2</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="tgl2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="box-footer">
+                            <button type="submit" id="btnSubmit2" class="btn btn-info waves-effect waves-light">Tampil</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+          </div>
+          <!-- /.box -->
+
 
           <!-- general form elements -->
           <div class="box box-primary">
@@ -216,17 +249,12 @@ desired effect
                 <thead>
                 <tr>
                   <th>Nomor</th>
-                  <th>Kode Invoice</th>
-                  <th>Pembeli</th>
-                  <th>Kategori</th>
-                  <th>Tipe</th>
-                  <th>Produk</th>
-                  <th>Kuantiti</th>
-                  <th>Bank Pengirim</th>
-                  <th>No Rekening</th>
-                  <th>Nama Pengirim</th>
-                  <th>Tanggal Kirim</th>
-                  <th>Jumlah Transfer</th>             
+                  <th>Tanggal</th>
+                  <th>Nomor Transaksi</th>
+                  <th>Nama</th>
+                  <th>Nama Undangan</th>
+                  <th>Jumlah</th>
+                  <th>Total Pembayaran</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -235,47 +263,30 @@ desired effect
                 foreach ($transaksi as $k): 
                   $no++;
                   $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$k->kode_transaksi'")->row();             
-                  $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
+                  $user = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
                   $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$k->id_produk'")->row();             
                   $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();             
                 ?>
                 <tr>
                   <td><?= $no ?></td>
-                  <td><?= $konfirmasi_pembayaran->kode_invoice ?></td>
-                  <td><?= $admin->nama ?></td>
-                  <td><?= $kategori->nama_kategori ?></td>
-                  <td>
-                  <?php
-                    if ($k->tipe == 1){
-                  ?> 
-                  Undangan Pernikahan
-                  <?php } else { ?>
-                  Undangan Khitanan
-                  <?php } ?>
-                  </td>
+                  <td><?= $k->tanggaljam ?></td>
+                  <td><?= $k->kode_transaksi ?></td>
+                  <td><?= $user->nama ?></td>
                   <td><?= $produk->nama_produk ?></td>
                   <td><?= $k->kuantiti ?></td>
-                  <td><?= $konfirmasi_pembayaran->bank_pengirim ?></td>
-                  <td><?= $konfirmasi_pembayaran->no_rekening ?></td>
-                  <td><?= $konfirmasi_pembayaran->nama_pengirim ?></td>
-                  <td><?= $konfirmasi_pembayaran->tanggal_transfer ?></td>
-                  <td>Rp <?= nominal($konfirmasi_pembayaran->jumlah_transfer) ?>,-</td>   
+                  <td>Rp <?= nominal($k->total) ?>,-</td>   
                 </tr>
                 <?php endforeach ?>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Kode Invoice</th>
-                  <th>Pembeli</th>
-                  <th>Kategori</th>
-                  <th>Tipe</th>
-                  <th>Produk</th>
-                  <th>Kuantiti</th>
-                  <th>Bank Pengirim</th>
-                  <th>No Rekening</th>
-                  <th>Nama Pengirim</th>
-                  <th>Tanggal Kirim</th>
-                  <th>Jumlah Transfer</th>                
+                  <th>Nomor</th>
+                  <th>Tanggal</th>
+                  <th>Nomor Transaksi</th>
+                  <th>Nama</th>
+                  <th>Nama Undangan</th>
+                  <th>Jumlah</th>
+                  <th>Total Pembayaran</th>
                 </tr>
                 </tfoot>
               </table>
@@ -420,6 +431,15 @@ desired effect
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+
+
+
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
@@ -435,7 +455,7 @@ $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'print'
+          'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     } );
 } );

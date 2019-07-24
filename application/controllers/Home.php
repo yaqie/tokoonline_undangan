@@ -37,8 +37,16 @@ class Home extends CI_Controller {
 		$this->db->where('kategori', $kategori3->id_kategori);
 		$this->db->order_by("id_produk", "desc");
 		$produk2 = $this->db->get()->result();
+
+
+		$setting4 = $this->m_data->select_where(array('id_setting' => '4'),'setting_web')->row();
+		$setting5 = $this->m_data->select_where(array('id_setting' => '5'),'setting_web')->row();
+		$setting6 = $this->m_data->select_where(array('id_setting' => '6'),'setting_web')->row();
 		
 		$data = array(
+			'setting4' 	=> $setting4,
+			'setting5' 	=> $setting5,
+			'setting6' 	=> $setting6,
 			'kategori3' 	=> $kategori3,
 			'kategori2' 	=> $kategori2,
 			'kategori' 	=> $kategori,
@@ -133,24 +141,53 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/footer',$data);
 	}
 	
-	public function produk()
+	public function produk($kode = '')
 	{
 		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
 		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
 		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
 		$kategori = $this->m_data->tampil_data('kategori')->result();
 
+		if($kode == 'terbaru'){
+			$this->db->limit(6);
+			$this->db->order_by("id_produk", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$query=$this->db->get();
+			$produk= $query->result();
+		} else if($kode == 'terlama') {
+			$this->db->limit(6);
+			$this->db->order_by("id_produk", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$query=$this->db->get();
+			$produk= $query->result();
+		} else if($kode == 'termurah') {
+			$this->db->limit(6);
+			$this->db->order_by("cast(harga as unsigned)", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$query=$this->db->get();
+			$produk= $query->result();
+		} else if($kode == 'termahal') {
+			$this->db->limit(6);
+			$this->db->order_by("cast(harga as unsigned)", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$query=$this->db->get();
+			$produk= $query->result();
+		}
 
-		$this->db->limit(6);
-		$this->db->order_by("id_produk", "desc");
-		$this->db->select('*');
-		$this->db->from('produk');
-		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
-		$query=$this->db->get();
-		$produk= $query->result();
+
+		
 
 
 		$data = array(
+			'kode' => $kode,
 			'produk' => $produk,
 			'web' => $web,
 			'kategori' 	=> $kategori,
@@ -162,34 +199,6 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/footer',$data);
 	}
 
-	public function termurah()
-	{
-		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
-		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
-		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
-		$kategori = $this->m_data->tampil_data('kategori')->result();
-
-
-		$this->db->limit(6);
-		$this->db->order_by("id_produk", "desc");
-		$this->db->select('*');
-		$this->db->from('produk');
-		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
-		$query=$this->db->get();
-		$produk= $query->result();
-
-
-		$data = array(
-			'produk' => $produk,
-			'web' => $web,
-			'kategori' 	=> $kategori,
-			'admin' => $admin,
-			'cara' => $cara,
-		);
-		$this->load->view('landingpage/header',$data);
-		$this->load->view('landingpage/produk',$data);
-		$this->load->view('landingpage/footer',$data);
-	}
 	public function search($kode,$kata)
 	{
 		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
@@ -257,6 +266,348 @@ class Home extends CI_Controller {
 		$this->load->view('landingpage/kategori',$data);
 		$this->load->view('landingpage/footer',$data);
 	}
+
+
+	public function filter()
+    {
+		$limit = $this->input->post('limit');
+		$start = $this->input->post('start');
+		$valfilter = $this->input->post('valfilter');
+
+
+
+		if($valfilter == 0){
+			$output = '';
+
+			$this->db->limit($limit, $start);
+			$this->db->order_by("id_produk", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			// $data= $query->result();
+
+			
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if($valfilter == 1){
+			$output = '';
+
+			$this->db->limit($limit, $start);
+			$this->db->order_by("id_produk", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			// $data= $query->result();
+
+			
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if($valfilter == 2){
+			$output = '';
+
+			$this->db->limit($limit, $start);
+			$this->db->order_by("cast(harga as unsigned)", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			// $data= $query->result();
+
+			
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if($valfilter == 3){
+			$output = '';
+
+			$this->db->limit($limit, $start);
+			$this->db->order_by("cast(harga as unsigned)", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			// $data= $query->result();
+
+			
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		}
+	}
+
+
+	public function loadmore()
+    {
+		$limit = $this->input->post('limit');
+		$start = $this->input->post('start');
+		$valfilter = $this->input->post('valfilter');
+
+		
+
+
+		if($valfilter == 'terbaru'){
+			$this->db->limit($limit, $start);
+			$this->db->order_by("id_produk", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			$output = '';
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if ($valfilter == 'terlama'){
+			$this->db->limit($limit, $start);
+			$this->db->order_by("id_produk", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			$output = '';
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if ($valfilter == 'termurah'){
+			$this->db->limit($limit, $start);
+			$this->db->order_by("cast(harga as unsigned)", "asc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			$output = '';
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		} else if ($valfilter == 'termahal'){
+			$this->db->limit($limit, $start);
+			$this->db->order_by("cast(harga as unsigned)", "desc");
+			$this->db->select('*');
+			$this->db->from('produk');
+			$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+			$data=$this->db->get();
+			$output = '';
+			if($data->num_rows() > 0)
+			{
+				foreach($data->result() as $p)
+				{
+
+					$output .= '
+					<div class="post-id" id="'.$p->id_produk.'">
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="product product-single">
+								<div class="product-thumb">
+									<div class="product-label">
+										<span>'.$p->nama_kategori.'</span>
+									</div>
+									<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+								</div>
+								<div class="product-body">
+									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<div class="product-btns">
+										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					';
+				}
+			}
+			echo $output;
+		}
+
+		// $data= $query->result();
+
+		
+        
+    }
 	
 	
 	public function loadmoredata($id){

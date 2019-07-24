@@ -141,6 +141,35 @@ class Admin extends CI_Controller {
       $this->load->view('admin2/footer',$data);
     }
   }
+  
+  public function slider()
+  {
+    if ($this->session->userdata('status') != "loginadmin"){
+      redirect(base_url('admin'));
+    } else {
+      $id_user = $this->session->userdata('id');
+      $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+      $setting4 = $this->m_data->select_where(array('id_setting' => '4'),'setting_web')->row();
+      $setting5 = $this->m_data->select_where(array('id_setting' => '5'),'setting_web')->row();
+      $setting6 = $this->m_data->select_where(array('id_setting' => '6'),'setting_web')->row();
+      $this->db->from('kategori');
+      $this->db->where(array('id_parent' => NULL ));
+      $this->db->order_by("id_kategori", "desc");
+      $kategori_master = $this->db->get()->result();
+
+      $data = array(
+        'kategori_master' => $kategori_master,
+        'setting4' => $setting4,
+        'setting5' => $setting5,
+        'setting6' => $setting6,
+        'admin' => $admin,
+        'breadcrumb' => 'Slider',
+      );
+      $this->load->view('admin2/header',$data);
+      $this->load->view('admin2/slider',$data);
+      $this->load->view('admin2/footer',$data);
+    }
+  }
 
   public function konfirmasi_pembayaran()
   {
@@ -165,16 +194,20 @@ class Admin extends CI_Controller {
     }
   }
 
-  public function laporan()
+  public function laporan($tgl1 = '',$tgl2 = '')
   {
     if ($this->session->userdata('status') != "loginadmin"){
       redirect(base_url('admin'));
     } else {
+      if($tgl1 != '' && $tgl2 != ''){
+        $transaksi = $this->m_data->select_where(array("status" => "2","tanggaljam >=" => "$tgl1" , "tanggaljam <= " => "$tgl2+1"),'transaksi')->result(); 
+      } else {
+        $transaksi = $this->m_data->select_where(array('status' => '2'),'transaksi')->result();
+      }
       $id_user = $this->session->userdata('id');
       $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
       $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
       $konfirmasi_pembayaran = $this->m_data->tampil_data('konfirmasi_pembayaran')->result();
-      $transaksi = $this->m_data->select_where(array('status' => '2'),'transaksi')->result();
       $data = array(
         'konfirmasi_pembayaran' => $konfirmasi_pembayaran,
         'transaksi' => $transaksi,

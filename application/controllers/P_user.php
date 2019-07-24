@@ -645,6 +645,12 @@ class P_user extends CI_Controller {
 
 
 
+  function pindahfilter()
+  {
+    $db = get_instance()->db->conn_id;
+    echo $valfilter = mysqli_real_escape_string($db, $this->input->post('valfilter'));
+    redirect(base_url('produk/'.$valfilter));
+  }
   function logout()
   {
     $this->session->sess_destroy();

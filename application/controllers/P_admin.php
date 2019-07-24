@@ -1066,6 +1066,232 @@ redirect(base_url('admin/semua_produk'));
 
     redirect(base_url('admin/permintaan_verif'));
   }
+  
+  function tampil_laporan()
+  {
+    $db = get_instance()->db->conn_id;
+    $tgl1 = mysqli_real_escape_string($db, $this->input->post('tgl1'));
+    $tgl2 = mysqli_real_escape_string($db, $this->input->post('tgl2'));
+    redirect(base_url('admin/laporan/'.$tgl1.'/'.$tgl2));
+  }
+
+  function slider1()
+  {
+    $db = get_instance()->db->conn_id;
+    $desk = mysqli_real_escape_string($db, $this->input->post('desk'));
+    $slider = $_FILES["slider"]["name"];
+
+    if($slider == ''){
+      $data = array(                   
+          'deskripsi' => $desk,
+      );
+      $where = array(                   
+          'id_setting' => 4,
+      );
+
+      // ===== input data ke tabel =====             
+      $this->m_data->update_data($where,$data,'setting_web');
+
+      $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Slider berhasil diubah!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');  
+      
+      // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+      redirect(base_url('admin/slider'));
+    } else {
+      $ext = pathinfo($slider, PATHINFO_EXTENSION);
+      $img_name = MD5($slider).".".$ext;
+
+      $config['upload_path']          = './slider/';
+      $config['allowed_types']        = 'jpg|jpeg|png';
+      $config['max_size']             = 2048;
+      $config['file_name']            = $img_name;
+
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('slider')){
+          $error = array('error' => $this->upload->display_errors());
+          // $this->load->view('v_upload', $error);
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');
+        redirect(base_url('admin/slider'));
+      }else{                        
+
+          $data = array(                   
+              
+            'deskripsi' => $desk,
+            'logo'      => $img_name,
+          );
+          $where = array(                   
+            'id_setting' => 4,
+          );
+
+          // ===== input data ke tabel =====             
+          $this->m_data->update_data($where,$data,'setting_web');
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Slider berhasil diubah!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');  
+          // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+          redirect(base_url('admin/slider'));
+      }
+    }
+
+    
+  }
+
+  function slider2()
+  {
+    $db = get_instance()->db->conn_id;
+    $desk = mysqli_real_escape_string($db, $this->input->post('desk'));
+    $slider = $_FILES["slider"]["name"];
+
+    if($slider == ''){
+      $data = array(                   
+          'deskripsi' => $desk,
+      );
+      $where = array(                   
+          'id_setting' => 5,
+      );
+
+      // ===== input data ke tabel =====             
+      $this->m_data->update_data($where,$data,'setting_web');
+
+      $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Slider berhasil diubah!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');  
+      
+      // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+      redirect(base_url('admin/slider'));
+    } else {
+      $ext = pathinfo($slider, PATHINFO_EXTENSION);
+      $img_name = MD5($slider).".".$ext;
+
+      $config['upload_path']          = './slider/';
+      $config['allowed_types']        = 'jpg|jpeg|png';
+      $config['max_size']             = 2048;
+      $config['file_name']            = $img_name;
+
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('slider')){
+          $error = array('error' => $this->upload->display_errors());
+          // $this->load->view('v_upload', $error);
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');
+        redirect(base_url('admin/slider'));
+      }else{                        
+
+          $data = array(                   
+              
+            'deskripsi' => $desk,
+            'logo'      => $img_name,
+          );
+          $where = array(                   
+            'id_setting' => 5,
+          );
+
+          // ===== input data ke tabel =====             
+          $this->m_data->update_data($where,$data,'setting_web');
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Slider berhasil diubah!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');  
+          // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+          redirect(base_url('admin/slider'));
+      }
+    }
+
+    
+  }
+
+
+
+  function slider3()
+  {
+    $db = get_instance()->db->conn_id;
+    $desk = mysqli_real_escape_string($db, $this->input->post('desk'));
+    $slider = $_FILES["slider"]["name"];
+
+    if($slider == ''){
+      $data = array(                   
+          'deskripsi' => $desk,
+      );
+      $where = array(                   
+          'id_setting' => 6,
+      );
+
+      // ===== input data ke tabel =====             
+      $this->m_data->update_data($where,$data,'setting_web');
+
+      $this->session->set_flashdata('message', '
+        <div class="alert alert-success"> Slider berhasil diubah!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+      ');  
+      
+      // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+      redirect(base_url('admin/slider'));
+    } else {
+      $ext = pathinfo($slider, PATHINFO_EXTENSION);
+      $img_name = MD5($slider).".".$ext;
+
+      $config['upload_path']          = './slider/';
+      $config['allowed_types']        = 'jpg|jpeg|png';
+      $config['max_size']             = 2048;
+      $config['file_name']            = $img_name;
+
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('slider')){
+          $error = array('error' => $this->upload->display_errors());
+          // $this->load->view('v_upload', $error);
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');
+        redirect(base_url('admin/slider'));
+      }else{                        
+
+          $data = array(                   
+              
+            'deskripsi' => $desk,
+            'logo'      => $img_name,
+          );
+          $where = array(                   
+            'id_setting' => 6,
+          );
+
+          // ===== input data ke tabel =====             
+          $this->m_data->update_data($where,$data,'setting_web');
+          $this->session->set_flashdata('message', '
+          <div class="alert alert-success"> Slider berhasil diubah!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        ');  
+          // setelah berhasil di redirect ke controller welcome (kalo cuma manggil controllernya brti default functionnya index)
+          redirect(base_url('admin/slider'));
+      }
+    }
+
+    
+  }
+
+
+
 
   function logout()
   {

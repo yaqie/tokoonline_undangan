@@ -176,7 +176,7 @@ margin-top:16px;
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="<?= base_url() ?>">Home</a></li>
-						<li><a href="<?= base_url('produk') ?>">Produk</a></li>
+						<li><a href="<?= base_url('produk/terbaru') ?>">Produk</a></li>
 						<li><a href="<?= base_url('cara_pesan') ?>">Cara Pesan</a></li>
 						<li><a href="<?= base_url('tentang_kami') ?>">Tentang Kami</a></li>
 						<li><a href="https://api.whatsapp.com/send?phone=<?= $admin->nohp ?>" target="_blank">Kontak</a></li>
