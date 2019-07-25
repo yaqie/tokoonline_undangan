@@ -260,12 +260,14 @@ desired effect
                 <tbody>
                 <?php
                 $no=0;
+                $total=0;
                 foreach ($transaksi as $k): 
                   $no++;
                   $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$k->kode_transaksi'")->row();             
                   $user = $this->db->query("SELECT * FROM user WHERE id_user = '$k->id_user'")->row();             
                   $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$k->id_produk'")->row();             
-                  $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();             
+                  $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$k->tipe'")->row();
+                  $total += $k->total;             
                 ?>
                 <tr>
                   <td><?= $no ?></td>
@@ -277,16 +279,12 @@ desired effect
                   <td>Rp <?= nominal($k->total) ?>,-</td>   
                 </tr>
                 <?php endforeach ?>
+                
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Nomor</th>
-                  <th>Tanggal</th>
-                  <th>Nomor Transaksi</th>
-                  <th>Nama</th>
-                  <th>Nama Undangan</th>
-                  <th>Jumlah</th>
-                  <th>Total Pembayaran</th>
+                  <th colspan="6">Total Omset</th>
+                  <th><?= "Rp " . nominal($total) ?></th>
                 </tr>
                 </tfoot>
               </table>
