@@ -236,6 +236,7 @@ class Home extends CI_Controller {
 	}
 	public function kategori($kode)
 	{
+
 		$web = $this->m_data->select_where(array('id_setting' => 1),'setting_web')->row();
 		$admin = $this->m_data->select_where(array('level' => 'super_admin' ),'user')->row();
 		$cara = $this->m_data->select_where(array('id_setting' => 2),'setting_web')->row();
@@ -256,6 +257,7 @@ class Home extends CI_Controller {
 
 
 		$data = array(
+			'kode' => $kode,
 			'produk' => $produk,
 			'web' => $web,
 			'kategori' 	=> $kategori,
@@ -629,6 +631,73 @@ class Home extends CI_Controller {
 				}
 			}
 			echo $output;
+		}
+
+		// $data= $query->result();
+
+		
+        
+	}
+	
+
+
+
+	public function loadmorekategori()
+    {
+		$limit = $this->input->post('limit');
+		$start = $this->input->post('start');
+		$kode = $this->input->post('valfilter');
+
+
+
+
+		if($kode == "semua_kategori"){
+		} else if($kode != "semua_kategori"){
+			$this->db->where(array('slug' => $kode));
+		}
+
+		$this->db->limit($limit, $start);
+		$this->db->order_by("id_produk", "desc");
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->join('kategori','produk.kategori=kategori.id_kategori','Left');
+		$data=$this->db->get();
+		$output = '';
+		if($data->num_rows() > 0)
+		{
+			foreach($data->result() as $p)
+			{
+
+				$jml_karakter = strlen($p->nama_produk);
+				if($jml_karakter >= 50){
+					$judul = substr($p->nama_produk,0,50)."...";
+				} else {
+					$judul = $p->nama_produk;
+				}
+
+				$output .= '
+				<div class="post-id" id="'.$p->id_produk.'">
+					<div class="col-md-4 col-sm-6 col-xs-6">
+						<div class="product product-single" style="height:480px;">
+							<div class="product-thumb">
+								<div class="product-label">
+									<span>'.$p->nama_kategori.'</span>
+								</div>
+								<img src="'.base_url('produk_img/'.$p->gambar) .'" style="height:300px;" alt="">
+							</div>
+							<div class="product-body">
+								<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
+								<h2 class="product-name"><a href="#">'.$judul.'</a></h2>
+								<div class="product-btns">
+									<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				';
+			}
+		echo $output;
 		}
 
 		// $data= $query->result();
