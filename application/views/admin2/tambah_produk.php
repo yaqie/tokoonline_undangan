@@ -21,6 +21,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">Tambahkan Produk Baru</h3>
             </div>
+            
             <!-- /.box-header -->
             <!-- form start -->
             <form class="form-horizontal" id="form_setting" action="<?= base_url('p_admin/tambah_produk'); ?>" method="post" enctype="multipart/form-data">

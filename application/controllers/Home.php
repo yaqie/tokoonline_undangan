@@ -466,10 +466,17 @@ class Home extends CI_Controller {
 				foreach($data->result() as $p)
 				{
 
+					$jml_karakter = strlen($p->nama_produk);
+					if($jml_karakter >= 50){
+						$judul = substr($p->nama_produk,0,50)."...";
+					} else {
+						$judul = $p->nama_produk;
+					}
+
 					$output .= '
 					<div class="post-id" id="'.$p->id_produk.'">
 						<div class="col-md-4 col-sm-6 col-xs-6">
-							<div class="product product-single">
+							<div class="product product-single" style="height:480px;">
 								<div class="product-thumb">
 									<div class="product-label">
 										<span>'.$p->nama_kategori.'</span>
@@ -478,7 +485,7 @@ class Home extends CI_Controller {
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
-									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<h2 class="product-name"><a href="#">'.$judul.'</a></h2>
 									<div class="product-btns">
 										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
 									</div>
@@ -503,10 +510,17 @@ class Home extends CI_Controller {
 				foreach($data->result() as $p)
 				{
 
+					$jml_karakter = strlen($p->nama_produk);
+					if($jml_karakter >= 50){
+						$judul = substr($p->nama_produk,0,50)."...";
+					} else {
+						$judul = $p->nama_produk;
+					}
+
 					$output .= '
 					<div class="post-id" id="'.$p->id_produk.'">
 						<div class="col-md-4 col-sm-6 col-xs-6">
-							<div class="product product-single">
+							<div class="product product-single" style="height:480px;">
 								<div class="product-thumb">
 									<div class="product-label">
 										<span>'.$p->nama_kategori.'</span>
@@ -515,7 +529,7 @@ class Home extends CI_Controller {
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
-									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<h2 class="product-name"><a href="#">'.$judul.'</a></h2>
 									<div class="product-btns">
 										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
 									</div>
@@ -540,10 +554,17 @@ class Home extends CI_Controller {
 				foreach($data->result() as $p)
 				{
 
+					$jml_karakter = strlen($p->nama_produk);
+					if($jml_karakter >= 50){
+						$judul = substr($p->nama_produk,0,50)."...";
+					} else {
+						$judul = $p->nama_produk;
+					}
+
 					$output .= '
 					<div class="post-id" id="'.$p->id_produk.'">
 						<div class="col-md-4 col-sm-6 col-xs-6">
-							<div class="product product-single">
+							<div class="product product-single" style="height:480px;">
 								<div class="product-thumb">
 									<div class="product-label">
 										<span>'.$p->nama_kategori.'</span>
@@ -552,7 +573,7 @@ class Home extends CI_Controller {
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
-									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<h2 class="product-name"><a href="#">'.$judul.'</a></h2>
 									<div class="product-btns">
 										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
 									</div>
@@ -577,10 +598,17 @@ class Home extends CI_Controller {
 				foreach($data->result() as $p)
 				{
 
+					$jml_karakter = strlen($p->nama_produk);
+					if($jml_karakter >= 50){
+						$judul = substr($p->nama_produk,0,50)."...";
+					} else {
+						$judul = $p->nama_produk;
+					}
+
 					$output .= '
 					<div class="post-id" id="'.$p->id_produk.'">
 						<div class="col-md-4 col-sm-6 col-xs-6">
-							<div class="product product-single">
+							<div class="product product-single" style="height:480px;">
 								<div class="product-thumb">
 									<div class="product-label">
 										<span>'.$p->nama_kategori.'</span>
@@ -589,7 +617,7 @@ class Home extends CI_Controller {
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">Rp '.nominal($p->harga).'</h3>
-									<h2 class="product-name"><a href="#">'.$p->nama_produk.'</a></h2>
+									<h2 class="product-name"><a href="#">'.$judul.'</a></h2>
 									<div class="product-btns">
 										<a class="primary-btn add-to-cart" href="'.base_url('detail/'.$p->id_produk) .'"> Lihat Detail</a>
 									</div>
