@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2019 at 11:38 AM
+-- Generation Time: Aug 02, 2019 at 06:08 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -84,7 +84,9 @@ INSERT INTO `detail_pemesanan` (`id_transaksi`, `nm1`, `nm_pang1`, `nm_ayah1`, `
 (5, 'lalalalala', 'alalala', 'alalalal', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-11-21', '10.00 sd 11.00', 'Masjid Fatimatuzahro', '2019-09-26', '10.00 WIB - Selesai', 'purwokerto', 'wayang', '', '', ''),
 (6, 'Diaz Adrian', 'Diaz', 'Budi', 'Tuti', 1, 'Anya Geraldyne', 'Anya', 'Aji', 'Dila', 1, '2019-07-24', '09.00 WIB', 'Istana Negara', '2019-07-23', '10.00 WIB - Selesai', 'Istana Presiden', 'Via Vallen', '', '', '4b5d37a54d7e8db69a811f3ecdedbc9d.jpg'),
 (7, 'lalalalala', 'Aji', 'bla', 'Tuti', 1, '', '', '', '', 0, '2019-07-24', '09.00 WIB', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', '', '', '', '3b317a6429affbf9afb03c131003a850.jpg'),
-(8, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-07-24', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-24', '10.00 WIB - Selesai', 'purwokerto', '', '', '', '766a8a3ac5c55d0f79e0684c5e9e40e7.jpg');
+(8, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-07-24', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-24', '10.00 WIB - Selesai', 'purwokerto', '', '', '', '766a8a3ac5c55d0f79e0684c5e9e40e7.jpg'),
+(9, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 4, '2019-07-31', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-31', '10.00 WIB - Selesai', 'purwokerto', '', '', '', 'a462f8c334e328ba8f572ca0a51c4861.jpg'),
+(11, 'Gagas', 'Restu', 'Iya', 'Koe', 2, '', '', '', '', 0, '2019-07-23', '09.00 WIB', 'Istana Negara', '0000-00-00', '', '', '', '', '', 'a462f8c334e328ba8f572ca0a51c4861.jpg');
 
 -- --------------------------------------------------------
 
@@ -142,7 +144,9 @@ INSERT INTO `konfirmasi_pembayaran` (`id_konfirmasi`, `kode_invoice`, `bank_tuju
 (8, 'TR-0004', '2', 'bni', '2342342', 'yahya', '2019-07-24', '1037000', '766a8a3ac5c55d0f79e0684c5e9e40e7.jpg', '', 1),
 (9, 'TR-0006', '1', 'BRI', '2342342', 'yahya', '2019-07-24', '126000', '766a8a3ac5c55d0f79e0684c5e9e40e7.jpg', '', 1),
 (10, 'TR-0007', '1', 'BRI', '2342342', 'yahya', '2019-07-24', '115000', '18509052e68889168422e7f387e654f9.jpg', '', 0),
-(11, 'TR-0007', '1', 'BCA', '2342342', 'yahya', '2019-07-24', '115000', 'f9d99830c5f7e8b2b95362dd19d8c1c1.jpg', '', 1);
+(11, 'TR-0007', '1', 'BCA', '2342342', 'yahya', '2019-07-24', '115000', 'f9d99830c5f7e8b2b95362dd19d8c1c1.jpg', '', 1),
+(12, 'TR-0008', '1', 'BRI', '192830810293', 'yaqie', '2019-07-31', '20500', 'a462f8c334e328ba8f572ca0a51c4861.jpg', '', 0),
+(13, 'TR-0008', '1', 'BCA', '98102830', 'yaqie', '2019-07-31', '20500', 'a462f8c334e328ba8f572ca0a51c4861.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -199,6 +203,7 @@ CREATE TABLE `setting_web` (
   `id_setting` int(11) NOT NULL,
   `judul` varchar(150) NOT NULL,
   `deskripsi` text NOT NULL,
+  `alamat` text NOT NULL,
   `logo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -206,13 +211,13 @@ CREATE TABLE `setting_web` (
 -- Dumping data for table `setting_web`
 --
 
-INSERT INTO `setting_web` (`id_setting`, `judul`, `deskripsi`, `logo`) VALUES
-(1, 'Market Places', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', '804387664.png'),
-(2, 'Cara Pesan', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, yaqiea</p>', ''),
-(3, 'Tentang Kami', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,a</p>', ''),
-(4, '', 'asd as das dasd asd asd as', '3b317a6429affbf9afb03c131003a850.jpg'),
-(5, '', 'jkab skd wkaskd as dan smd', 'b570565bf6b7b650d45da4aa357d4d42.jpg'),
-(6, '', ' as dma smd,asd as dm w,a d,a s,d ,aw,d', '18509052e68889168422e7f387e654f9.jpg');
+INSERT INTO `setting_web` (`id_setting`, `judul`, `deskripsi`, `alamat`, `logo`) VALUES
+(1, 'Market Places', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ', 'JL. KIOS SUWITO 123', '804387664.png'),
+(2, 'Cara Pesan', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, yaqiea</p>', '', ''),
+(3, 'Tentang Kami', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,a</p>', '', ''),
+(4, '', 'asd as das dasd asd asd as', '', '3b317a6429affbf9afb03c131003a850.jpg'),
+(5, '', 'jkab skd wkaskd as dan smd', '', 'b570565bf6b7b650d45da4aa357d4d42.jpg'),
+(6, '', ' as dma smd,asd as dm w,a d,a s,d ,aw,d', '', '18509052e68889168422e7f387e654f9.jpg');
 
 -- --------------------------------------------------------
 
@@ -250,7 +255,10 @@ INSERT INTO `transaksi` (`id_transaksi`, `kode_transaksi`, `id_produk`, `kuantit
 (5, 'TR-0004', 22, 500, 7, '10', '41', 'jne', '', '74000', '2074000', 'kaliori ', 2, 1, 2, '2019-07-23 13:34:15'),
 (6, 'TR-0005', 12, 50, 7, '10', '105', 'jne', '', '33000', '233000', 'cilacap', 0, 1, 2, '2019-07-23 15:39:05'),
 (7, 'TR-0006', 23, 10, 4, '10', '41', 'tiki', '', '26000', '126000', 'purwokerto', 2, 2, 1, '2019-07-24 07:11:50'),
-(8, 'TR-0007', 18, 100, 4, '5', '39', 'pos', '', '30000', '230000', 'jogja bagian tengah', 2, 1, 2, '2019-07-24 11:24:09');
+(8, 'TR-0007', 18, 100, 4, '5', '39', 'pos', '', '30000', '230000', 'jogja bagian tengah', 2, 1, 2, '2019-07-24 11:24:09'),
+(9, 'TR-0008', 16, 2, 4, '10', '41', 'pos', '', '27000', '41000', 'ajs dw a,sd wma sm dma sm das s  rekrnaermaks', 2, 1, 2, '2019-07-31 03:32:47'),
+(10, 'TR-0009', 22, 2, 4, '', '', '', '', '', '', '', 0, 1, 1, '2019-07-31 06:08:35'),
+(11, 'TR-0010', 22, 2, 4, '3', '331', 'jne', '', '39000', '47000', ' cb vc ', 0, 2, 1, '2019-07-31 06:08:49');
 
 -- --------------------------------------------------------
 
@@ -356,7 +364,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `konfirmasi_pembayaran`
 --
 ALTER TABLE `konfirmasi_pembayaran`
-  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -374,7 +382,7 @@ ALTER TABLE `setting_web`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
