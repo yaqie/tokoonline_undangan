@@ -482,6 +482,7 @@ redirect(base_url('admin/semua_produk'));
 
       $judul = mysqli_real_escape_string($db, $this->input->post('judul'));
       $deskripsi = mysqli_real_escape_string($db, $this->input->post('deskripsi'));
+      $alamat = mysqli_real_escape_string($db, $this->input->post('alamat'));
 
       $nama_gambar = $_FILES["file"]["name"];
       
@@ -494,8 +495,9 @@ redirect(base_url('admin/semua_produk'));
 
           $data = array(                   
                 
-            'judul'              => $judul,
-            'deskripsi'          => $deskripsi,
+            'judul'     => $judul,
+            'deskripsi' => $deskripsi,
+            'alamat'    => $alamat,
         );
 
         $query = $this->m_data->update_data($where,$data,'setting_web');
@@ -551,6 +553,7 @@ redirect(base_url('admin/semua_produk'));
             $data = array(
               'judul'     => $judul,
               'deskripsi' => $deskripsi,
+              'alamat'    => $alamat,
               'logo'      => $img_name,
             );
 

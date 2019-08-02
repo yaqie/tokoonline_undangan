@@ -37,6 +37,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="lname" class="col-sm-2 text-right control-label col-form-label">Alamat</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="alamat" name="alamat" maxlength="150" value="<?= $setting->alamat ?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="email1" class="col-sm-2 text-right control-label col-form-label">Logo Depan</label>
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" id="file" name="file">

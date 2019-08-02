@@ -229,14 +229,12 @@
                                       <?php } ?>
                                   </td>  
                                 </tr>
-                              </tbody>
                               <tr>
                                   <th width="50%">
                                     <b>Produk / Kuantiti</b>
                                   </th>
                                   <td><?= $produk->nama_produk ?> / <?= $transaksi->kuantiti ?></td>  
                                 </tr>
-                              </tbody>
                                 <?php
                                     if ($transaksi->tipe == 1){
                                 ?>
@@ -254,7 +252,6 @@
                                   <td><p><?= $detail_pemesanan->nm1 ?> / <?= $detail_pemesanan->nm_pang1 ?> / <?= $detail_pemesanan->anak1 ?></p></td>  
                                 </tr>
                                 <?php } ?>
-                              </tbody>  
                                 <tr>
                                   <th width="50%">
                                   <?php
@@ -267,7 +264,6 @@
                                   </th>
                                   <td><p><?= $detail_pemesanan->nm_ayah1 ?></p></td>  
                                 </tr>
-                              </tbody> 
                                 <tr>
                                   <th width="50%">
                                   <?php
@@ -280,7 +276,6 @@
                                   </th>
                                   <td><p><?= $detail_pemesanan->nm_ibu1 ?></p></td>  
                                 </tr>
-                              </tbody> 
                               <?php
                                     if ($transaksi->tipe == 1){
                               ?>
@@ -290,7 +285,6 @@
                                   </th>
                                   <td><p><?= $detail_pemesanan->nm2 ?> / <?= $detail_pemesanan->nm_pang2 ?> / <?= $detail_pemesanan->anak2 ?></p></td>  
                                 </tr>
-                              </tbody>
                               <?php } ?>  
                               <?php
                                     if ($transaksi->tipe == 1){
@@ -301,7 +295,6 @@
                                   </th>
                                   <td><p><?= $detail_pemesanan->nm_ayah2 ?></p></td>  
                                 </tr>
-                              </tbody>
                               <?php } ?> 
                               <?php
                                     if ($transaksi->tipe == 1){
@@ -312,7 +305,6 @@
                                   </th>
                                   <td><p><?= $detail_pemesanan->nm_ibu2 ?></p></td>  
                                 </tr>
-                              </tbody>
                               <?php } ?>  
                                 <tr>
                                   <th width="50%">
@@ -326,7 +318,6 @@
                                   </th>
                                   <td><?= $detail_pemesanan->tgl1 ?>, <?= $detail_pemesanan->jam1 ?> </td>  
                                 </tr>
-                              </tbody> 
                                 <tr>
                                   <th width="50%">
                                   <?php
@@ -339,7 +330,6 @@
                                   </th>
                                   <td><?= $detail_pemesanan->tempat1 ?></td>  
                                 </tr>
-                              </tbody> 
                               <?php
                                     if ($transaksi->tipe == 1){
                               ?>
@@ -349,7 +339,6 @@
                                   </th>
                                   <td><?= $detail_pemesanan->tgl2 ?>, <?= $detail_pemesanan->jam2 ?></td>  
                                 </tr>
-                              </tbody>
                               <?php } ?>
                               <?php
                                     if ($transaksi->tipe == 1){
@@ -360,7 +349,6 @@
                                   </th>
                                   <td><?= $detail_pemesanan->tempat2 ?></td>  
                                 </tr>
-                              </tbody>
                               <?php } ?> 
                                 <tr>
                                   <th width="50%">
@@ -368,21 +356,24 @@
                                   </th>
                                   <td><?= $detail_pemesanan->hiburan ?></td>  
                                 </tr>
-                              </tbody> 
                                 <tr>
                                   <th width="50%">
                                     <b>Turut Mengundang</b>
                                   </th>
                                   <td><?= $detail_pemesanan->mengundang ?></td>  
                                 </tr>
-                              </tbody> 
                                 <tr>
                                   <th width="50%">
                                     <b>Keterangan Lain</b>
                                   </th>
                                   <td><?= $detail_pemesanan->ket_lain ?></td>  
                                 </tr>
-                              </tbody>
+                                <tr>
+                                  <th width="50%">
+                                    <b>Alamat Pengiriman</b>
+                                  </th>
+                                  <td><?= $transaksi->alamat ?></td>  
+                                </tr>
                                 <tr>
                                   <th width="50%">
                                     <b>Gambar</b>

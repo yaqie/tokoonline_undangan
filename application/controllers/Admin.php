@@ -200,6 +200,7 @@ class Admin extends CI_Controller {
       redirect(base_url('admin'));
     } else {
       if($tgl1 != '' && $tgl2 != ''){
+        $tgl2 = date('Y-m-d', strtotime('+6 days', strtotime($tgl2))); //operasi penjumlahan tanggal sebanyak 6 hari
         $transaksi = $this->m_data->select_where(array("status" => "2","tanggaljam >=" => "$tgl1" , "tanggaljam <= " => "$tgl2+1"),'transaksi')->result(); 
       } else {
         $transaksi = $this->m_data->select_where(array('status' => '2'),'transaksi')->result();
@@ -215,9 +216,97 @@ class Admin extends CI_Controller {
         'admin' => $admin,
         'breadcrumb' => 'laporan',
       );
+      $this->load->view('admin2/header',$data);
       $this->load->view('admin2/laporan',$data);
+      $this->load->view('admin2/footer',$data);
       
     }
+  }
+
+  function export_pdf($tgl1 = '',$tgl2 = '',$id_user = ''){
+    $this->load->view('pdf/fpdf');
+    // require('assets/pdf/fpdf.php');
+
+    $pdf = new FPDF("L","cm","A4");
+    // $admin = $this->m_data->select_where(array('id_user' => $id_user,'level' => 'super_admin' ),'user')->row();
+    $admin = $this->db->query("SELECT * FROM user WHERE id_user = '$id_user'")->row();
+    $setting = $this->m_data->select_where(array('id_setting' => '1'),'setting_web')->row();
+    // echo $admin->nohp;
+    $pdf->SetMargins(2,1,1);
+    $pdf->AliasNbPages();
+    $pdf->AddPage();
+    $pdf->SetFont('Times','B',11);
+    $pdf->Image(base_url().'img_web/804387664.png',1,1,10,2);
+    $pdf->SetX(11);            
+    $pdf->MultiCell(19.5,0.5,$setting->judul,0,'L');
+    $pdf->SetX(11);
+    $pdf->MultiCell(19.5,0.5,'Telpon : '.$admin->nohp,0,'L');    
+    $pdf->SetFont('Arial','B',10);
+    $pdf->SetX(11);
+    $pdf->MultiCell(19.5,0.5,$setting->alamat,0,'L');
+    $pdf->SetX(11);
+    $pdf->MultiCell(19.5,0.5,'website : '.base_url().' | email : '.$admin->email,0,'L');
+    $pdf->Line(1,3.1,28.5,3.1);
+    $pdf->SetLineWidth(0.1);      
+    $pdf->Line(1,3.2,28.5,3.2);   
+    $pdf->SetLineWidth(0);
+    $pdf->ln(1);
+    $pdf->SetFont('Arial','B',14);
+    $pdf->Cell(0,0.7,'Laporan Data Penjualan Barang',0,0,'C');
+    $pdf->ln(1);
+    $pdf->SetFont('Arial','B',10);
+    $pdf->Cell(5,0.7,"Di cetak pada : ".date("D-d/m/Y"),0,0,'C');
+    $pdf->ln(1);
+    $pdf->Cell(9.5,0.7,"Laporan Penjualan pada : ".$tgl1." sampai ".$tgl2,0,0,'C');
+    $pdf->ln(1);
+    $pdf->Cell(1, 0.8, 'NO', 1, 0, 'C');
+    $pdf->Cell(5, 0.8, 'Tanggal', 1, 0, 'C');
+    $pdf->Cell(4, 0.8, 'Nomor Transaksi', 1, 0, 'C');
+    $pdf->Cell(5, 0.8, 'Nama Pemesan', 1, 0, 'C');
+    $pdf->Cell(4, 0.8, 'Nama Undangan', 1, 0, 'C');
+    $pdf->Cell(2.5, 0.8, 'Jumlah', 1, 0, 'C');
+    $pdf->Cell(4, 0.8, 'Total Pembayaran', 1, 1, 'C');
+
+
+
+
+
+
+
+
+    $no=1;
+    $total=0;
+    $tgl2 = date('Y-m-d', strtotime('+1 days', strtotime($tgl2)));
+    $barang = $this->m_data->select_where(array("status" => "2","tanggaljam >=" => "$tgl1" , "tanggaljam <= " => "$tgl2+1"),'transaksi')->result();
+    // while($lihat=mysqli_fetch_array($query)){
+    foreach($barang as $lihat){
+      $konfirmasi_pembayaran = $this->db->query("SELECT * FROM konfirmasi_pembayaran WHERE kode_invoice = '$lihat->kode_transaksi'")->row();             
+      $user = $this->db->query("SELECT * FROM user WHERE id_user = '$lihat->id_user'")->row();             
+      $produk = $this->db->query("SELECT * FROM produk WHERE id_produk = '$lihat->id_produk'")->row();             
+      $kategori = $this->db->query("SELECT * FROM kategori WHERE id_kategori = '$lihat->tipe'")->row();
+      $total += $lihat->total;
+      $pdf->Cell(1, 0.8, $no , 1, 0, 'C');
+      $pdf->Cell(5, 0.8, $lihat->tanggaljam,1, 0, 'C');
+      $pdf->Cell(4, 0.8, $lihat->kode_transaksi,1, 0, 'C');
+      $pdf->Cell(5, 0.8, $user->nama, 1, 0,'C');
+      $pdf->Cell(4, 0.8, $produk->nama_produk, 1, 0,'C');
+      $pdf->Cell(2.5, 0.8, $lihat->kuantiti ,1, 0, 'C');
+      $pdf->Cell(4, 0.8, "Rp. ".number_format($lihat->total)." ,-", 1, 1,'C');	
+      
+      $no++;
+    }
+    // $q=mysqli_query($conn,"select sum(total_harga) as total from barang_laku where tanggal=".$tanggal);
+    // // select sum(total_harga) as total from barang_laku where tanggal='$tanggal'
+    // while($total=mysqli_fetch_array($q)){
+      $pdf->Cell(21.5, 0.8, "Total Omset", 1, 0,'C');		
+      $pdf->Cell(4, 0.8, "Rp. ".number_format($total)." ,-", 1, 0,'C');	
+    // }
+    // $qu=mysqli_query($conn,"select sum(laba) as total_laba from barang_laku where tanggal=".$tanggal);
+    // // select sum(total_harga) as total from barang_laku where tanggal='$tanggal'
+    // while($tl=mysqli_fetch_array($qu)){
+    //   $pdf->Cell(4, 0.8, "Rp. ".number_format($tl['total_laba'])." ,-", 1, 1,'C');	
+    // }
+    $pdf->Output("laporan_transaksi.pdf","I");
   }
 
   public function data_pesanan()
