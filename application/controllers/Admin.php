@@ -364,6 +364,20 @@ class Admin extends CI_Controller {
       $setting = $this->m_data->select_where(array('id_setting' => '3'),'setting_web')->row();
       $produk = $this->m_data->tampil_data('produk')->result();
       $kategori = $this->m_data->tampil_data('kategori')->result();
+      $hitung_gambar_sementara = $this->m_data->select_where(array('id_user' => $id_user),'gambar_sementara')->num_rows();
+      if($hitung_gambar_sementara != 0){
+        $gambar_sementara = $this->m_data->select_where(array('id_user' => $id_user),'gambar_sementara')->result();
+        foreach($gambar_sementara as $g){
+          
+          $cek_produk = $this->db->query("SELECT * FROM produk WHERE gambar2 = '$g->gambar' OR gambar3 = '$g->gambar' OR gambar4 = '$g->gambar' ")->num_rows();
+
+          $where = array('id_gambar' => $g->id_gambar);
+          $this->m_data->hapus_data($where,'gambar_sementara');
+          if ($cek_produk == 0) {
+            unlink('./produk_img/'.$g->gambar);
+          }
+        }
+      }
       $data = array(
         'produk' => $produk,
         'kategori' => $kategori,

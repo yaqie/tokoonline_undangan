@@ -96,12 +96,17 @@
 								</div>
                             </div>
 						</div>
-						<?php
-						if ($transaksi->tipe == 1){
-						?>
+						
                         <div class="shiping-methods">
 							<div class="section-title">
+							<?php
+							if ($transaksi->tipe == 1){
+							?>
 								<h4 class="title">Resepsi</h4>
+							<?php } else { ?>
+								<h4 class="title">Acara Hari ke 2</h4>
+								<small style="color:red;">Kosongi jika tidak ada</small>
+							<?php } ?>
 							</div>
                             <div class="caption">
 								<div class="billing-details">
@@ -117,7 +122,6 @@
 								</div>
                             </div>
 						</div>
-						<?php } ?>
                         <div class="shiping-methods">
 							<div class="section-title">
 								<h4 class="title">Hiburan</h4>
@@ -159,7 +163,13 @@
 						</div>
 						<div class="shiping-methods">
 							<div class="section-title">
-								<h4 class="title">Tambahan Foto Prewed</h4>
+								<?php
+								if ($transaksi->tipe == 1){
+									?>
+									<h4 class="title">Tambahan Foto Prewed</h4>
+								<?php } else { ?>
+									<h4 class="title">Tambahan Foto Manten</h4>
+								<?php } ?>
 							</div>
                             <div class="caption">
 								<div class="billing-details">
@@ -221,7 +231,7 @@
 										<textarea class="input" name="alamat" style="height:100px;" required placeholder="detail alamat pengiriman"></textarea>
 									</div>
 									<div class="form-group">
-										<input type="hidden" name="ongkir" id="ongkir2">
+										<input type="hidden" name="ongkir" id="ongkir2" required>
 										Biaya Pengiriman <span  id="onp" >Rp.  <span id="ongkir" ></span></span>
 									</div>
 									<div class="form-group">
@@ -243,7 +253,7 @@
 										<input type="radio" value="2" name="tipe_pembayaran"> Dp 50%
 									</div>
 									<div class="form-group">
-										<button class="primary-btn">Simpan</button>
+										<button class="primary-btn" disabled id="simpan">Simpan</button>
 									</div>
 								</div>
 							</div>

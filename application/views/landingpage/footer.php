@@ -93,6 +93,9 @@
 	function myFunction() {
 			
 		$("#onp").show();
+		$("#simpan").prop('disabled', false);
+		// document.getElementById("simpan").style.display = "block";
+
 		
 	}
 	</script>

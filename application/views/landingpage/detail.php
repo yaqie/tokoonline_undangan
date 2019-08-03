@@ -9,9 +9,93 @@
 				<!--  Product Details -->
 				<div class="product product-details clearfix">
 					<div class="col-md-6">
+						<?php
+						if ($produk->gambar2 == '' && $produk->gambar3 == '' && $produk->gambar4 == ''){
+						?>
 						<div id="product-main-view">
-                            <a href="<?= base_url('produk_img/'.$produk->gambar) ?>"><img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" style="width:100%;height:400px;" alt=""></a>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" alt="">
+							</div>
 						</div>
+						<?php } else { ?>
+						<div id="product-main-view">
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" alt="">
+							</div>
+							<?php
+							if ($produk->gambar2 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+							<?php
+							if ($produk->gambar3 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+							<?php
+							if ($produk->gambar4 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+						</div>
+						<?php } ?>
+
+
+
+
+
+
+
+						<?php
+						if ($produk->gambar2 == '' && $produk->gambar3 == '' && $produk->gambar4 == ''){
+						?>
+						<?php } else { ?>
+						<div id="product-view">
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" alt="">
+							</div>
+							<?php
+							if ($produk->gambar2 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+							<?php
+							if ($produk->gambar3 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+							<?php
+							if ($produk->gambar4 != '') {
+							?>
+							<div class="product-view">
+								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" alt="">
+							</div>
+							<?php
+							}
+							?>
+						</div>
+						<?php } ?>
+
 					</div>
 					<div class="col-md-6">
 						<div class="product-body">							

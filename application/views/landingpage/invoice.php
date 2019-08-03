@@ -61,6 +61,9 @@
 										<th>Nama Produk</th>
 										<th>Kuantiti</th>
 										<th>Harga</th>
+										<th>Biaya Cetak</th>
+										<th>Biaya Ongkir</th>
+										<th>Total Pembayaran</th>
 										<th>Tipe Pembayaran</th>
 									</tr>
 									<tr>
@@ -68,6 +71,30 @@
 										<td><img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" style="width:70px;height:70px;border-radius:50%;" alt=""></td>
 										<td><?= $produk->nama_produk ?></td>
 										<td><?= $transaksi->kuantiti ?></td>
+										<td>
+											Rp <?= nominal($produk->harga) ?>
+										</td>
+										<td>
+											<?php
+											if($transaksi->tipe_pembayaran == 1){
+												$total = $produk->harga * $transaksi->kuantiti;
+											} else {
+												$total = ($produk->harga * $transaksi->kuantiti) / 2;
+											}
+											?>
+											Rp <?= nominal($total) ?>
+										</td>
+										<td>
+											<?php
+											echo $transaksi->ongkir;
+											if($transaksi->tipe_pembayaran == 1){
+												// $total_ongkir = $transaksi->ongkir;
+											} else {
+												// $total_ongkir = $transaksi->ongkir / 2;
+											}
+											?>
+											<!-- Rp <?= nominal($total_ongkir) ?> -->
+										</td>
 										<td>
 											<?php
 											if($transaksi->tipe_pembayaran == 1){
@@ -107,15 +134,24 @@
                         <div class="shiping-methods">
 							<div class="section-title">
 								<?php
-								$tgl1 = date("Y-m-d H:i:s");
+								$tgl1 = $transaksi->tanggaljam;
 								$tgl2 = date('Y-m-d H:i:s', strtotime('+1 days', strtotime($tgl1)));
 								?>
 								<h4 class="title">Jatuh Tempo | <?= indonesian_date($tgl2) ?></h4>
 							</div>
                             <div class="caption">
+								<?php
+								if(date('Y-m-d H:i:s') < $tgl2){
+								?>
 								<div class="form-group">
                                     <button class="primary-btn" data-toggle="modal" data-target="#myModal">Konfirmasi Pembayaran</button>
 								</div>
+								<?php
+								} else {
+									echo '<font color="red">Sudah melewati jatuh tempo! Silahkan order produk kembali</font>';
+								}
+								?>
+								
 								<!-- Modal -->
 								<div id="myModal" class="modal fade" role="dialog">
 								<div class="modal-dialog">

@@ -313,7 +313,7 @@ class P_admin extends CI_Controller {
               # code...
               #code 3
               $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
-              $img_name = MD5($nama_gambar).".".$ext;
+              $img_name = MD5($nama_gambar).rand().".".$ext;
   
               $config['upload_path']          = './produk_img/';
               $config['allowed_types']        = 'jpg|jpeg|png';
@@ -331,7 +331,29 @@ class P_admin extends CI_Controller {
                   </div>
                 ');
                 redirect(base_url('admin/tambah_produk'));
-              }else{                        
+              }else{
+                  $id_user = $this->session->userdata('id');
+                  $cekgbr1 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '1' ),'gambar_sementara')->num_rows();
+                  $gbr1 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '1' ),'gambar_sementara')->row();
+                  $cekgbr2 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '2' ),'gambar_sementara')->num_rows();
+                  $gbr2 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '2' ),'gambar_sementara')->row();
+                  $cekgbr3 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '3' ),'gambar_sementara')->num_rows();
+                  $gbr3 = $this->m_data->select_where(array('id_user' => $id_user,'gambarke' => '3' ),'gambar_sementara')->row();
+                  if($cekgbr1 == 0){
+                    $gambar1 = '';
+                  } else {
+                    $gambar1 = $gbr1->gambar;
+                  }
+                  if($cekgbr2 == 0){
+                    $gambar2 = '';
+                  } else {
+                    $gambar2 = $gbr2->gambar;
+                  }
+                  if($cekgbr3 == 0){
+                    $gambar3 = '';
+                  } else {
+                    $gambar3 = $gbr3->gambar;
+                  }
 
                   $data = array(                   
                       
@@ -342,6 +364,9 @@ class P_admin extends CI_Controller {
                     'deskripsi'         => $deskripsi,
                     'tgljam'            => $date,
                     'gambar'            => $img_name,
+                    'gambar2'            => $gambar1,
+                    'gambar3'            => $gambar2,
+                    'gambar4'            => $gambar3,
                   );
   
                   // ===== input data ke tabel =====             
@@ -1291,6 +1316,60 @@ redirect(base_url('admin/semua_produk'));
     }
 
     
+  }
+
+
+
+  function gambar_tambahan(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_user   = mysqli_real_escape_string($db, $this->input->post('id_user'));
+    $nama_gambar = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+      echo json_encode(['code' => 200, 'msg' => 'gambar wajib diisi']);
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).rand().".".$ext;
+
+        $config['upload_path']          = './produk_img/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            echo json_encode(['code' => 200, 'msg' => 'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+        }else{
+
+            $c = $this->m_data->select_where(array('id_user' => $id_user ),'gambar_sementara')->num_rows();
+            if ($c == 0) {
+              $gambarke = 1;
+            } else {
+              $cek = $this->db->query("SELECT * FROM gambar_sementara WHERE id_user = '$id_user' ORDER BY id_gambar DESC LIMIT 1 ")->row();
+              $gambarke = $cek->gambarke + 1;
+            }
+            
+            $data = array(                   
+                
+              'id_user'   => $id_user,
+              'gambarke'  => $gambarke,
+              'gambar'    => $img_name,
+            );
+
+            // ===== input data ke tabel =====             
+            $this->m_data->input_data($data,'gambar_sementara');
+            echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim','foto'=>$img_name]);
+        }
+    }
   }
 
 

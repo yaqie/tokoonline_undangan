@@ -1,4 +1,4 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
 
   <!-- Content Wrapper. Contains page content -->
@@ -63,10 +63,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Gambar</label>
+                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Gambar Utama</label>
                     <div class="col-sm-9">
                     <input type="file" class="form-control" id="file" name="file">
                     Ukuran Gambar : 166x33
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lname" class="col-sm-2 text-right control-label col-form-label">Tambahkan Gambar Lainya</label>
+                    <div class="col-sm-9">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      Tambah
+                    </button>
                     </div>
                 </div>
             </div>
@@ -76,13 +85,69 @@
               <button type="submit" id="btnSubmit2" class="btn btn-info waves-effect waves-light">Tambah</button>
               </div>
             </form>
+
           </div>
           <!-- /.box -->
 
 
-          <!-- general form elements -->
-          
-          <!-- /.box -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="form1" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input type="hidden" id="id_user" name="id_user" value="<?= $admin->id_user; ?>">
+                      <input type="file" id="file" name="file" accept="image/*" name="image" />
+                      
+                      <div id="foto1"></div>
+
+                      <div id="loading_kirim1">
+                        <!-- <input class="btn btn-success" type="submit" value="Upload" readonly> -->
+                        <button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda">
+                          <span class="ladda-label">Kirim</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <form id="form2" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input type="hidden" id="id_user" name="id_user" value="<?= $admin->id_user; ?>">
+                      <input type="file" id="file" name="file" accept="image/*" name="image" />
+                      <div id="foto2"></div>
+
+                      <div id="loading_kirim2">
+                        <!-- <input class="btn btn-success" type="submit" value="Upload" readonly> -->
+                        <button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda">
+                          <span class="ladda-label">Kirim</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <form id="form3" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input type="hidden" id="id_user" name="id_user" value="<?= $admin->id_user; ?>">
+                      <input type="file" id="file" name="file" accept="image/*" name="image" />
+                      <div id="foto3"></div>
+
+                      <div id="loading_kirim3">
+                        <!-- <input class="btn btn-success" type="submit" value="Upload" readonly> -->
+                        <button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda">
+                          <span class="ladda-label">Kirim</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           
 
         </div>
@@ -184,7 +249,112 @@
 <!-- ./wrapper -->
 <script>
     $(document).ready(function () {
+
+
+    $("#form1").on('submit',(function(e) {
+    e.preventDefault();
+      $('#loading_kirim1').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label" disabled>Mengirim ...</span></button>');
+      $.ajax({
+        url: "<?= base_url(); ?>p_admin/gambar_tambahan",
+        type: "POST",
+        data: new FormData(this),
+        dataType: "JSON",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+          if (data.code == '200') {
+            $('#loading_kirim1').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label">Kirim</span></button>');
+          } else if (data.code == '1') {
+            $('#loading_kirim1').html('');
+            $('#foto1').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
+          }
+
+        },
+        error: function() {
+          alert('gagal');
+        }
+      });
+    }));
+
+    $("#form2").on('submit',(function(e) {
+    e.preventDefault();
+      $('#loading_kirim2').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label" disabled>Mengirim ...</span></button>');
+      $.ajax({
+        url: "<?= base_url(); ?>p_admin/gambar_tambahan",
+        type: "POST",
+        data: new FormData(this),
+        dataType: "JSON",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+          if (data.code == '200') {
+            $('#loading_kirim2').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label">Kirim</span></button>');
+          } else if (data.code == '1') {
+            $('#loading_kirim2').html('');
+            $('#foto2').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
+          }
+
+        },
+        error: function() {
+          alert('gagal');
+        }
+      });
+    }));
     
+    
+    $("#form3").on('submit',(function(e) {
+    e.preventDefault();
+      $('#loading_kirim3').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label" disabled>Mengirim ...</span></button>');
+      $.ajax({
+        url: "<?= base_url(); ?>p_admin/gambar_tambahan",
+        type: "POST",
+        data: new FormData(this),
+        dataType: "JSON",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+          if (data.code == '200') {
+            $('#loading_kirim3').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label">Kirim</span></button>');
+          } else if (data.code == '1') {
+            $('#loading_kirim3').html('');
+            $('#foto3').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
+          }
+
+        },
+        error: function() {
+          alert('gagal');
+        }
+      });
+    }));
+
+    $("#form4").on('submit',(function(e) {
+    e.preventDefault();
+      $('#loading_kirim4').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label" disabled>Mengirim ...</span></button>');
+      $.ajax({
+        url: "<?= base_url(); ?>p_admin/gambar_tambahan",
+        type: "POST",
+        data: new FormData(this),
+        dataType: "JSON",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+          if (data.code == '200') {
+            $('#loading_kirim4').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label">Kirim</span></button>');
+          } else if (data.code == '1') {
+            $('#loading_kirim4').html('');
+            $('#foto4').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
+          }
+
+        },
+        error: function() {
+          alert('gagal');
+        }
+      });
+    }));
 
     $('#form_setting').submit(function(){
         $('#btnSubmit2').attr('disabled',true);
@@ -208,5 +378,7 @@
     })
   })
 </script>
+
+
 
   

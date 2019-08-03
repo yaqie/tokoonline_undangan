@@ -316,7 +316,11 @@
                                     <b>Tgl & Jam Acara</b>
                                   <?php } ?>  
                                   </th>
-                                  <td><?= $detail_pemesanan->tgl1 ?>, <?= $detail_pemesanan->jam1 ?> </td>  
+                                  <td>
+                                    <?= $detail_pemesanan->tgl1 ?>, <?= $detail_pemesanan->jam1 ?>
+                                    <br>
+                                    <?= $detail_pemesanan->tgl2 ?>, <?= $detail_pemesanan->jam2 ?>
+                                  </td>  
                                 </tr>
                                 <tr>
                                   <th width="50%">
