@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2019 at 06:08 AM
+-- Generation Time: Aug 05, 2019 at 01:34 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -86,7 +86,27 @@ INSERT INTO `detail_pemesanan` (`id_transaksi`, `nm1`, `nm_pang1`, `nm_ayah1`, `
 (7, 'lalalalala', 'Aji', 'bla', 'Tuti', 1, '', '', '', '', 0, '2019-07-24', '09.00 WIB', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', '', '', '', '3b317a6429affbf9afb03c131003a850.jpg'),
 (8, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-07-24', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-24', '10.00 WIB - Selesai', 'purwokerto', '', '', '', '766a8a3ac5c55d0f79e0684c5e9e40e7.jpg'),
 (9, 'Aprilianto Aji Nugroho', 'Aji', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 4, '2019-07-31', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-07-31', '10.00 WIB - Selesai', 'purwokerto', '', '', '', 'a462f8c334e328ba8f572ca0a51c4861.jpg'),
-(11, 'Gagas', 'Restu', 'Iya', 'Koe', 2, '', '', '', '', 0, '2019-07-23', '09.00 WIB', 'Istana Negara', '0000-00-00', '', '', '', '', '', 'a462f8c334e328ba8f572ca0a51c4861.jpg');
+(10, 'lalalalala', 'Aji', 'alalalal', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-08-03', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-08-03', '10.00 WIB - Selesai', 'purwokerto', '', '', '', 'b7987a2b1c97736c0df85564be2cb5f3.jpg'),
+(11, 'Gagas', 'Restu', 'Iya', 'Koe', 2, '', '', '', '', 0, '2019-07-23', '09.00 WIB', 'Istana Negara', '0000-00-00', '', '', '', '', '', 'a462f8c334e328ba8f572ca0a51c4861.jpg'),
+(12, 'cek cek cek', 'cek', 'cek cek cek', 'cek cek cek', 2, '', '', '', '', 0, '2019-12-31', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-01-01', '', '', '', '', '', '305c19e3929d93f15294ef1f34db6f91.jpg'),
+(13, 'asj dajbsd', ' na sdn ', 'j ans dnb s', ' nab snd a', 8, '', '', '', '', 0, '2019-08-03', '09.00 WIB', 'Masjid Baitut Thoyyibah', '2019-08-04', '10.00 WIB - Selesai', 'purwokerto', '', '', '', '305c19e3929d93f15294ef1f34db6f91.jpg'),
+(14, 'Aprilianto Aji Nugroho', 'alalala', 'Steven', 'Kimberley', 1, 'Dilla Alfianur Kumalasari', 'Dilla', 'Jackson', 'Ariana', 2, '2019-08-03', '10.00 sd 11.00', 'Masjid Baitut Thoyyibah', '2019-08-05', '10.00 WIB - Selesai', 'purwokerto', '', '', '', '305c19e3929d93f15294ef1f34db6f91.jpg'),
+(15, 'Aprilianto Aji Nugroho', 'Aji', 'Budi', 'Tuti', 1, '', '', '', '', 0, '2019-08-03', '10.00 sd 11.00', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', '', '', '', 'b7987a2b1c97736c0df85564be2cb5f3.jpg'),
+(16, 'Aprilianto Aji Nugroho', 'Restu', 'Steven', 'lllllll', 5, '', '', '', '', 0, '2019-08-03', '09.00 WIB', 'Masjid Baitut Thoyyibah', '0000-00-00', '', '', '', '', '', 'b7987a2b1c97736c0df85564be2cb5f3.jpg'),
+(18, 'fghbjnm', 'ghjbn,m', 'fghjk', 'vghjbn,', 6, 'gvhbjnm', ' mn,', 'hbjnkm.l', 'bnm', 4, '2019-01-01', 'ghjbk', 'vghjbk', '2019-12-31', 'ghjbkl', 'hjbk', 'ghjbk', 'vghjbkghvjb', 'b jk', 'b7987a2b1c97736c0df85564be2cb5f3.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gambar_sementara`
+--
+
+CREATE TABLE `gambar_sementara` (
+  `id_gambar` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `gambarke` int(11) NOT NULL,
+  `gambar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -146,7 +166,9 @@ INSERT INTO `konfirmasi_pembayaran` (`id_konfirmasi`, `kode_invoice`, `bank_tuju
 (10, 'TR-0007', '1', 'BRI', '2342342', 'yahya', '2019-07-24', '115000', '18509052e68889168422e7f387e654f9.jpg', '', 0),
 (11, 'TR-0007', '1', 'BCA', '2342342', 'yahya', '2019-07-24', '115000', 'f9d99830c5f7e8b2b95362dd19d8c1c1.jpg', '', 1),
 (12, 'TR-0008', '1', 'BRI', '192830810293', 'yaqie', '2019-07-31', '20500', 'a462f8c334e328ba8f572ca0a51c4861.jpg', '', 0),
-(13, 'TR-0008', '1', 'BCA', '98102830', 'yaqie', '2019-07-31', '20500', 'a462f8c334e328ba8f572ca0a51c4861.jpg', '', 1);
+(13, 'TR-0008', '1', 'BCA', '98102830', 'yaqie', '2019-07-31', '20500', 'a462f8c334e328ba8f572ca0a51c4861.jpg', '', 1),
+(14, 'TR-0011', '2', 'yahya', '2342342', 'yahya', '2019-08-03', '58000', '4a4d107c7d7cfa34e099dc3484ade755.jpg', '', 1),
+(15, 'TR-0012', '2', 'yahya', '2342342', 'yahya', '2019-08-03', '20000', '305c19e3929d93f15294ef1f34db6f91.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -161,6 +183,9 @@ CREATE TABLE `produk` (
   `harga` varchar(20) NOT NULL,
   `deskripsi` text NOT NULL,
   `gambar` text NOT NULL,
+  `gambar2` text NOT NULL,
+  `gambar3` text NOT NULL,
+  `gambar4` text NOT NULL,
   `berat` varchar(100) NOT NULL,
   `tgljam` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -169,29 +194,33 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori`, `harga`, `deskripsi`, `gambar`, `berat`, `tgljam`) VALUES
-(1, 'Lorem Ipsum', 1, '50000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '8541a09f7bd94e084132db479856f414.png', '10', '2019-07-15 14:58:36'),
-(3, 'Dolor modi ullam cumque', 1, '100000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', 'eec14a6fbb642fb7b1ff1fb6d7a94855.jpg', '10', '2019-07-15 15:31:19'),
-(4, 'blue', 1, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '924fe1c9d4ddc7261753257a9d699baf.png', '10', '2019-07-16 18:56:27'),
-(5, 'red', 1, '3000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '81c1dcb6d1a1eab8c25f401ae770424c.jpg', '10', '2019-07-16 18:56:52'),
-(6, 'black', 1, '6000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '48ce820586d0276c7a02a5a468671888.jpg', '10', '2019-07-16 18:57:18'),
-(7, 'white', 1, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'fa76ef901f409356885f0a4a5090631a.jpg', '10', '2019-07-16 18:57:42'),
-(8, 'green', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '10', '2019-07-16 18:58:10'),
-(9, 'grey', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '1bfb4c0e130881d0d17e7d9b5b1d9c52.jpg', '10', '2019-07-16 18:58:29'),
-(10, 'gold', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '2dc08ca6b472aceb907c9e6284fcd88c.jpg', '10', '2019-07-16 19:00:07'),
-(11, 'pink', 1, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '40c42cc39ce79706934a24887b7d3ac0.jpg', '10', '2019-07-16 19:00:44'),
-(12, 'dummy', 2, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'c270eb7dd0e8b6b2e46e7b8efb3a1362.jpg', '11', '2019-07-16 19:03:55'),
-(13, 'sani', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '11', '2019-07-16 19:04:19'),
-(14, 'jujeng', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'c270eb7dd0e8b6b2e46e7b8efb3a1362.jpg', '11', '2019-07-16 19:04:41'),
-(15, 'thosiba', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '1bfb4c0e130881d0d17e7d9b5b1d9c52.jpg', '11', '2019-07-16 19:05:07'),
-(16, 'samsung', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '9907eee19cb7274ac29128dd9e6e1bf0.png', '11', '2019-07-16 19:05:34'),
-(17, 'samsung', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '7fdc1a630c238af0815181f9faa190f5.jpg', '11', '2019-07-16 19:05:53'),
-(18, 'xiaomi', 2, '2000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '11', '2019-07-16 19:06:15'),
-(19, 'redmi', 2, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '2d99ae9e904f880eef8feb4e61882b79.jpg', '11', '2019-07-16 19:06:37'),
-(20, 'huawei', 2, '8000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '924fe1c9d4ddc7261753257a9d699baf.png', '11', '2019-07-16 19:07:09'),
-(21, 'nokia', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'b9fb9d37bdf15a699bc071ce49baea53.jpg', '11', '2019-07-16 19:07:33'),
-(22, 'Ultimate', 1, '4000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fugaQuam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dictaDolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! RecusandaeAccusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '41fbb36f87af43f5230bb50d90f7cad8.jpg', '12', '2019-07-22 03:13:57'),
-(23, 'white', 0, '10000', '<p>cbbvvbvb</p>', '18509052e68889168422e7f387e654f9.jpg', '26', '2019-07-23 14:00:08');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori`, `harga`, `deskripsi`, `gambar`, `gambar2`, `gambar3`, `gambar4`, `berat`, `tgljam`) VALUES
+(1, 'Lorem Ipsum', 1, '50000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '8541a09f7bd94e084132db479856f414.png', '', '', '', '10', '2019-07-15 14:58:36'),
+(3, 'Dolor modi ullam cumque', 1, '100000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fuga!</p><p>Quam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dicta!</p><p>Dolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! Recusandae.</p><p>Accusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.</p><p>Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', 'eec14a6fbb642fb7b1ff1fb6d7a94855.jpg', '924fe1c9d4ddc7261753257a9d699baf495329226.png', '9f2f3597273ad180302de76bc959ab511106204292.jpg', 'c5be2cd7f01422af15bb4215248ed9cb1926655321.jpg', '10', '2019-07-15 15:31:19'),
+(4, 'blue', 1, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '924fe1c9d4ddc7261753257a9d699baf.png', '', '', '', '10', '2019-07-16 18:56:27'),
+(5, 'red', 1, '3000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '81c1dcb6d1a1eab8c25f401ae770424c.jpg', '', '', '', '10', '2019-07-16 18:56:52'),
+(6, 'black', 1, '6000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '48ce820586d0276c7a02a5a468671888.jpg', '', '', '', '10', '2019-07-16 18:57:18'),
+(7, 'white', 1, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'fa76ef901f409356885f0a4a5090631a.jpg', '', '', '', '10', '2019-07-16 18:57:42'),
+(8, 'green', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '', '', '', '10', '2019-07-16 18:58:10'),
+(9, 'grey', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '1bfb4c0e130881d0d17e7d9b5b1d9c52.jpg', '', '', '', '10', '2019-07-16 18:58:29'),
+(10, 'gold', 1, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '2dc08ca6b472aceb907c9e6284fcd88c.jpg', '', '', '', '10', '2019-07-16 19:00:07'),
+(11, 'pink', 1, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '40c42cc39ce79706934a24887b7d3ac0.jpg', '', '', '', '10', '2019-07-16 19:00:44'),
+(12, 'dummy', 2, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'c270eb7dd0e8b6b2e46e7b8efb3a1362.jpg', '', '', '', '11', '2019-07-16 19:03:55'),
+(13, 'sani', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '', '', '', '11', '2019-07-16 19:04:19'),
+(14, 'jujeng', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'c270eb7dd0e8b6b2e46e7b8efb3a1362.jpg', '', '', '', '11', '2019-07-16 19:04:41'),
+(15, 'thosiba', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '1bfb4c0e130881d0d17e7d9b5b1d9c52.jpg', '', '', '', '11', '2019-07-16 19:05:07'),
+(16, 'samsung', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '9907eee19cb7274ac29128dd9e6e1bf0.png', '', '', '', '11', '2019-07-16 19:05:34'),
+(17, 'samsung', 2, '7000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '7fdc1a630c238af0815181f9faa190f5.jpg', '', '', '', '11', '2019-07-16 19:05:53'),
+(18, 'xiaomi', 2, '2000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'bd02c5c31729ae2946ba2da8d8c355c2.jpg', '', '', '', '11', '2019-07-16 19:06:15'),
+(19, 'redmi', 2, '4000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '2d99ae9e904f880eef8feb4e61882b79.jpg', '', '', '', '11', '2019-07-16 19:06:37'),
+(20, 'huawei', 2, '8000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', '924fe1c9d4ddc7261753257a9d699baf.png', '', '', '', '11', '2019-07-16 19:07:09'),
+(21, 'nokia', 2, '5000', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>', 'b9fb9d37bdf15a699bc071ce49baea53.jpg', '', '', '', '11', '2019-07-16 19:07:33'),
+(22, 'Ultimate', 1, '4000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, quisquam natus voluptas quibusdam aut corporis eos tempore optio amet harum ullam illum, officia fugiat maiores quo asperiores sunt, veritatis fugaQuam ut, aut a nihil beatae voluptates voluptate eum facilis ullam? Doloribus atque ipsum sapiente magni assumenda ratione non maiores facere minus aspernatur nam, sint fugiat consequatur, culpa neque dictaDolor modi ullam cumque ratione laboriosam beatae aut maiores, in nisi reprehenderit voluptate provident libero, ipsam est quaerat rerum natus deleniti distinctio ducimus, minima eum architecto aperiam quia corrupti! RecusandaeAccusamus sed labore possimus dolores enim? Iure, voluptatibus corporis! Provident eos harum dolorem, accusantium sed illum sequi officiis pariatur reprehenderit ex aut soluta vitae, qui nesciunt non animi quos quisquam.Quo maxime rem porro a animi esse libero consequuntur harum veniam eius laborum quas aliquid ut corporis possimus dignissimos, voluptatibus totam corrupti enim reprehenderit? Corporis dicta incidunt iusto ducimus iste.</p>', '41fbb36f87af43f5230bb50d90f7cad8.jpg', '', '', '', '12', '2019-07-22 03:13:57'),
+(23, 'white', 0, '10000', '<p>cbbvvbvb</p>', '18509052e68889168422e7f387e654f9.jpg', '', '', '', '26', '2019-07-23 14:00:08'),
+(29, 'Numquam, quisquam natus voluptas quibusdam aut corporis eos', 1, '5000', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum magni explicabo tempore architecto nobis cum aspernatur modi fugiat quisquam voluptates qui delectus accusantium fuga, quos ab error, ullam ut aliquid?</p>', 'a9963f72a17b34527cb7c80f4792a860408754300.jpg', 'c5be2cd7f01422af15bb4215248ed9cb1288510666.jpg', '9f2f3597273ad180302de76bc959ab51171843087.jpg', '924fe1c9d4ddc7261753257a9d699baf84579681.png', '10', '2019-08-03 20:16:02'),
+(30, 'Numquam, quisquam natus voluptas quibusdam aut corporis eos', 1, '5000', '<p>rtct vgbhjbbhbhgvhhgvhgvhvjh h</p>', '924fe1c9d4ddc7261753257a9d699baf1872522014.png', 'c5be2cd7f01422af15bb4215248ed9cb256243943.jpg', '924fe1c9d4ddc7261753257a9d699baf399988490.png', '9f2f3597273ad180302de76bc959ab511509869390.jpg', '7', '2019-08-03 20:17:56'),
+(31, 'jaksj djabjksd wnma sdas', 1, '5000', '<p>kjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn askjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn askjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn askjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn askjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn askjans dn kuwanks ndkwn kajs d nkaw ndkwn dwadkjnsk dnwakn sdnw akn sdkn as</p>', '924fe1c9d4ddc7261753257a9d699baf738173135.png', '17234f60a40f9b9a3cc5fbdd6a5cc4bd1227824677.jpg', 'c5be2cd7f01422af15bb4215248ed9cb1157289113.jpg', '9f2f3597273ad180302de76bc959ab511537042569.jpg', '10', '2019-08-04 01:17:57'),
+(32, 'Numquam, quisquam natus voluptas quibusdam aut corporis eos', 1, '5000', '<p>as d</p>', '924fe1c9d4ddc7261753257a9d699baf326291360.png', '9907eee19cb7274ac29128dd9e6e1bf01485386998.png', '90ce7e80d2bb30bcc33c2900da18156f102985991.jpg', '924fe1c9d4ddc7261753257a9d699baf397654658.png', '1', '2019-08-05 06:32:26');
 
 -- --------------------------------------------------------
 
@@ -257,8 +286,11 @@ INSERT INTO `transaksi` (`id_transaksi`, `kode_transaksi`, `id_produk`, `kuantit
 (7, 'TR-0006', 23, 10, 4, '10', '41', 'tiki', '', '26000', '126000', 'purwokerto', 2, 2, 1, '2019-07-24 07:11:50'),
 (8, 'TR-0007', 18, 100, 4, '5', '39', 'pos', '', '30000', '230000', 'jogja bagian tengah', 2, 1, 2, '2019-07-24 11:24:09'),
 (9, 'TR-0008', 16, 2, 4, '10', '41', 'pos', '', '27000', '41000', 'ajs dw a,sd wma sm dma sm das s  rekrnaermaks', 2, 1, 2, '2019-07-31 03:32:47'),
-(10, 'TR-0009', 22, 2, 4, '', '', '', '', '', '', '', 0, 1, 1, '2019-07-31 06:08:35'),
-(11, 'TR-0010', 22, 2, 4, '3', '331', 'jne', '', '39000', '47000', ' cb vc ', 0, 2, 1, '2019-07-31 06:08:49');
+(10, 'TR-0009', 22, 2, 4, '2', '27', 'jne', '', '71000', '79000', 'jbkm', 0, 1, 1, '2019-07-31 06:08:35'),
+(11, 'TR-0010', 22, 2, 4, '3', '331', 'jne', '', '39000', '47000', ' cb vc ', 0, 2, 1, '2019-07-31 06:08:49'),
+(12, 'TR-0011', 24, 1, 4, '1', '32', 'tiki', '', '53000', '58000', 'purwokerto', 1, 2, 1, '2019-08-03 00:27:31'),
+(16, 'TR-0012', 22, 30, 4, '3', '106', 'pos', '', '45000', '165000', 'j f n', 0, 2, 1, '2019-08-03 08:08:44'),
+(18, 'TR-0013', 22, 6, 4, '2', '30', 'pos', '', '61000', '85000', 'dcvbnm', 0, 1, 1, '2019-08-03 08:19:04');
 
 -- --------------------------------------------------------
 
@@ -308,6 +340,12 @@ ALTER TABLE `detail_pemesanan`
   ADD PRIMARY KEY (`id_transaksi`);
 
 --
+-- Indexes for table `gambar_sementara`
+--
+ALTER TABLE `gambar_sementara`
+  ADD PRIMARY KEY (`id_gambar`);
+
+--
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -355,6 +393,12 @@ ALTER TABLE `bank`
   MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `gambar_sementara`
+--
+ALTER TABLE `gambar_sementara`
+  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -364,13 +408,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `konfirmasi_pembayaran`
 --
 ALTER TABLE `konfirmasi_pembayaran`
-  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `setting_web`
@@ -382,7 +426,7 @@ ALTER TABLE `setting_web`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
