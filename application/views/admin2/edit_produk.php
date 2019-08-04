@@ -65,7 +65,7 @@
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Gambar</label>
                     <div class="col-sm-9">
-                    <input type="file" class="form-control" id="file" name="file" required>
+                    <input type="file" class="form-control" id="file" name="file">
                     Ukuran Gambar : 166x33
                     </div>
                 </div>
