@@ -1375,6 +1375,218 @@ redirect(base_url('admin/semua_produk'));
 
 
 
+
+  function edit_gambar_sementara1(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+    $nama_gambar = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+      echo json_encode(['code' => 200, 'msg' => 'gambar wajib diisi']);
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).rand().".".$ext;
+
+        $config['upload_path']          = './produk_img/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            echo json_encode(['code' => 200, 'msg' => 'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+        }else{
+
+            $where = array(
+              'id_produk' => $id_produk
+            );
+    
+            $data = array(
+              'gambar2' => $img_name,
+            );
+    
+            // update modified (jika di perlukan dalam tabel)
+            $query = $this->m_data->update_data($where,$data,'produk');
+
+            echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim','foto'=>$img_name]);
+        }
+    }
+  }
+  function edit_gambar_sementara2(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+    $nama_gambar = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+      echo json_encode(['code' => 200, 'msg' => 'gambar wajib diisi']);
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).rand().".".$ext;
+
+        $config['upload_path']          = './produk_img/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            echo json_encode(['code' => 200, 'msg' => 'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+        }else{
+
+            $where = array(
+              'id_produk' => $id_produk
+            );
+    
+            $data = array(
+              'gambar3' => $img_name,
+            );
+    
+            // update modified (jika di perlukan dalam tabel)
+            $query = $this->m_data->update_data($where,$data,'produk');
+
+            echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim','foto'=>$img_name]);
+        }
+    }
+  }
+  function edit_gambar_sementara3(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+    $nama_gambar = $_FILES["file"]["name"];
+
+    if ($nama_gambar == "") {
+      echo json_encode(['code' => 200, 'msg' => 'gambar wajib diisi']);
+    } else {
+        # code...
+        #code 3
+        $ext = pathinfo($nama_gambar, PATHINFO_EXTENSION);
+        $img_name = MD5($nama_gambar).rand().".".$ext;
+
+        $config['upload_path']          = './produk_img/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 2048;
+        $config['file_name']            = $img_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('v_upload', $error);
+            echo json_encode(['code' => 200, 'msg' => 'format file tidak diijinkan (.jpg / .png) . Atau ukuran file terlalu besar (2Mb)']);
+        }else{
+
+            $where = array(
+              'id_produk' => $id_produk
+            );
+    
+            $data = array(
+              'gambar4' => $img_name,
+            );
+    
+            // update modified (jika di perlukan dalam tabel)
+            $query = $this->m_data->update_data($where,$data,'produk');
+
+            echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim','foto'=>$img_name]);
+        }
+    }
+  }
+
+
+
+
+
+
+  function hapus1(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+
+
+    $where = array(
+      'id_produk' => $id_produk
+    );
+
+    $data = array(
+      'gambar2' => '',
+    );
+
+    // update modified (jika di perlukan dalam tabel)
+    $query = $this->m_data->update_data($where,$data,'produk');
+
+    echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim']);
+  }
+  function hapus2(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+
+
+    $where = array(
+      'id_produk' => $id_produk
+    );
+
+    $data = array(
+      'gambar3' => '',
+    );
+
+    // update modified (jika di perlukan dalam tabel)
+    $query = $this->m_data->update_data($where,$data,'produk');
+
+    echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim']);
+  }
+  function hapus3(){
+    global $date;
+    $db = get_instance()->db->conn_id;
+
+    // mysqli_real_escape_string anti injeksi
+    
+    $id_produk   = mysqli_real_escape_string($db, $this->input->post('id_produk'));
+
+
+    $where = array(
+      'id_produk' => $id_produk
+    );
+
+    $data = array(
+      'gambar4' => '',
+    );
+
+    // update modified (jika di perlukan dalam tabel)
+    $query = $this->m_data->update_data($where,$data,'produk');
+
+    echo json_encode(['code' => 1, 'msg' => 'data berhasil dikirim']);
+  }
+
+
+
+
   function logout()
   {
     $this->session->sess_destroy();

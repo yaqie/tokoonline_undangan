@@ -14,19 +14,19 @@
 						?>
 						<div id="product-main-view">
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" alt="">
+								<img src="<?= base_url('produk_img/') ?><?= $produk->gambar ?>" style="max-height:400px;" alt="">
 							</div>
 						</div>
 						<?php } else { ?>
 						<div id="product-main-view">
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" style="max-height:400px;" alt="">
 							</div>
 							<?php
 							if ($produk->gambar2 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" style="max-height:400px;" alt="">
 							</div>
 							<?php
 							}
@@ -35,7 +35,7 @@
 							if ($produk->gambar3 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" style="max-height:400px;" alt="">
 							</div>
 							<?php
 							}
@@ -44,7 +44,7 @@
 							if ($produk->gambar4 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" style="max-height:400px;" alt="">
 							</div>
 							<?php
 							}
@@ -64,13 +64,13 @@
 						<?php } else { ?>
 						<div id="product-view">
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar) ?>" style="max-height:100px;" alt="">
 							</div>
 							<?php
 							if ($produk->gambar2 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar2) ?>" style="max-height:100px;" alt="">
 							</div>
 							<?php
 							}
@@ -79,7 +79,7 @@
 							if ($produk->gambar3 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar3) ?>" style="max-height:100px;" alt="">
 							</div>
 							<?php
 							}
@@ -88,7 +88,7 @@
 							if ($produk->gambar4 != '') {
 							?>
 							<div class="product-view">
-								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" alt="">
+								<img src="<?= base_url('produk_img/'.$produk->gambar4) ?>" style="max-height:100px;" alt="">
 							</div>
 							<?php
 							}

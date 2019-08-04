@@ -11,7 +11,7 @@
 						<img src="<?= base_url('slider/'.$setting4->logo) ?>" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color"><?= $setting4->deskripsi ?></h1>
-							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
+							<a href="<?= base_url('produk/terbaru')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -21,7 +21,7 @@
 						<img src="<?= base_url('slider/'.$setting5->logo) ?>" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color"><?= $setting5->deskripsi ?></h1>
-							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
+							<a href="<?= base_url('produk/terbaru')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -31,7 +31,7 @@
 						<img src="<?= base_url('slider/'.$setting6->logo) ?>" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color"><?= $setting6->deskripsi ?></h1>
-							<a href="<?= base_url('produk')?>" class="primary-btn">Shop Now</a>
+							<a href="<?= base_url('produk/terbaru')?>" class="primary-btn">Shop Now</a>
 						</div>
 					</div>
 					<!-- /banner -->

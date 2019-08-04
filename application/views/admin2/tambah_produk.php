@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="fname" class="col-sm-2 text-right control-label col-form-label">Nama Produk</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" maxlength="150" value="" placeholder="Masukkan Nama Produk" required="true">
+                        <input type="text" class="form-control" id="nama_produk" required name="nama_produk" maxlength="150" value="" placeholder="Masukkan Nama Produk" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -47,25 +47,25 @@
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Harga</label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" id="harga" name="harga" maxlength="150" value="" placeholder="Masukkan harga (Contoh: 50000)" required="true">
+                        <input type="number" class="form-control" id="harga" required name="harga" maxlength="150" value="" placeholder="Masukkan harga (Contoh: 50000)" required="true">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Berat</label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" id="berat" name="berat" maxlength="150" value="" placeholder="Masukkan berat dalam gram (Contoh: 10) " required="true">
+                        <input type="number" class="form-control" id="berat" required name="berat" maxlength="150" value="" placeholder="Masukkan berat dalam gram (Contoh: 10) " required="true">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Deskripsi</label>
                     <div class="col-sm-9">
-                    <textarea id="editor1" name="deskripsi" rows="10" cols="80"></textarea>
+                    <textarea id="editor1" name="deskripsi" rows="10" required cols="80"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lname" class="col-sm-2 text-right control-label col-form-label">Gambar Utama</label>
                     <div class="col-sm-9">
-                    <input type="file" class="form-control" id="file" name="file">
+                    <input type="file" class="form-control" id="file" required name="file">
                     Ukuran Gambar : 166x33
                     </div>
                 </div>
@@ -321,32 +321,6 @@
           } else if (data.code == '1') {
             $('#loading_kirim3').html('');
             $('#foto3').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
-          }
-
-        },
-        error: function() {
-          alert('gagal');
-        }
-      });
-    }));
-
-    $("#form4").on('submit',(function(e) {
-    e.preventDefault();
-      $('#loading_kirim4').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label" disabled>Mengirim ...</span></button>');
-      $.ajax({
-        url: "<?= base_url(); ?>p_admin/gambar_tambahan",
-        type: "POST",
-        data: new FormData(this),
-        dataType: "JSON",
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function(data) {
-          if (data.code == '200') {
-            $('#loading_kirim4').html('<button type="submit" class="btn btn-primary ladda-button" data-style="slide-left" data-plugin="ladda"><span class="ladda-label">Kirim</span></button>');
-          } else if (data.code == '1') {
-            $('#loading_kirim4').html('');
-            $('#foto4').html('<a href="<?= base_url() ?>produk_img/' + data.foto + '" target="_blank"><img src="<?= base_url() ?>produk_img/' + data.foto + '" style="width:100px;height:100px;"></a>');
           }
 
         },
